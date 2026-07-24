@@ -1,0 +1,421 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys Sandboxes API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: Sandboxes
+  description: Sandbox lifecycle management
+paths:
+  /api/v1/sandboxes:
+    get:
+      tags:
+      - Sandboxes
+      summary: List all sandboxes.
+      operationId: list_sandboxes
+      responses:
+        '200':
+          description: List of sandboxes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSandboxesResponse'
+    post:
+      tags:
+      - Sandboxes
+      summary: Create a new sandbox.
+      operationId: create_sandbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSandboxRequest'
+        required: true
+      responses:
+        '200':
+          description: Sandbox created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SandboxInfo'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '409':
+          description: Sandbox already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}:
+    get:
+      tags:
+      - Sandboxes
+      summary: Get sandbox status.
+      operationId: get_sandbox
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Sandbox details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SandboxInfo'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+    delete:
+      tags:
+      - Sandboxes
+      summary: Delete a sandbox.
+      operationId: delete_sandbox
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      - name: force
+        in: query
+        description: Force delete even if VM is still running
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Sandbox deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '409':
+          description: VM still running, use force=true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/start:
+    post:
+      tags:
+      - Sandboxes
+      summary: Start a sandbox.
+      operationId: start_sandbox
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Sandbox started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SandboxInfo'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to start
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/stop:
+    post:
+      tags:
+      - Sandboxes
+      summary: Stop a sandbox.
+      operationId: stop_sandbox
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Sandbox stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SandboxInfo'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to stop
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    CreateSandboxRequest:
+      type: object
+      description: Request to create a new sandbox.
+      required:
+      - name
+      properties:
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MountSpec'
+          description: Host mounts to attach.
+        name:
+          type: string
+          description: Unique name for the sandbox.
+          example: my-sandbox
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortSpec'
+          description: Port mappings (host:guest).
+        resources:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ResourceSpec'
+            description: VM resource configuration.
+        restart:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RestartSpec'
+            description: Restart policy configuration.
+    DeleteResponse:
+      type: object
+      description: Generic delete response.
+      required:
+      - deleted
+      properties:
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
+    SandboxInfo:
+      type: object
+      description: Sandbox status information.
+      required:
+      - name
+      - state
+      - mounts
+      - ports
+      - resources
+      - network
+      properties:
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MountInfo'
+          description: Configured mounts (with virtiofs tags for use in container mounts).
+        name:
+          type: string
+          description: Sandbox name.
+          example: my-sandbox
+        network:
+          type: boolean
+          description: Whether outbound network access is enabled.
+        pid:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Process ID (if running).
+          example: 12345
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortSpec'
+          description: Configured ports.
+        resources:
+          $ref: '#/components/schemas/ResourceSpec'
+          description: VM resources.
+        restartCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Number of times this sandbox has been automatically restarted.
+          minimum: 0
+        state:
+          type: string
+          description: Current state.
+          example: running
+    PortSpec:
+      type: object
+      description: Port mapping specification.
+      required:
+      - host
+      - guest
+      properties:
+        guest:
+          type: integer
+          format: int32
+          description: Port inside the sandbox.
+          example: 80
+          minimum: 0
+        host:
+          type: integer
+          format: int32
+          description: Port on the host.
+          example: 8080
+          minimum: 0
+    MountInfo:
+      type: object
+      description: Mount information (for responses, includes virtiofs tag).
+      required:
+      - tag
+      - source
+      - target
+      - readonly
+      properties:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: Host path.
+          example: /Users/me/code
+        tag:
+          type: string
+          description: Virtiofs tag (e.g., "smolvm0"). Use this in container mounts.
+          example: smolvm0
+        target:
+          type: string
+          description: Path inside the sandbox.
+          example: /workspace
+    ListSandboxesResponse:
+      type: object
+      description: List sandboxes response.
+      required:
+      - sandboxes
+      properties:
+        sandboxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SandboxInfo'
+          description: List of sandboxes.
+    RestartSpec:
+      type: object
+      description: Restart policy specification for sandbox creation.
+      properties:
+        maxRetries:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Maximum restart attempts (0 = unlimited).
+          minimum: 0
+        policy:
+          type:
+          - string
+          - 'null'
+          description: 'Restart policy: "never", "always", "on-failure", "unless-stopped".'
+    MountSpec:
+      type: object
+      description: Mount specification (for requests).
+      required:
+      - source
+      - target
+      properties:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: Host path to mount.
+          example: /Users/me/code
+        target:
+          type: string
+          description: Path inside the sandbox.
+          example: /workspace
+    ResourceSpec:
+      type: object
+      description: VM resource specification.
+      properties:
+        cpus:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Number of vCPUs.
+          example: 2
+          minimum: 0
+        memoryMb:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Memory in MiB.
+          example: 1024
+          minimum: 0
+        network:
+          type:
+          - boolean
+          - 'null'
+          description: 'Enable outbound network access (TSI).
+
+            Note: Only TCP/UDP supported, not ICMP (ping).'
+        overlayGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Overlay disk size in GiB (default: 2).'
+          example: 2
+          minimum: 0
+        storageGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Storage disk size in GiB (default: 20).'
+          example: 20
+          minimum: 0

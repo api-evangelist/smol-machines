@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys Images API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: Images
+  description: OCI image management
+paths:
+  /api/v1/sandboxes/{id}/images:
+    get:
+      tags:
+      - Images
+      summary: List images in a sandbox.
+      operationId: list_images
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of images
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImagesResponse'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/images/pull:
+    post:
+      tags:
+      - Images
+      summary: Pull an image into a sandbox.
+      operationId: pull_image
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PullImageRequest'
+        required: true
+      responses:
+        '200':
+          description: Image pulled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullImageResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to pull image
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    ListImagesResponse:
+      type: object
+      description: List images response.
+      required:
+      - images
+      properties:
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageInfo'
+          description: List of images.
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    PullImageRequest:
+      type: object
+      description: Request to pull an image.
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: Image reference.
+          example: python:3.12-alpine
+        ociPlatform:
+          type:
+          - string
+          - 'null'
+          description: OCI platform for multi-arch images (e.g., "linux/arm64").
+          example: linux/arm64
+    PullImageResponse:
+      type: object
+      description: Pull image response.
+      required:
+      - image
+      properties:
+        image:
+          $ref: '#/components/schemas/ImageInfo'
+          description: Information about the pulled image.
+    ImageInfo:
+      type: object
+      description: Image information.
+      required:
+      - reference
+      - digest
+      - size
+      - architecture
+      - os
+      - layerCount
+      properties:
+        architecture:
+          type: string
+          description: Architecture.
+          example: arm64
+        digest:
+          type: string
+          description: Image digest.
+          example: sha256:abc123...
+        layerCount:
+          type: integer
+          description: Number of layers.
+          example: 3
+          minimum: 0
+        os:
+          type: string
+          description: OS.
+          example: linux
+        reference:
+          type: string
+          description: Image reference.
+          example: alpine:latest
+        size:
+          type: integer
+          format: int64
+          description: Size in bytes.
+          example: 7500000
+          minimum: 0

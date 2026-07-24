@@ -1,0 +1,208 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys tenants API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: tenants
+  description: Customer accounts (product-backend)
+paths:
+  /v1/tenants:
+    get:
+      tags:
+      - tenants
+      operationId: tenant_list
+      responses:
+        '200':
+          description: List tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantInfo'
+    post:
+      tags:
+      - tenants
+      operationId: tenant_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantRequest'
+        required: true
+      responses:
+        '201':
+          description: Tenant created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantInfo'
+  /v1/tenants/{id}:
+    get:
+      tags:
+      - tenants
+      operationId: tenant_get
+      parameters:
+      - name: id
+        in: path
+        description: Tenant id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Tenant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantInfo'
+        '404':
+          description: Not found
+    patch:
+      tags:
+      - tenants
+      operationId: tenant_update
+      parameters:
+      - name: id
+        in: path
+        description: Tenant id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenantRequest'
+        required: true
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantInfo'
+  /v1/tenants/{id}/reactivate:
+    post:
+      tags:
+      - tenants
+      operationId: tenant_reactivate
+      parameters:
+      - name: id
+        in: path
+        description: Tenant id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Reactivated
+  /v1/tenants/{id}/suspend:
+    post:
+      tags:
+      - tenants
+      operationId: tenant_suspend
+      parameters:
+      - name: id
+        in: path
+        description: Tenant id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Suspended
+components:
+  schemas:
+    UpdateTenantRequest:
+      type: object
+      description: Partial update — only present fields change.
+      properties:
+        externalBillingId:
+          type:
+          - string
+          - 'null'
+        planId:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+    TenantInfo:
+      type: object
+      description: 'A tenant (customer account). Quota override fields are `None` when inherited
+
+        from the plan. See docs/product-backend-layer.md.'
+      required:
+      - id
+      - name
+      - status
+      - createdAt
+      properties:
+        createdAt:
+          type: string
+        externalBillingId:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        maxApps:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        maxCpus:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        maxMemoryMb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        maxSandboxPools:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        name:
+          type: string
+        planId:
+          type:
+          - string
+          - 'null'
+        status:
+          type: string
+        updatedAt:
+          type:
+          - string
+          - 'null'
+    CreateTenantRequest:
+      type: object
+      required:
+      - name
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        planId:
+          type:
+          - string
+          - 'null'

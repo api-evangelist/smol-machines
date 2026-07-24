@@ -1,0 +1,679 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys machines API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: machines
+  description: First-class machine lifecycle and exec
+paths:
+  /v1/machines:
+    get:
+      tags:
+      - machines
+      operationId: machine_list
+      responses:
+        '200':
+          description: List machines
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MachineInfo'
+    post:
+      tags:
+      - machines
+      operationId: machine_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMachineRequest'
+        required: true
+      responses:
+        '201':
+          description: Machine created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineInfo'
+        '409':
+          description: Name already exists
+        '422':
+          description: Quota exceeded
+  /v1/machines/{id}:
+    get:
+      tags:
+      - machines
+      operationId: machine_get
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Machine
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineInfo'
+        '404':
+          description: Not found
+    delete:
+      tags:
+      - machines
+      operationId: machine_delete
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+  /v1/machines/{id}/code:
+    post:
+      tags:
+      - machines
+      operationId: machine_code
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MachineCodeRequest'
+        required: true
+      responses:
+        '200':
+          description: Code result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineExecResponse'
+  /v1/machines/{id}/events:
+    get:
+      tags:
+      - machines
+      operationId: machine_events
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Machine events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventInfo'
+  /v1/machines/{id}/exec:
+    post:
+      tags:
+      - machines
+      operationId: machine_exec
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MachineCommandRequest'
+        required: true
+      responses:
+        '200':
+          description: Command result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineExecResponse'
+  /v1/machines/{id}/files:
+    get:
+      tags:
+      - machines
+      operationId: machine_file_download
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File bytes
+          content:
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+                  minimum: 0
+    post:
+      tags:
+      - machines
+      operationId: machine_file_upload
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: array
+              items:
+                type: integer
+                format: int32
+                minimum: 0
+        required: true
+      responses:
+        '200':
+          description: File uploaded
+  /v1/machines/{id}/sessions:
+    get:
+      tags:
+      - machines
+      operationId: machine_session_list
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MachineSessionInfo'
+    post:
+      tags:
+      - machines
+      operationId: machine_session_create
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMachineSessionRequest'
+        required: true
+      responses:
+        '200':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineSessionInfo'
+  /v1/machines/{id}/sessions/{session_id}:
+    delete:
+      tags:
+      - machines
+      operationId: machine_session_delete
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      - name: session_id
+        in: path
+        description: Session id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Session deleted
+  /v1/machines/{id}/sessions/{session_id}/exec:
+    post:
+      tags:
+      - machines
+      operationId: machine_session_exec
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      - name: session_id
+        in: path
+        description: Session id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MachineCommandRequest'
+        required: true
+      responses:
+        '200':
+          description: Command result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineExecResponse'
+  /v1/machines/{id}/start:
+    post:
+      tags:
+      - machines
+      operationId: machine_start
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineInfo'
+  /v1/machines/{id}/stop:
+    post:
+      tags:
+      - machines
+      operationId: machine_stop
+      parameters:
+      - name: id
+        in: path
+        description: Machine id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineInfo'
+components:
+  schemas:
+    MachineInfo:
+      type: object
+      required:
+      - id
+      - source
+      - state
+      - resources
+      - network
+      - env
+      - ephemeral
+      - createdAt
+      - updatedAt
+      properties:
+        autoStopSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        createdAt:
+          type: string
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        ephemeral:
+          type: boolean
+        id:
+          type: string
+        lastActivityAt:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        network:
+          $ref: '#/components/schemas/MachineNetwork'
+        resources:
+          $ref: '#/components/schemas/MachineResources'
+        source:
+          $ref: '#/components/schemas/MachineSource'
+        state:
+          type: string
+        ttlSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        updatedAt:
+          type: string
+        workdir:
+          type:
+          - string
+          - 'null'
+    MachineSource:
+      oneOf:
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - image
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - smolmachine
+    EventInfo:
+      type: object
+      required:
+      - id
+      - level
+      - message
+      - createdAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        level:
+          type: string
+        message:
+          type: string
+    MachineMountSpec:
+      type: object
+      required:
+      - volume
+      - mountPath
+      properties:
+        mountPath:
+          type: string
+          description: Mount path inside the VM.
+        readonly:
+          type: boolean
+          description: Mount as read-only.
+        volume:
+          type: string
+          description: Volume name to mount.
+    MachineResources:
+      type: object
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          minimum: 0
+        diskGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          minimum: 0
+    MachineCodeRequest:
+      type: object
+      required:
+      - language
+      - code
+      properties:
+        code:
+          type: string
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        language:
+          type: string
+        timeoutSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+    CommandSpec:
+      oneOf:
+      - type: array
+        items:
+          type: string
+      - type: string
+    MachineExecResponse:
+      type: object
+      required:
+      - stdout
+      - stderr
+      - exitCode
+      - durationMs
+      - machineId
+      properties:
+        durationMs:
+          type: integer
+          format: int64
+          minimum: 0
+        exitCode:
+          type: integer
+          format: int32
+        machineId:
+          type: string
+        stderr:
+          type: string
+        stderrTruncated:
+          type: boolean
+        stdout:
+          type: string
+        stdoutTruncated:
+          type: boolean
+    MachineCommandRequest:
+      type: object
+      required:
+      - command
+      properties:
+        command:
+          $ref: '#/components/schemas/CommandSpec'
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        stdin:
+          type:
+          - string
+          - 'null'
+        stream:
+          type: boolean
+        timeoutSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+    CreateMachineRequest:
+      type: object
+      required:
+      - source
+      properties:
+        autoStopSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        ephemeral:
+          type: boolean
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MachineMountSpec'
+        name:
+          type:
+          - string
+          - 'null'
+        network:
+          $ref: '#/components/schemas/MachineNetwork'
+        resources:
+          $ref: '#/components/schemas/MachineResources'
+        source:
+          $ref: '#/components/schemas/MachineSource'
+        ttlSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+    CreateMachineSessionRequest:
+      type: object
+      properties:
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        id:
+          type:
+          - string
+          - 'null'
+    MachineNetwork:
+      oneOf:
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - blocked
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - open
+      - type: object
+        required:
+        - cidrs
+        - mode
+        properties:
+          cidrs:
+            type: array
+            items:
+              type: string
+          mode:
+            type: string
+            enum:
+            - allowCidrs
+    MachineSessionInfo:
+      type: object
+      required:
+      - id
+      - machineId
+      - status
+      - env
+      - createdAt
+      properties:
+        createdAt:
+          type: string
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        id:
+          type: string
+        lastExecAt:
+          type:
+          - string
+          - 'null'
+        machineId:
+          type: string
+        status:
+          type: string

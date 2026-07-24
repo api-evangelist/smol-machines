@@ -1,0 +1,187 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys nodes API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: nodes
+  description: Cluster node enrollment and status
+paths:
+  /v1/nodes:
+    get:
+      tags:
+      - nodes
+      operationId: node_list
+      responses:
+        '200':
+          description: List nodes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NodeInfo'
+  /v1/nodes/register:
+    post:
+      tags:
+      - nodes
+      operationId: node_register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodeInfo'
+        required: true
+      responses:
+        '200':
+          description: Node registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeInfo'
+  /v1/nodes/{id}/credential:
+    delete:
+      tags:
+      - nodes
+      operationId: node_credential_revoke
+      parameters:
+      - name: id
+        in: path
+        description: Node id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Credential revoked
+  /v1/nodes/{id}/drain:
+    post:
+      tags:
+      - nodes
+      operationId: node_drain
+      parameters:
+      - name: id
+        in: path
+        description: Node id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Node draining
+  /v1/nodes/{id}/heartbeat:
+    post:
+      tags:
+      - nodes
+      operationId: node_heartbeat
+      parameters:
+      - name: id
+        in: path
+        description: Node id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Heartbeat accepted
+components:
+  schemas:
+    NodeInfo:
+      type: object
+      required:
+      - id
+      - address
+      - smolvmAddress
+      - status
+      - totalCpus
+      - availableCpus
+      - totalMemoryMb
+      - availableMemoryMb
+      - totalDiskGb
+      - availableDiskGb
+      - labels
+      - registeredAt
+      properties:
+        address:
+          type: string
+        availableCpus:
+          type: integer
+          format: int32
+          minimum: 0
+        availableDiskGb:
+          type: integer
+          format: int64
+          minimum: 0
+        availableMemoryMb:
+          type: integer
+          format: int64
+          minimum: 0
+        id:
+          type: string
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        lastHeartbeatAt:
+          type:
+          - string
+          - 'null'
+        registeredAt:
+          type: string
+        runtime:
+          type: string
+          description: 'The runtime this node speaks (e.g. `"smolvm"`). The control plane resolves
+
+            a driver from this name; `smolvm_address` is that runtime''s endpoint.
+
+            Defaults to `"smolvm"` so a node that doesn''t report a runtime (the only
+
+            runtime today) is handled transparently.'
+        smolvmAddress:
+          type: string
+          description: The runtime endpoint (HTTP address) on this node.
+        status:
+          type: string
+        totalCpus:
+          type: integer
+          format: int32
+          minimum: 0
+        totalDiskGb:
+          type: integer
+          format: int64
+          minimum: 0
+        totalMemoryMb:
+          type: integer
+          format: int64
+          minimum: 0
+        usedCpus:
+          type: number
+          format: double
+          description: 'Real CPU usage as fractional CPUs (e.g., 2.5 = 2.5 CPUs worth of load).
+
+            Reported by the node from hypervisor/process stats. Separate from
+
+            `available_cpus` (which is allocation-based bookkeeping).'
+        usedDiskGb:
+          type: integer
+          format: int64
+          description: 'Real disk space consumed by VM overlay/storage files in GB. Reported
+
+            from filesystem stat of VM disk images. Separate from
+
+            `available_disk_gb` (which reflects the entire host filesystem).'
+          minimum: 0
+        usedMemoryMb:
+          type: integer
+          format: int64
+          description: 'Real memory usage in MB. Reported by the node from RSS of VM processes.
+
+            Separate from `available_memory_mb` (which is allocation-based bookkeeping).'
+          minimum: 0

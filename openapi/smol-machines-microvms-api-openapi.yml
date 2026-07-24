@@ -1,0 +1,483 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys MicroVMs API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: MicroVMs
+  description: Persistent microVM management
+paths:
+  /api/v1/microvms:
+    get:
+      tags:
+      - MicroVMs
+      summary: List all microvms.
+      operationId: list_microvms
+      responses:
+        '200':
+          description: List of microvms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMicrovmsResponse'
+        '500':
+          description: Database error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+    post:
+      tags:
+      - MicroVMs
+      summary: Create a new microvm.
+      operationId: create_microvm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMicrovmRequest'
+        required: true
+      responses:
+        '200':
+          description: MicroVM created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrovmInfo'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '409':
+          description: MicroVM already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/microvms/{name}:
+    get:
+      tags:
+      - MicroVMs
+      summary: Get microvm status.
+      operationId: get_microvm
+      parameters:
+      - name: name
+        in: path
+        description: MicroVM name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: MicroVM details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrovmInfo'
+        '404':
+          description: MicroVM not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+    delete:
+      tags:
+      - MicroVMs
+      summary: Delete a microvm.
+      operationId: delete_microvm
+      parameters:
+      - name: name
+        in: path
+        description: MicroVM name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: MicroVM deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '404':
+          description: MicroVM not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to delete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/microvms/{name}/exec:
+    post:
+      tags:
+      - MicroVMs
+      summary: Execute a command in a microvm.
+      operationId: exec_microvm
+      parameters:
+      - name: name
+        in: path
+        description: MicroVM name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MicrovmExecRequest'
+        required: true
+      responses:
+        '200':
+          description: Command executed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: MicroVM not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '409':
+          description: MicroVM not running
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Execution failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/microvms/{name}/start:
+    post:
+      tags:
+      - MicroVMs
+      summary: Start a microvm.
+      operationId: start_microvm
+      parameters:
+      - name: name
+        in: path
+        description: MicroVM name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: MicroVM started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrovmInfo'
+        '404':
+          description: MicroVM not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to start
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/microvms/{name}/stop:
+    post:
+      tags:
+      - MicroVMs
+      summary: Stop a microvm.
+      operationId: stop_microvm
+      parameters:
+      - name: name
+        in: path
+        description: MicroVM name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: MicroVM stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MicrovmInfo'
+        '404':
+          description: MicroVM not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to stop
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    DeleteResponse:
+      type: object
+      description: Generic delete response.
+      required:
+      - deleted
+      properties:
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
+    PortSpec:
+      type: object
+      description: Port mapping specification.
+      required:
+      - host
+      - guest
+      properties:
+        guest:
+          type: integer
+          format: int32
+          description: Port inside the sandbox.
+          example: 80
+          minimum: 0
+        host:
+          type: integer
+          format: int32
+          description: Port on the host.
+          example: 8080
+          minimum: 0
+    MicrovmInfo:
+      type: object
+      description: MicroVM status information.
+      required:
+      - name
+      - state
+      - cpus
+      - memoryMb
+      - mounts
+      - ports
+      - network
+      - createdAt
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          description: Number of vCPUs.
+          example: 2
+          minimum: 0
+        createdAt:
+          type: string
+          description: Creation timestamp.
+        memoryMb:
+          type: integer
+          format: int32
+          description: Memory in MiB.
+          example: 1024
+          minimum: 0
+        mounts:
+          type: integer
+          description: Number of configured mounts.
+          minimum: 0
+        name:
+          type: string
+          description: MicroVM name.
+          example: my-vm
+        network:
+          type: boolean
+          description: Whether outbound network access is enabled.
+        pid:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Process ID (if running).
+          example: 12345
+        ports:
+          type: integer
+          description: Number of configured ports.
+          minimum: 0
+        state:
+          type: string
+          description: Current state ("created", "running", "stopped").
+          example: running
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '
+    MicrovmExecRequest:
+      type: object
+      description: Request to execute a command in a microvm.
+      required:
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - echo
+          - hello
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout in seconds.
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
+    MountSpec:
+      type: object
+      description: Mount specification (for requests).
+      required:
+      - source
+      - target
+      properties:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: Host path to mount.
+          example: /Users/me/code
+        target:
+          type: string
+          description: Path inside the sandbox.
+          example: /workspace
+    ListMicrovmsResponse:
+      type: object
+      description: List microvms response.
+      required:
+      - microvms
+      properties:
+        microvms:
+          type: array
+          items:
+            $ref: '#/components/schemas/MicrovmInfo'
+          description: List of microvms.
+    EnvVar:
+      type: object
+      description: Environment variable.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
+    CreateMicrovmRequest:
+      type: object
+      description: Request to create a new microvm.
+      required:
+      - name
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          description: Number of vCPUs.
+          example: 2
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          description: Memory in MiB.
+          example: 1024
+          minimum: 0
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MountSpec'
+          description: Host mounts to attach.
+        name:
+          type: string
+          description: Unique name for the microvm.
+          example: my-vm
+        network:
+          type: boolean
+          description: 'Enable outbound network access (TSI).
+
+            Note: Only TCP/UDP supported, not ICMP (ping).'
+        overlayGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Overlay disk size in GiB (default: 2).'
+          minimum: 0
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortSpec'
+          description: Port mappings (host:guest).
+        storageGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Storage disk size in GiB (default: 20).'
+          minimum: 0

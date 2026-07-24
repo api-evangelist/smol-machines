@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys plans API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: plans
+  description: Quota + rate + budget plans
+paths:
+  /v1/plans:
+    get:
+      tags:
+      - plans
+      operationId: plan_list
+      responses:
+        '200':
+          description: List plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanInfo'
+    post:
+      tags:
+      - plans
+      operationId: plan_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlanRequest'
+        required: true
+      responses:
+        '201':
+          description: Plan created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanInfo'
+components:
+  schemas:
+    CreatePlanRequest:
+      type: object
+      required:
+      - name
+      properties:
+        budgetPolicy:
+          type: string
+        id:
+          type:
+          - string
+          - 'null'
+        isDefault:
+          type: boolean
+        maxApps:
+          type: integer
+          format: int32
+          minimum: 0
+        maxConcurrentMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        maxCpus:
+          type: integer
+          format: int32
+          minimum: 0
+        maxEgressGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        maxMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        maxMemoryMb:
+          type: integer
+          format: int64
+          minimum: 0
+        monthlyBudgetMicros:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        name:
+          type: string
+        rateCpuHourMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        rateExecMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        rateMemoryGbHourMicros:
+          type: integer
+          format: int64
+          minimum: 0
+    PlanInfo:
+      type: object
+      description: 'A reusable plan: quota + per-unit rates (money in integer micros) + budget.'
+      required:
+      - id
+      - name
+      - maxApps
+      - maxCpus
+      - maxMemoryMb
+      - maxMachines
+      - maxConcurrentMachines
+      - rateCpuHourMicros
+      - rateMemoryGbHourMicros
+      - rateExecMicros
+      - budgetPolicy
+      - isDefault
+      - createdAt
+      properties:
+        budgetPolicy:
+          type: string
+        createdAt:
+          type: string
+        id:
+          type: string
+        isDefault:
+          type: boolean
+        maxApps:
+          type: integer
+          format: int32
+          minimum: 0
+        maxConcurrentMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        maxCpus:
+          type: integer
+          format: int32
+          minimum: 0
+        maxEgressGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        maxMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        maxMemoryMb:
+          type: integer
+          format: int64
+          minimum: 0
+        monthlyBudgetMicros:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        name:
+          type: string
+        rateCpuHourMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        rateExecMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        rateMemoryGbHourMicros:
+          type: integer
+          format: int64
+          minimum: 0

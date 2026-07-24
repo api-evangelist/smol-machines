@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys Logs API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: Logs
+  description: Log streaming
+paths:
+  /api/v1/sandboxes/{id}/logs:
+    get:
+      tags:
+      - Logs
+      summary: Stream sandbox console logs via SSE.
+      operationId: stream_logs
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      - name: follow
+        in: query
+        description: Follow the logs (like tail -f)
+        required: false
+        schema:
+          type: boolean
+      - name: tail
+        in: query
+        description: Number of lines to show from the end
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Log stream (SSE)
+          content:
+            text/event-stream: {}
+        '404':
+          description: Sandbox or log file not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found

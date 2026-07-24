@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys health API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: health
+  description: Health, probes, and metrics
+paths:
+  /health:
+    get:
+      tags:
+      - health
+      operationId: health_check
+      responses:
+        '200':
+          description: Cluster health
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterHealth'
+  /livez:
+    get:
+      tags:
+      - health
+      operationId: livez
+      responses:
+        '200':
+          description: Process is alive
+  /metrics:
+    get:
+      tags:
+      - health
+      operationId: metrics
+      responses:
+        '200':
+          description: Prometheus metrics (text)
+  /readyz:
+    get:
+      tags:
+      - health
+      operationId: readyz
+      responses:
+        '200':
+          description: Ready to serve
+        '503':
+          description: State backend unreachable
+components:
+  schemas:
+    ClusterHealth:
+      type: object
+      required:
+      - clusterId
+      - version
+      - nodesTotal
+      - nodesReady
+      - appsTotal
+      - poolsTotal
+      - uptimeSecs
+      properties:
+        appsTotal:
+          type: integer
+          format: int32
+          minimum: 0
+        clusterId:
+          type: string
+        nodesReady:
+          type: integer
+          format: int32
+          minimum: 0
+        nodesTotal:
+          type: integer
+          format: int32
+          minimum: 0
+        poolsTotal:
+          type: integer
+          format: int32
+          minimum: 0
+        uptimeSecs:
+          type: integer
+          format: int64
+          minimum: 0
+        version:
+          type: string

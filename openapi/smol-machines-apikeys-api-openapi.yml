@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: apikeys
+  description: API key management
+paths:
+  /v1/apikeys:
+    get:
+      tags:
+      - apikeys
+      operationId: apikey_list
+      responses:
+        '200':
+          description: List API keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKeyInfo'
+    post:
+      tags:
+      - apikeys
+      operationId: apikey_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiKeyRequest'
+        required: true
+      responses:
+        '200':
+          description: API key created (plaintext shown once)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyCreated'
+  /v1/apikeys/{id}:
+    delete:
+      tags:
+      - apikeys
+      operationId: apikey_delete
+      parameters:
+      - name: id
+        in: path
+        description: API key id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: API key revoked
+components:
+  schemas:
+    ApiKeyInfo:
+      type: object
+      required:
+      - id
+      - scopes
+      - createdAt
+      properties:
+        createdAt:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        expiresAt:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        lastUsedAt:
+          type:
+          - string
+          - 'null'
+        scopes:
+          type: array
+          items:
+            type: string
+    ApiKeyCreated:
+      type: object
+      required:
+      - id
+      - key
+      properties:
+        id:
+          type: string
+        key:
+          type: string
+    CreateApiKeyRequest:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        expiresInDays:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        scopes:
+          type: array
+          items:
+            type: string
+        tenantId:
+          type:
+          - string
+          - 'null'
+          description: 'Tenant to scope this key to (admin only). Keys created with a tenant_id
+
+            can only access resources belonging to that tenant.'

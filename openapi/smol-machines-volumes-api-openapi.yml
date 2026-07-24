@@ -1,0 +1,126 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys volumes API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: volumes
+  description: Persistent volumes
+paths:
+  /v1/volumes:
+    get:
+      tags:
+      - volumes
+      operationId: volume_list
+      responses:
+        '200':
+          description: List volumes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VolumeInfo'
+    post:
+      tags:
+      - volumes
+      operationId: volume_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVolumeRequest'
+        required: true
+      responses:
+        '200':
+          description: Volume created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeInfo'
+  /v1/volumes/{id}:
+    get:
+      tags:
+      - volumes
+      operationId: volume_get
+      parameters:
+      - name: id
+        in: path
+        description: Volume id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Volume
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeInfo'
+        '404':
+          description: Not found
+    delete:
+      tags:
+      - volumes
+      operationId: volume_delete
+      parameters:
+      - name: id
+        in: path
+        description: Volume id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Volume deleted
+components:
+  schemas:
+    CreateVolumeRequest:
+      type: object
+      required:
+      - name
+      - sizeGb
+      properties:
+        name:
+          type: string
+        node:
+          type:
+          - string
+          - 'null'
+        sizeGb:
+          type: integer
+          format: int64
+          minimum: 0
+    VolumeInfo:
+      type: object
+      required:
+      - id
+      - name
+      - nodeId
+      - sizeGb
+      - status
+      - createdAt
+      properties:
+        appInstanceId:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        nodeId:
+          type: string
+        sizeGb:
+          type: integer
+          format: int64
+          minimum: 0
+        status:
+          type: string

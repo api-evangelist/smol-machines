@@ -1,0 +1,229 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys Execution API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: Execution
+  description: Command execution in sandboxes
+paths:
+  /api/v1/sandboxes/{id}/exec:
+    post:
+      tags:
+      - Execution
+      summary: Execute a command in a sandbox.
+      description: This executes directly in the VM (not in a container).
+      operationId: exec_command
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecRequest'
+        required: true
+      responses:
+        '200':
+          description: Command executed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Execution failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/run:
+    post:
+      tags:
+      - Execution
+      summary: Run a command in an image.
+      description: This creates a temporary overlay from the image and runs the command.
+      operationId: run_command
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+        required: true
+      responses:
+        '200':
+          description: Command executed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Execution failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    ExecRequest:
+      type: object
+      description: Request to execute a command in a sandbox.
+      required:
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - echo
+          - hello
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout in seconds.
+          example: 30
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
+          example: /workspace
+    RunRequest:
+      type: object
+      description: Request to run a command in an image.
+      required:
+      - image
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - python
+          - -c
+          - print('hello')
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        image:
+          type: string
+          description: Image to run in.
+          example: python:3.12-alpine
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout in seconds.
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
+    EnvVar:
+      type: object
+      description: Environment variable.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '

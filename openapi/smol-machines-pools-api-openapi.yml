@@ -1,0 +1,257 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys pools API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: pools
+  description: Warm machine pools
+paths:
+  /v1/pools:
+    get:
+      tags:
+      - pools
+      operationId: pool_list
+      responses:
+        '200':
+          description: List pools
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoolInfo'
+    post:
+      tags:
+      - pools
+      operationId: pool_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoolConfig'
+        required: true
+      responses:
+        '200':
+          description: Pool created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolInfo'
+  /v1/pools/{id}/claim:
+    post:
+      tags:
+      - pools
+      operationId: pool_claim
+      parameters:
+      - name: id
+        in: path
+        description: Pool id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Claimed machine
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineInfo'
+components:
+  schemas:
+    MachineInfo:
+      type: object
+      required:
+      - id
+      - source
+      - state
+      - resources
+      - network
+      - env
+      - ephemeral
+      - createdAt
+      - updatedAt
+      properties:
+        autoStopSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        createdAt:
+          type: string
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        ephemeral:
+          type: boolean
+        id:
+          type: string
+        lastActivityAt:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        network:
+          $ref: '#/components/schemas/MachineNetwork'
+        resources:
+          $ref: '#/components/schemas/MachineResources'
+        source:
+          $ref: '#/components/schemas/MachineSource'
+        state:
+          type: string
+        ttlSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        updatedAt:
+          type: string
+        workdir:
+          type:
+          - string
+          - 'null'
+    MachineSource:
+      oneOf:
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - image
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - smolmachine
+    PoolConfig:
+      type: object
+      required:
+      - image
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          minimum: 0
+        image:
+          type: string
+        maxIdleSecs:
+          type: integer
+          format: int64
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          minimum: 0
+        network:
+          type: boolean
+        targetSize:
+          type: integer
+          format: int32
+          minimum: 0
+        tenantId:
+          type:
+          - string
+          - 'null'
+          description: 'Optional owning tenant. Admin-only: when set, the pool is private to that
+
+            tenant; when omitted, the pool is shared and any tenant may claim from it.'
+    MachineResources:
+      type: object
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          minimum: 0
+        diskGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          minimum: 0
+    PoolInfo:
+      type: object
+      required:
+      - id
+      - image
+      - targetSize
+      - idleCount
+      - busyCount
+      - status
+      properties:
+        busyCount:
+          type: integer
+          format: int32
+          minimum: 0
+        id:
+          type: string
+        idleCount:
+          type: integer
+          format: int32
+          minimum: 0
+        image:
+          type: string
+        status:
+          type: string
+        targetSize:
+          type: integer
+          format: int32
+          minimum: 0
+    MachineNetwork:
+      oneOf:
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - blocked
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - open
+      - type: object
+        required:
+        - cidrs
+        - mode
+        properties:
+          cidrs:
+            type: array
+            items:
+              type: string
+          mode:
+            type: string
+            enum:
+            - allowCidrs

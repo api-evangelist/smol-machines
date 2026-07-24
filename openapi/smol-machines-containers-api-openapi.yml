@@ -1,0 +1,493 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys Containers API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: Containers
+  description: Container management within sandboxes
+paths:
+  /api/v1/sandboxes/{id}/containers:
+    get:
+      tags:
+      - Containers
+      summary: List containers in a sandbox.
+      operationId: list_containers
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of containers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContainersResponse'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+    post:
+      tags:
+      - Containers
+      summary: Create a container in a sandbox.
+      operationId: create_container
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContainerRequest'
+        required: true
+      responses:
+        '200':
+          description: Container created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerInfo'
+        '404':
+          description: Sandbox not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to create container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/containers/{cid}:
+    delete:
+      tags:
+      - Containers
+      summary: Delete a container.
+      operationId: delete_container
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      - name: cid
+        in: path
+        description: Container ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteContainerRequest'
+        required: true
+      responses:
+        '200':
+          description: Container deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '404':
+          description: Sandbox or container not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to delete container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/containers/{cid}/exec:
+    post:
+      tags:
+      - Containers
+      summary: Execute a command in a container.
+      operationId: exec_in_container
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      - name: cid
+        in: path
+        description: Container ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContainerExecRequest'
+        required: true
+      responses:
+        '200':
+          description: Command executed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Sandbox or container not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Execution failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/containers/{cid}/start:
+    post:
+      tags:
+      - Containers
+      summary: Start a container.
+      operationId: start_container
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      - name: cid
+        in: path
+        description: Container ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Container started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartResponse'
+        '404':
+          description: Sandbox or container not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to start container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/sandboxes/{id}/containers/{cid}/stop:
+    post:
+      tags:
+      - Containers
+      summary: Stop a container.
+      operationId: stop_container
+      parameters:
+      - name: id
+        in: path
+        description: Sandbox name
+        required: true
+        schema:
+          type: string
+      - name: cid
+        in: path
+        description: Container ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopContainerRequest'
+        required: true
+      responses:
+        '200':
+          description: Container stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopResponse'
+        '404':
+          description: Sandbox or container not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Failed to stop container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    ContainerInfo:
+      type: object
+      description: Container information.
+      required:
+      - id
+      - image
+      - state
+      - createdAt
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command.
+        createdAt:
+          type: integer
+          format: int64
+          description: Creation timestamp.
+          minimum: 0
+        id:
+          type: string
+          description: Container ID.
+          example: abc123
+        image:
+          type: string
+          description: Image.
+          example: alpine:latest
+        state:
+          type: string
+          description: State (created, running, stopped).
+          example: running
+    StopContainerRequest:
+      type: object
+      description: Request to stop a container.
+      properties:
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout before force kill (seconds).
+          example: 10
+          minimum: 0
+    ContainerExecRequest:
+      type: object
+      description: Request to exec in a container.
+      required:
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - ls
+          - -la
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout in seconds.
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    CreateContainerRequest:
+      type: object
+      description: Request to create a container.
+      required:
+      - image
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - sleep
+          - infinity
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        image:
+          type: string
+          description: Image to use.
+          example: alpine:latest
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerMountSpec'
+          description: Volume mounts.
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
+    StartResponse:
+      type: object
+      description: Generic start response.
+      required:
+      - started
+      properties:
+        started:
+          type: string
+          description: Identifier of started resource.
+          example: abc123
+    DeleteResponse:
+      type: object
+      description: Generic delete response.
+      required:
+      - deleted
+      properties:
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
+    StopResponse:
+      type: object
+      description: Generic stop response.
+      required:
+      - stopped
+      properties:
+        stopped:
+          type: string
+          description: Identifier of stopped resource.
+          example: abc123
+    ContainerMountSpec:
+      type: object
+      description: 'Container mount specification.
+
+
+        Note: The `source` field is the virtiofs tag, which corresponds to
+
+        host mounts configured on the sandbox. Tags are assigned in order:
+
+        `smolvm0`, `smolvm1`, etc. based on the sandbox''s mount configuration.
+
+        Use `GET /api/v1/sandboxes/:id` to see the tag-to-path mapping.'
+      required:
+      - source
+      - target
+      properties:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: 'Virtiofs tag (e.g., "smolvm0", "smolvm1").
+
+            These correspond to sandbox mounts in order.'
+          example: smolvm0
+        target:
+          type: string
+          description: Target path in container.
+          example: /app
+    ListContainersResponse:
+      type: object
+      description: List containers response.
+      required:
+      - containers
+      properties:
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerInfo'
+          description: List of containers.
+    EnvVar:
+      type: object
+      description: Environment variable.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '
+    DeleteContainerRequest:
+      type: object
+      description: Request to delete a container.
+      properties:
+        force:
+          type: boolean
+          description: Force delete even if running.

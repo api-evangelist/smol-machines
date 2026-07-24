@@ -1,0 +1,258 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys billing API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: billing
+  description: Self-service account and metering
+paths:
+  /v1/account:
+    get:
+      tags:
+      - billing
+      operationId: account_get
+      responses:
+        '200':
+          description: 'Tenant account: plan, effective limits, period usage + spend'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInfo'
+  /v1/billing/meters:
+    get:
+      tags:
+      - billing
+      operationId: billing_meters
+      responses:
+        '200':
+          description: Per-tenant metered usage + cost for the period
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantMeter'
+components:
+  schemas:
+    PlanInfo:
+      type: object
+      description: 'A reusable plan: quota + per-unit rates (money in integer micros) + budget.'
+      required:
+      - id
+      - name
+      - maxApps
+      - maxCpus
+      - maxMemoryMb
+      - maxMachines
+      - maxConcurrentMachines
+      - rateCpuHourMicros
+      - rateMemoryGbHourMicros
+      - rateExecMicros
+      - budgetPolicy
+      - isDefault
+      - createdAt
+      properties:
+        budgetPolicy:
+          type: string
+        createdAt:
+          type: string
+        id:
+          type: string
+        isDefault:
+          type: boolean
+        maxApps:
+          type: integer
+          format: int32
+          minimum: 0
+        maxConcurrentMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        maxCpus:
+          type: integer
+          format: int32
+          minimum: 0
+        maxEgressGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        maxMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        maxMemoryMb:
+          type: integer
+          format: int64
+          minimum: 0
+        monthlyBudgetMicros:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        name:
+          type: string
+        rateCpuHourMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        rateExecMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        rateMemoryGbHourMicros:
+          type: integer
+          format: int64
+          minimum: 0
+    UsageResponse:
+      type: object
+      required:
+      - tenantId
+      - from
+      - to
+      - totalUptimeSeconds
+      - cpuHours
+      - memoryGbHours
+      - machineCount
+      - execCount
+      - execDurationMs
+      properties:
+        cpuHours:
+          type: number
+          format: double
+        execCount:
+          type: integer
+          format: int32
+          minimum: 0
+        execDurationMs:
+          type: integer
+          format: int64
+          minimum: 0
+        from:
+          type: string
+        machineCount:
+          type: integer
+          format: int32
+          minimum: 0
+        memoryGbHours:
+          type: number
+          format: double
+        tenantId:
+          type: string
+        to:
+          type: string
+        totalUptimeSeconds:
+          type: integer
+          format: int64
+          minimum: 0
+    TenantMeter:
+      type: object
+      description: 'One tenant''s metered usage for a period, in the shape a billing system
+
+        ingests (`GET /v1/billing/meters`).'
+      required:
+      - tenantId
+      - cpuHours
+      - memoryGbHours
+      - execCount
+      - cost
+      properties:
+        cost:
+          $ref: '#/components/schemas/CostBreakdown'
+        cpuHours:
+          type: number
+          format: double
+        execCount:
+          type: integer
+          format: int64
+          minimum: 0
+        externalBillingId:
+          type:
+          - string
+          - 'null'
+        memoryGbHours:
+          type: number
+          format: double
+        tenantId:
+          type: string
+    CostBreakdown:
+      type: object
+      description: Cost breakdown for a usage period (all amounts in integer micros).
+      required:
+      - cpuMicros
+      - memoryMicros
+      - execMicros
+      - totalMicros
+      properties:
+        cpuMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        execMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        memoryMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        totalMicros:
+          type: integer
+          format: int64
+          minimum: 0
+    AccountInfo:
+      type: object
+      description: 'The tenant self-service account view: plan, effective limits, usage, spend.'
+      required:
+      - tenantId
+      - status
+      - effectiveMaxCpus
+      - effectiveMaxMemoryMb
+      - effectiveMaxMachines
+      - periodUsage
+      - periodCost
+      properties:
+        budgetRemainingMicros:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        effectiveMaxCpus:
+          type: integer
+          format: int32
+          minimum: 0
+        effectiveMaxMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        effectiveMaxMemoryMb:
+          type: integer
+          format: int64
+          minimum: 0
+        monthlyBudgetMicros:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        periodCost:
+          $ref: '#/components/schemas/CostBreakdown'
+        periodUsage:
+          $ref: '#/components/schemas/UsageResponse'
+        plan:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PlanInfo'
+        status:
+          type: string
+        tenantId:
+          type: string

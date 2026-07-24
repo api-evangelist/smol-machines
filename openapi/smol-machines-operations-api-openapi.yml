@@ -1,0 +1,37 @@
+openapi: 3.1.0
+info:
+  title: smolfleet apikeys operations API
+  description: Control plane for smolvm — deploy and run machines across a cluster.
+  license:
+    name: Apache-2.0
+  version: 0.1.0
+servers:
+- url: https://api.smolmachines.com
+  description: Hosted smolfleet
+tags:
+- name: operations
+  description: Async operations
+paths:
+  /v1/operations:
+    get:
+      tags:
+      - operations
+      operationId: operation_list
+      responses:
+        '200':
+          description: List operations
+  /v1/operations/{id}:
+    get:
+      tags:
+      - operations
+      operationId: operation_get
+      parameters:
+      - name: id
+        in: path
+        description: Operation id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation
