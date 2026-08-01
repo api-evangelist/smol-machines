@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/smol-machines-smolfleet-openapi.json, openapi/smol-machines-smolvm-openapi.json, https://smolmachines.com/docs
+authentication:
+  style: bearer-api-key
+  header: "Authorization: Bearer smk_<key>"
+  ref: authentication/smol-machines-authentication.yml
+idempotency:
+  supported: false
+  key_header: null
+  natural_key: >-
+    Resources are created with a client-supplied unique `name` (sandboxes,
+    microvms) — re-creating with an existing name returns 409 CONFLICT rather
+    than a duplicate, so retries on a fixed name are conflict-safe. No dedicated
+    Idempotency-Key header is documented.
+pagination:
+  style: none-documented
+  notes: List endpoints (list_machines, list_sandboxes, list_apps, ...) return full collections; no cursor/offset params are documented in either spec.
+versioning:
+  style: uri-path
+  current: v1
+  ref: lifecycle/smol-machines-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  shape: '{"code": "<CODE>", "error": "<message>"}'
+  rfc9457: false
+  ref: errors/smol-machines-problem-types.yml
+streaming:
+  style: server-sent-events
+  endpoints:
+  - POST /api/v1/sandboxes/{id}/exec (streaming exec)
+  - GET /api/v1/sandboxes/{id}/logs (stream_logs)
+  - GET /v1/machines/{id}/events (machine_events)
+  - GET /v1/apps/{name}/logs (app_logs)
+rate_limit_signaling:
+  documented: true
+  mechanism: HTTP 429 Too Many Requests on the Cloud API
+  headers: not-documented
+secrets:
+  style: references-resolved-at-launch
+  notes: >-
+    Secrets are not stored by the platform; the CLI/SDK injects them from host
+    env vars or files at launch (--secret-env GUEST=HOST_VAR, --secret-file,
+    or a Smolfile [secrets] block).

@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+source: https://smolmachines.com/docs/cloud-api, https://smolmachines.com/docs/cloud-quickstart, https://github.com/smol-machines/smol/blob/main/docs/cli.md
+docs: https://smolmachines.com/docs/cloud-api
+summary:
+  types: [http, oauth2]
+  http_scheme: bearer
+  token_prefix: smk_
+  oauth2_flows: [deviceCode]
+  notes: >-
+    Neither published OpenAPI declares components.securitySchemes, so this
+    profile is captured from the provider's documentation, not derived.
+schemes:
+- name: CloudBearerApiKey
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: "Bearer smk_<api_key>"
+  applies_to: https://api.smolmachines.com (smolfleet cloud REST API — /v1/*)
+  docs: https://smolmachines.com/docs/cloud-api
+  description: >-
+    All hosted Cloud API endpoints require an Authorization: Bearer <api_key>
+    header. Keys are created in the console (smolmachines.com/console) or via
+    POST /v1/apikeys, are prefixed smk_, and are exported by convention as
+    SMOLCLOUD_KEY. Managed via /v1/apikeys and /v1/tokens.
+- name: CloudDeviceFlow
+  type: oauth2
+  flow: deviceCode
+  in: header
+  applies_to: smol CLI (`smol auth login`) — registry + smolfleet
+  description: >-
+    The smol CLI authenticates via an OAuth device flow (`smol auth login`);
+    one token covers both the artifact registry and the smolfleet API.
+- name: LocalNone
+  type: none
+  applies_to: >-
+    smolvm local API (`smolvm serve start`, default 127.0.0.1:8080) and the
+    in-process embedded engine used by the SDKs — no auth on the loopback
+    interface; isolation is enforced by the hypervisor boundary, not tokens.

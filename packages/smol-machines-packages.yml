@@ -1,0 +1,64 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/smol-machines/smol, https://github.com/smol-machines/smolvm-sdk
+packages:
+- language: javascript
+  registry: npm
+  name: smolmachines
+  url: https://www.npmjs.com/package/smolmachines
+  install: npm install smolmachines
+  version: 1.6.11
+  official: true
+  description: >-
+    Node SDK — run code in isolated microVM sandboxes, embedded in-process
+    (local) or against the smolfleet cloud, via one Machine API.
+- language: python
+  registry: pypi
+  name: smolmachines
+  url: https://pypi.org/project/smolmachines/
+  install: pip install smolmachines
+  version: 1.6.11
+  official: true
+  description: >-
+    Python SDK — the same Machine API as Node; local embedded microVM or cloud.
+- language: javascript
+  registry: npm
+  name: smolvm
+  url: https://www.npmjs.com/package/smolvm
+  install: npm install smolvm
+  version: 1.0.0
+  official: true
+  description: >-
+    smolvm Node SDK (Sandbox API) — talks to a running smolvm server
+    (default http://127.0.0.1:8080).
+- language: python
+  registry: pypi
+  name: smolvm
+  url: https://pypi.org/project/smolvm/
+  install: pip install smolvm
+  version: 0.0.28
+  official: true
+  description: >-
+    smolvm Python SDK (Sandbox API) — talks to a running smolvm server.
+- language: shell
+  registry: homebrew
+  name: smolvm
+  url: https://github.com/smol-machines/homebrew-tap
+  install: brew install smol-machines/tap/smolvm
+  official: true
+  description: Homebrew tap for the smolvm CLI.
+- language: rust
+  registry: github-releases
+  name: smolvm
+  url: https://github.com/smol-machines/smolvm/releases
+  install: curl -sSL https://smolmachines.com/install.sh | bash
+  version: v1.6.13
+  official: true
+  description: The smolvm CLI/engine binary (macOS, Linux, Windows).
+- language: rust
+  registry: github-releases
+  name: smol
+  url: https://github.com/smol-machines/smol/releases
+  install: curl -sSL https://raw.githubusercontent.com/smol-machines/smol/main/scripts/install.sh | bash
+  official: true
+  description: The smol CLI (create/run/exec, pack .smolmachine, registry, cloud deploy).

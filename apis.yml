@@ -1,7 +1,16 @@
 aid: smol-machines
 name: Smol Machines
-description: Smol Machines is a company surfaced as a portfolio company of y-combinator and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Smol Machines (smol machines, inc.) is a Y Combinator-backed developer
+  infrastructure company building portable, self-contained Linux microVMs.
+  Its open-source `smolvm` engine and `smol` CLI (both Rust, Apache-2.0) boot
+  hardware-isolated virtual machines from any OCI image in under 200ms — on a
+  laptop, in the smolfleet cloud, or self-hosted — with no daemon and no Docker.
+  The same Machine API runs locally as an in-process microVM or against the
+  hosted smolfleet control plane at api.smolmachines.com, so teams sandbox
+  untrusted code and AI-agent workloads, ship stateful `.smolmachine` artifacts,
+  and deploy machines across a cluster without changing a line. Node and Python
+  SDKs (`smolmachines`), a local REST API, and a cloud REST API are all public.
 url: https://raw.githubusercontent.com/api-evangelist/smol-machines/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,14 +18,334 @@ x-backed-by:
 - y-combinator
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://smolmachines.com/install.sh
 tags:
 - Company
-apis: []
+- MicroVM
+- Sandbox
+- Virtualization
+- Developer Tools
+- Infrastructure
+- AI Agents
+- Code Execution
+- Containers
+- Cloud
+apis:
+- aid: smol-machines:smol-machines-apikeys-api
+  name: Smol Machines apikeys API
+  description: API key management
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - apikeys
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-apikeys-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-apps-api
+  name: Smol Machines apps API
+  description: Long-running app deployments
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - apps
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-apps-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-billing-api
+  name: Smol Machines billing API
+  description: Self-service account and metering
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - billing
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-billing-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-containers-api
+  name: Smol Machines Containers API
+  description: Container management within sandboxes
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - Containers
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-containers-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-execution-api
+  name: Smol Machines Execution API
+  description: Command execution in sandboxes
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - Execution
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-execution-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-health-api
+  name: Smol Machines health API
+  description: Health, probes, and metrics
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-health-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-images-api
+  name: Smol Machines Images API
+  description: OCI image management
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-images-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-logs-api
+  name: Smol Machines Logs API
+  description: Log streaming
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-logs-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-machines-api
+  name: Smol Machines machines API
+  description: First-class machine lifecycle and exec
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - machines
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-machines-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-microvms-api
+  name: Smol Machines MicroVMs API
+  description: Persistent microVM management
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - MicroVMs
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-microvms-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-nodes-api
+  name: Smol Machines nodes API
+  description: Cluster node enrollment and status
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-operations-api
+  name: Smol Machines operations API
+  description: Async operations
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - operations
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-operations-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-plans-api
+  name: Smol Machines plans API
+  description: Quota + rate + budget plans
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - plans
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-plans-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-pools-api
+  name: Smol Machines pools API
+  description: Warm machine pools
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - pools
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-pools-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-sandboxes-api
+  name: Smol Machines Sandboxes API
+  description: Sandbox lifecycle management
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - Sandboxes
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-sandboxes-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-tenants-api
+  name: Smol Machines tenants API
+  description: Customer accounts (product-backend)
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-tenants-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-tokens-api
+  name: Smol Machines tokens API
+  description: Node join tokens
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-usage-api
+  name: Smol Machines usage API
+  description: Usage and billing
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - usage
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-usage-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-volumes-api
+  name: Smol Machines volumes API
+  description: Persistent volumes
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - volumes
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-volumes-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+common:
+- type: Authentication
+  url: authentication/smol-machines-authentication.yml
+- type: DomainSecurity
+  url: security/smol-machines-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/smol-machines-agentic-access.yml
+- type: DeveloperPortal
+  url: https://smolmachines.com/docs
+- type: Documentation
+  url: https://smolmachines.com/docs
+- type: APIReference
+  url: https://smolmachines.com/docs/cloud-api
+- type: GettingStarted
+  url: https://smolmachines.com/docs/quickstart
+- type: Quickstart
+  url: https://smolmachines.com/docs/cloud-quickstart
+- type: SignUp
+  url: https://smolmachines.com/console
+- type: Pricing
+  url: https://smolmachines.com/pricing
+- type: TermsOfService
+  url: https://smolmachines.com/legal/terms
+- type: PrivacyPolicy
+  url: https://smolmachines.com/legal/privacy
+- type: Blog
+  url: https://smolmachines.com/engineering
+- type: StatusPage
+  url: https://smolmachines.com/status
+- type: GitHubOrganization
+  url: https://github.com/smol-machines
+- type: Support
+  url: https://discord.gg/E5r8rEWY9J
+- type: Registry
+  url: https://smolmachines.com/registry
+- type: OpenAPI
+  url: openapi/smol-machines-smolfleet-openapi.json
+- type: OpenAPI
+  url: openapi/smol-machines-smolvm-openapi.json
+- type: LLMsTxt
+  url: llms/smol-machines-llms.txt
+- type: Packages
+  url: packages/smol-machines-packages.yml
+- type: SDKs
+  url: packages/smol-machines-packages.yml
+- type: CLI
+  url: cli/smol-machines-cli.yml
+- type: MCPServer
+  url: mcp/smol-machines-mcp.yml
+- type: WellKnown
+  url: well-known/smol-machines-well-known.yml
+- type: Conformance
+  url: conformance/smol-machines-conformance.yml
+- type: ErrorCatalog
+  url: errors/smol-machines-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/smol-machines-lifecycle.yml
+- type: Conventions
+  url: conventions/smol-machines-conventions.yml
+- type: ChangeLog
+  url: changelog/smol-machines-changelog.yml
+- type: DataModel
+  url: data-model/smol-machines-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1

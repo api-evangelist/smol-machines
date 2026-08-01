@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: smolmachines.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 11 13:03:12 2026 GMT
+  hsts: false
+- host: api.smolmachines.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  9 02:29:30 2026 GMT
+  hsts: null
+domains:
+- domain: smolmachines.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

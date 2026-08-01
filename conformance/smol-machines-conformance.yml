@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/smol-machines-smolfleet-openapi.json, openapi/smol-machines-smolvm-openapi.json, https://smolmachines.com/docs
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: both published specs declare openapi 3.1.0
+- id: oauth2
+  conforms: true
+  evidence: smol CLI uses an OAuth device flow (smol auth login); not declared in OpenAPI securitySchemes
+- id: oidc
+  conforms: false
+- id: bearer-token-auth
+  conforms: true
+  evidence: Cloud API requires Authorization Bearer smk_ api key (docs/cloud-api)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use a custom {code, error} JSON envelope (ApiErrorResponse), not application/problem+json
+- id: rest
+  conforms: true
+  evidence: resource-oriented /v1 and /api/v1 paths with standard HTTP verbs
+- id: sse-streaming
+  conforms: true
+  evidence: exec/logs endpoints stream output (server-sent events)
+- id: oci
+  conforms: true
+  evidence: machines/sandboxes boot from OCI image references; registry speaks GET /v2/_catalog
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: no /.well-known/security.txt served
+- id: fhir-r4
+  conforms: false
+- id: fapi
+  conforms: false
+- id: scim
+  conforms: false
+- id: json-api
+  conforms: false

@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/smol-machines-smolfleet-openapi.json, openapi/smol-machines-smolvm-openapi.json
+provider_published:
+- file: smol-machines-smolvm-AGENTS.md
+  name: smolvm — Agent Reference
+  method: searched
+  source: https://github.com/smol-machines/smolvm/blob/main/AGENTS.md
+skills:
+- file: smol-machines-run-untrusted-code-cloud.md
+  name: Run untrusted code in a cloud microVM
+  api: openapi/smol-machines-smolfleet-openapi.json
+  operations: [machine_create, machine_start, machine_exec, machine_file_download, machine_stop, machine_delete]
+- file: smol-machines-local-sandbox-exec.md
+  name: Sandbox and run code on the local smolvm API
+  api: openapi/smol-machines-smolvm-openapi.json
+  operations: [create_sandbox, start_sandbox, run_command, exec_command, stream_logs, delete_sandbox]
+- file: smol-machines-deploy-and-scale-app.md
+  name: Deploy and scale an app on smolfleet
+  api: openapi/smol-machines-smolfleet-openapi.json
+  operations: [app_deploy, app_get, app_logs, app_scale, app_promote, app_redeploy, app_destroy]

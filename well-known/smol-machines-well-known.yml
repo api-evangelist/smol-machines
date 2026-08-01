@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+hosts:
+- host: https://smolmachines.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.smolmachines.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+    note: control plane requires Authorization; not publicly served
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+  - path: /.well-known/api-catalog
+    status: 401
+notes: >-
+  No public /.well-known/ discovery documents were served. The website host
+  returns 404 for all probed paths; the API control plane returns 401 (auth
+  required) rather than exposing them anonymously. A public llms.txt IS served
+  at https://smolmachines.com/llms.txt (captured in llms/) and points to
+  https://smolmachines.com/openapi.json.

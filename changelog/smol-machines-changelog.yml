@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/smol-machines/smolvm/releases
+scheme: semver
+current_version: v1.6.13
+project: smolvm (engine/CLI)
+entries:
+- version: v1.6.13
+  date: '2026-07-19'
+  highlights:
+  - Bump the Nix flake to smolvm 1.6.0
+  - Fix the pacman repo build so it packages both architectures
+  - Make VM boot failures diagnosable instead of opaque
+- version: v1.6.12
+  date: '2026-07-19'
+  highlights:
+  - Packaging and boot-diagnostics fixes (see release notes)
+- version: v1.6.11
+  date: '2026-07-18'
+  highlights:
+  - Packaging and boot-diagnostics fixes
+- version: v1.6.10
+  date: '2026-07-18'
+  highlights:
+  - Incremental release
+- version: v1.6.9
+  date: '2026-07-17'
+  highlights:
+  - Incremental release
+notes: >-
+  Recent window only. smolvm ships very frequently (multiple releases per day
+  during active development). Full history at the releases page.

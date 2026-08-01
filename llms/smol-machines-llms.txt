@@ -1,0 +1,37 @@
+# smol machines
+
+> The same smol machine on your laptop, in the cloud, or self-hosted. smolmachines runs fast, isolated microVMs — "machines" — from any OCI image: locally with the open-source `smol` CLI, or on the smolmachines cloud platform. This file indexes the site for automated agents.
+
+## Product
+
+- [Home](https://smolmachines.com): The same smol machine on your laptop, in the cloud, or self-hosted.
+- [Browse machines](https://smolmachines.com/machines): Catalog of ready-to-run base machines.
+- [Pricing](https://smolmachines.com/pricing): Usage-based pricing across the Standard, Startup, and Enterprise tiers.
+- [Registry](https://smolmachines.com/registry): Public registry of .smolmachine artifacts.
+- [Documentation](https://smolmachines.com/docs): Full documentation home.
+- [Engineering](https://smolmachines.com/engineering): Engineering notes on the runtime under smol machines.
+- [Running a real Kubernetes cluster inside one microVM](https://smolmachines.com/engineering/kubernetes-in-a-microvm): Why a microVM can host nested Kubernetes where a container cannot.
+- [GPU access by API remoting](https://smolmachines.com/engineering/gpu-over-vsock): Remoting the CUDA API over vsock to a host GPU, and how it compares to passthrough and vGPU.
+
+## Documentation
+
+- [Docs index for agents](https://smolmachines.com/docs/llms.txt): Machine-readable index of every documentation page.
+- [Overview](https://smolmachines.com/docs): What smol machines is and how the pieces fit together.
+- [Installation](https://smolmachines.com/docs/installation): Install the smol CLI on macOS, Linux, or Windows.
+- [Quick Start](https://smolmachines.com/docs/quickstart): Run your first machine in a couple of commands.
+- [Cloud Getting Started](https://smolmachines.com/docs/cloud-quickstart): Deploy and manage machines on the smolmachines cloud.
+- [Cloud API Reference](https://smolmachines.com/docs/cloud-api): REST API for the cloud platform.
+- [Cloud API Explorer](https://smolmachines.com/docs/api-explorer): Interactive explorer for the cloud API.
+- [Machine](https://smolmachines.com/docs/machine): The machine model: images, lifecycle, and exec.
+- [Volume Mounts](https://smolmachines.com/docs/mounts): Mount host directories and volumes into a machine.
+- [Resources](https://smolmachines.com/docs/resources): CPU, memory, and disk sizing for machines.
+- [GPU](https://smolmachines.com/docs/gpu): Attach and use GPUs inside a machine.
+- [Machine API](https://smolmachines.com/docs/api-machine): The in-guest machine agent API.
+- [Error Handling](https://smolmachines.com/docs/errors): Error codes and how to handle them.
+- [Running Python](https://smolmachines.com/docs/preset-python): Run Python code in a machine.
+- [Running Node.js](https://smolmachines.com/docs/preset-node): Run Node.js code in a machine.
+
+## API
+
+- [OpenAPI specification](https://smolmachines.com/openapi.json): Machine-readable spec for the cloud API.
+- [Sitemap](https://smolmachines.com/sitemap.xml): All indexable pages.

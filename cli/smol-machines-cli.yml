@@ -1,0 +1,65 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/smol-machines/smol/blob/main/docs/cli.md, https://github.com/smol-machines/smolvm
+clis:
+- name: smol
+  description: >-
+    Manages microVM sandboxes locally (in-process, via the bundled smolvm engine)
+    and on the smolfleet cloud. Local or cloud is resolved automatically; force
+    with --local / --cloud or a local/<name> | cloud/<name> prefix.
+  language: rust
+  license: Apache-2.0
+  repo: https://github.com/smol-machines/smol
+  docs: https://smolmachines.com/docs
+  install:
+  - curl -sSL https://raw.githubusercontent.com/smol-machines/smol/main/scripts/install.sh | bash
+  - npm install smolmachines
+  - pip install smolmachines
+  config: ~/.config/smolvm/config.toml (0600; SMOLVM_CONFIG to override)
+  command_groups:
+  - group: run
+    summary: Ephemeral one-shot — boot a machine, run a command, discard it.
+    commands: [run]
+  - group: machine
+    summary: Machine lifecycle — create/start/stop/exec/shell/ls/status/rm/cp/logs/fork/images/prune/update/monitor.
+    commands: [create, start, stop, exec, shell, ls, status, rm, cp, logs, fork, images, prune, update, monitor, data-dir]
+  - group: file
+    summary: Smolfile (declarative) — init/up/down.
+    commands: [init, up, down]
+  - group: pack
+    summary: Artifacts — build/push/pull/inspect .smolmachine images.
+    commands: [create, push, pull, inspect]
+  - group: registry
+    summary: Registries — ls/catalog/tags/login/logout.
+    commands: [ls, catalog, tags, login, logout]
+  - group: auth
+    summary: Authentication — OAuth device-flow login covering registry + smolfleet.
+    commands: [login, logout]
+  - group: cloud
+    summary: Cloud (smolfleet) — cloud-only operations (deploy, scale, etc.).
+    commands: [deploy]
+- name: smolvm
+  description: >-
+    The standalone smolvm CLI/engine — build and run portable, self-contained
+    Linux microVMs locally (<200ms boot, no daemon, no Docker), pack them into
+    single-file .smolmachine artifacts, and serve the local HTTP API.
+  language: rust
+  license: Apache-2.0
+  repo: https://github.com/smol-machines/smolvm
+  docs: https://github.com/smol-machines/smolvm/blob/main/AGENTS.md
+  install:
+  - curl -sSL https://smolmachines.com/install.sh | bash
+  - brew install smol-machines/tap/smolvm
+  command_groups:
+  - group: machine
+    summary: run/exec/shell/create/start/stop/delete/status/ls/update/cp/monitor.
+    commands: [run, exec, shell, create, start, stop, delete, status, ls, update, cp, monitor]
+  - group: pack
+    summary: create/run — package a workload into a portable .smolmachine binary.
+    commands: [create, run]
+  - group: serve
+    summary: Start the local HTTP API (default 127.0.0.1:8080 or a unix socket).
+    commands: [start]
+  - group: config
+    summary: registries edit — container registry auth.
+    commands: [registries]

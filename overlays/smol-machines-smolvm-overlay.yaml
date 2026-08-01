@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Smol Machines — smolvm Local API
+  version: 1.0.0
+extends: openapi/smol-machines-smolvm-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: smol-machines
+    x-apievangelist-note: >-
+      Local runtime API served by `smolvm serve start` (default 127.0.0.1:8080
+      or a unix socket). No auth on the loopback interface; isolation is enforced
+      by the hypervisor boundary.
+    x-apievangelist-artifacts:
+      errors: errors/smol-machines-problem-types.yml
+      conventions: conventions/smol-machines-conventions.yml
+      data_model: data-model/smol-machines-data-model.yml

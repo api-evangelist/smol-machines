@@ -1,0 +1,52 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/smol-machines-smolfleet-openapi.json
+note: >-
+  No official hosted/remote MCP server was found for Smol Machines (searched the
+  GitHub org, docs, and npm @modelcontextprotocol). The provider does publish an
+  AGENTS.md agent reference for the smolvm CLI (saved under skills/). The tool
+  list below is a CANDIDATE derived from the smolfleet Cloud API operations, one
+  tool per operationId, for a would-be MCP server over the REST API.
+server:
+  name: smol-machines
+  transport: http
+  auth: bearer (smk_ api key)
+  base_url: https://api.smolmachines.com
+tools:
+- name: machine_create
+  description: Create a machine from an OCI image or .smolmachine artifact.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_create
+- name: machine_list
+  description: List machines.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_list
+- name: machine_get
+  description: Get a machine by id.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_get
+- name: machine_start
+  description: Start a machine.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_start
+- name: machine_stop
+  description: Stop a machine.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_stop
+- name: machine_delete
+  description: Delete a machine.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_delete
+- name: machine_exec
+  description: Execute a command in a machine.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_exec
+- name: machine_code
+  description: Run code in a machine.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_code
+- name: machine_file_upload
+  description: Upload a file to a machine.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_file_upload
+- name: machine_file_download
+  description: Download a file from a machine.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#machine_file_download
+- name: app_deploy
+  description: Deploy an app.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#app_deploy
+- name: volume_create
+  description: Create a volume.
+  source_operation: openapi/smol-machines-smolfleet-openapi.json#volume_create

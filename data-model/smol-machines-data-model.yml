@@ -1,0 +1,94 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/smol-machines-smolvm-openapi.json, openapi/smol-machines-smolfleet-openapi.json
+entities:
+- name: Sandbox
+  id: name
+  api: smolvm-local
+  schema: SandboxInfo
+- name: Microvm
+  id: name
+  api: smolvm-local
+  schema: MicrovmInfo
+- name: Container
+  id: cid
+  api: smolvm-local
+  schema: ContainerInfo
+- name: Image
+  api: smolvm-local
+  schema: ImageInfo
+- name: Machine
+  id: id (mach-*)
+  api: smolfleet-cloud
+- name: App
+  id: name
+  api: smolfleet-cloud
+- name: Volume
+  id: id
+  api: smolfleet-cloud
+- name: Session
+  id: session_id
+  api: smolfleet-cloud
+- name: Node
+  id: id
+  api: smolfleet-cloud
+- name: Pool
+  id: id
+  api: smolfleet-cloud
+- name: Tenant
+  id: id
+  api: smolfleet-cloud
+- name: ApiKey
+  id: id
+  api: smolfleet-cloud
+- name: Token
+  id: prefix
+  api: smolfleet-cloud
+- name: Plan
+  api: smolfleet-cloud
+- name: Operation
+  id: id
+  api: smolfleet-cloud
+relationships:
+- from: Container
+  to: Sandbox
+  type: belongs_to
+  via: sandbox id ({id} path param)
+- from: Sandbox
+  to: Container
+  type: has_many
+  via: /api/v1/sandboxes/{id}/containers
+- from: Sandbox
+  to: Image
+  type: has_many
+  via: /api/v1/sandboxes/{id}/images
+- from: Machine
+  to: Session
+  type: has_many
+  via: /v1/machines/{id}/sessions
+- from: Machine
+  to: Volume
+  type: has_many
+  via: mounts[].volume in CreateMachine request
+- from: Session
+  to: Machine
+  type: belongs_to
+  via: machine id ({id} path param)
+- from: Tenant
+  to: Machine
+  type: has_many
+  via: tenant scoping
+- from: Tenant
+  to: ApiKey
+  type: has_many
+  via: tenant scoping
+- from: Pool
+  to: Machine
+  type: has_many
+  via: /v1/pools/{id}/claim
+notes: >-
+  Two APIs share one Machine mental model. The local smolvm API models
+  Sandboxes (which own Containers and Images) and standalone Microvms. The cloud
+  smolfleet control plane models Machines (with Sessions, Volumes, mounts) plus
+  the multi-tenant/cluster layer (Tenants, Nodes, Pools, ApiKeys, Tokens, Plans,
+  Operations, Apps).
