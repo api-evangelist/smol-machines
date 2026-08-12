@@ -275,6 +275,8 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 common:
+- type: Overlay
+  url: overlays/smol-machines-smolfleet-overlay.yaml
 - type: Authentication
   url: authentication/smol-machines-authentication.yml
 - type: DomainSecurity
@@ -310,9 +312,9 @@ common:
 - type: Registry
   url: https://smolmachines.com/registry
 - type: OpenAPI
-  url: openapi/smol-machines-smolfleet-openapi.json
+  url: openapi/_original/smol-machines-smolfleet-openapi.json
 - type: OpenAPI
-  url: openapi/smol-machines-smolvm-openapi.json
+  url: openapi/_original/smol-machines-smolvm-openapi.json
 - type: LLMsTxt
   url: llms/smol-machines-llms.txt
 - type: Packages
