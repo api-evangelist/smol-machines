@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys tokens API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "token_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/v1/tokens"
+          }
+        },
+        {
+          "info": {
+            "name": "token_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/tokens"
+          }
+        },
+        {
+          "info": {
+            "name": "token_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smolmachines.com/v1/tokens/:prefix",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "path",
+                "description": "Token prefix"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

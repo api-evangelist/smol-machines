@@ -1,0 +1,579 @@
+{
+  "item": [
+    {
+      "id": "becb2c18-5e64-4299-ad06-2f6330010733",
+      "name": "tenants",
+      "description": {
+        "content": "Customer accounts (product-backend)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f03923a2-dbdc-4c71-afbf-4317f81b2f29",
+          "name": "tenant list",
+          "request": {
+            "name": "tenant list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "801a0936-09b3-492d-804b-cea3b8898ee6",
+              "name": "List tenants",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"status\": \"string\",\n    \"createdAt\": \"string\",\n    \"externalBillingId\": \"string\",\n    \"maxApps\": 2923,\n    \"maxCpus\": 9958,\n    \"maxMemoryMb\": 4671,\n    \"maxSandboxPools\": 5562,\n    \"planId\": \"string\",\n    \"updatedAt\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"status\": \"string\",\n    \"createdAt\": \"string\",\n    \"externalBillingId\": \"string\",\n    \"maxApps\": 6134,\n    \"maxCpus\": 6273,\n    \"maxMemoryMb\": 7241,\n    \"maxSandboxPools\": 7175,\n    \"planId\": \"string\",\n    \"updatedAt\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56f503bf-fd70-413d-b9bc-1a9a58a3d447",
+          "name": "tenant create",
+          "request": {
+            "name": "tenant create",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<string,null>\",\n  \"planId\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eab5c565-05ff-43c9-a4cf-f4594b8bd382",
+              "name": "Tenant created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<string,null>\",\n  \"planId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"createdAt\": \"string\",\n  \"externalBillingId\": \"string\",\n  \"maxApps\": 6953,\n  \"maxCpus\": 465,\n  \"maxMemoryMb\": 2859,\n  \"maxSandboxPools\": 8049,\n  \"planId\": \"string\",\n  \"updatedAt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20cfc9b7-81f4-4bc1-818b-b13e2c037b7a",
+          "name": "tenant get",
+          "request": {
+            "name": "tenant get",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tenants",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Tenant id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15214e8f-ccd2-4fa0-9059-bc4fe4fbd379",
+              "name": "Tenant",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Tenant id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"createdAt\": \"string\",\n  \"externalBillingId\": \"string\",\n  \"maxApps\": 6953,\n  \"maxCpus\": 465,\n  \"maxMemoryMb\": 2859,\n  \"maxSandboxPools\": 8049,\n  \"planId\": \"string\",\n  \"updatedAt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be5e64d3-e6af-4efd-9feb-8d3cc3283746",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Tenant id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e770e2c-60de-4273-a890-9f2b747ef19f",
+          "name": "tenant update",
+          "request": {
+            "name": "tenant update",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tenants",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Tenant id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalBillingId\": \"<string,null>\",\n  \"planId\": \"<string,null>\",\n  \"status\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f0a34c8-3eaf-4a46-a397-55572cc01c46",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Tenant id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalBillingId\": \"<string,null>\",\n  \"planId\": \"<string,null>\",\n  \"status\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"createdAt\": \"string\",\n  \"externalBillingId\": \"string\",\n  \"maxApps\": 6953,\n  \"maxCpus\": 465,\n  \"maxMemoryMb\": 2859,\n  \"maxSandboxPools\": 8049,\n  \"planId\": \"string\",\n  \"updatedAt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4354e2b3-34b2-4568-9cf5-e1ca8657918a",
+          "name": "tenant reactivate",
+          "request": {
+            "name": "tenant reactivate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tenants",
+                ":id",
+                "reactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Tenant id"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "103fe0b6-b7f0-4660-b1ce-92643b2c7fdc",
+              "name": "Reactivated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants",
+                    ":id",
+                    "reactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Tenant id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1570d377-6903-4c55-a7ba-19883a034660",
+          "name": "tenant suspend",
+          "request": {
+            "name": "tenant suspend",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tenants",
+                ":id",
+                "suspend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Tenant id"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ad08ba1-211b-4478-a516-b1d6ecb882a9",
+              "name": "Suspended",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Tenant id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d47cc2a4-c026-4128-862e-16d8e97837a5",
+    "name": "smolfleet apikeys tenants API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

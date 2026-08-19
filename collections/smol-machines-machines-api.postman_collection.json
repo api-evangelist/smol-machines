@@ -1,0 +1,1554 @@
+{
+  "item": [
+    {
+      "id": "00b41f92-d2ef-4e27-95d1-aa690487c72a",
+      "name": "machines",
+      "description": {
+        "content": "First-class machine lifecycle and exec",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b017a5e9-25fc-4490-b9ce-0fc2a8093c01",
+          "name": "machine list",
+          "request": {
+            "name": "machine list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c99ae299-ba7d-4d74-a7cb-d6f7e2b105cd",
+              "name": "List machines",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"source\": {\n      \"reference\": \"string\",\n      \"type\": \"image\"\n    },\n    \"state\": \"string\",\n    \"resources\": {\n      \"cpus\": 8017,\n      \"diskGb\": 6476,\n      \"memoryMb\": 9415\n    },\n    \"network\": {\n      \"mode\": \"blocked\"\n    },\n    \"env\": {\n      \"key_0\": \"string\"\n    },\n    \"ephemeral\": false,\n    \"createdAt\": \"string\",\n    \"updatedAt\": \"string\",\n    \"autoStopSeconds\": 3750,\n    \"lastActivityAt\": \"string\",\n    \"name\": \"string\",\n    \"ttlSeconds\": 9123,\n    \"workdir\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"source\": {\n      \"reference\": \"string\",\n      \"type\": \"image\"\n    },\n    \"state\": \"string\",\n    \"resources\": {\n      \"cpus\": 6729,\n      \"diskGb\": 6701,\n      \"memoryMb\": 5545\n    },\n    \"network\": {\n      \"mode\": \"blocked\"\n    },\n    \"env\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"ephemeral\": false,\n    \"createdAt\": \"string\",\n    \"updatedAt\": \"string\",\n    \"autoStopSeconds\": 8920,\n    \"lastActivityAt\": \"string\",\n    \"name\": \"string\",\n    \"ttlSeconds\": 6768,\n    \"workdir\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f407913-858e-4b0a-98b9-a7efad916584",
+          "name": "machine create",
+          "request": {
+            "name": "machine create",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"reference\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"autoStopSeconds\": \"<integer,null-int64>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"ephemeral\": \"<boolean>\",\n  \"mounts\": [\n    {\n      \"volume\": \"<string>\",\n      \"mountPath\": \"<string>\",\n      \"readonly\": \"<boolean>\"\n    },\n    {\n      \"volume\": \"<string>\",\n      \"mountPath\": \"<string>\",\n      \"readonly\": \"<boolean>\"\n    }\n  ],\n  \"name\": \"<string,null>\",\n  \"network\": {\n    \"mode\": \"<string>\"\n  },\n  \"resources\": {\n    \"cpus\": \"<integer>\",\n    \"diskGb\": \"<integer,null-int64>\",\n    \"memoryMb\": \"<integer>\"\n  },\n  \"ttlSeconds\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1534d70a-13fe-4c2d-988c-120388287b0e",
+              "name": "Machine created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"reference\": \"string\",\n    \"type\": \"image\"\n  },\n  \"autoStopSeconds\": \"<integer,null-int64>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"ephemeral\": \"<boolean>\",\n  \"mounts\": [\n    {\n      \"volume\": \"string\",\n      \"mountPath\": \"string\",\n      \"readonly\": false\n    },\n    {\n      \"volume\": \"string\",\n      \"mountPath\": \"string\",\n      \"readonly\": true\n    }\n  ],\n  \"name\": \"<string,null>\",\n  \"network\": {\n    \"mode\": \"blocked\"\n  },\n  \"resources\": {\n    \"cpus\": 8032,\n    \"diskGb\": 2925,\n    \"memoryMb\": 489\n  },\n  \"ttlSeconds\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source\": {\n    \"reference\": \"string\",\n    \"type\": \"image\"\n  },\n  \"state\": \"string\",\n  \"resources\": {\n    \"cpus\": 8924,\n    \"diskGb\": 1731,\n    \"memoryMb\": 570\n  },\n  \"network\": {\n    \"mode\": \"blocked\"\n  },\n  \"env\": {\n    \"key_0\": \"string\"\n  },\n  \"ephemeral\": false,\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"autoStopSeconds\": 8679,\n  \"lastActivityAt\": \"string\",\n  \"name\": \"string\",\n  \"ttlSeconds\": 8313,\n  \"workdir\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a29fc03-c183-44b2-9381-9bf8670bb27d",
+              "name": "Name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"reference\": \"string\",\n    \"type\": \"image\"\n  },\n  \"autoStopSeconds\": \"<integer,null-int64>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"ephemeral\": \"<boolean>\",\n  \"mounts\": [\n    {\n      \"volume\": \"string\",\n      \"mountPath\": \"string\",\n      \"readonly\": false\n    },\n    {\n      \"volume\": \"string\",\n      \"mountPath\": \"string\",\n      \"readonly\": true\n    }\n  ],\n  \"name\": \"<string,null>\",\n  \"network\": {\n    \"mode\": \"blocked\"\n  },\n  \"resources\": {\n    \"cpus\": 8032,\n    \"diskGb\": 2925,\n    \"memoryMb\": 489\n  },\n  \"ttlSeconds\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d31eb45-628c-41c8-9bbe-c8c7771b1f1b",
+              "name": "Quota exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"reference\": \"string\",\n    \"type\": \"image\"\n  },\n  \"autoStopSeconds\": \"<integer,null-int64>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"ephemeral\": \"<boolean>\",\n  \"mounts\": [\n    {\n      \"volume\": \"string\",\n      \"mountPath\": \"string\",\n      \"readonly\": false\n    },\n    {\n      \"volume\": \"string\",\n      \"mountPath\": \"string\",\n      \"readonly\": true\n    }\n  ],\n  \"name\": \"<string,null>\",\n  \"network\": {\n    \"mode\": \"blocked\"\n  },\n  \"resources\": {\n    \"cpus\": 8032,\n    \"diskGb\": 2925,\n    \"memoryMb\": 489\n  },\n  \"ttlSeconds\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b4ea2e9-23fd-4740-8055-4fa8be702294",
+          "name": "machine get",
+          "request": {
+            "name": "machine get",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "731200a9-8b53-40ac-b305-db37783575aa",
+              "name": "Machine",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source\": {\n    \"reference\": \"string\",\n    \"type\": \"image\"\n  },\n  \"state\": \"string\",\n  \"resources\": {\n    \"cpus\": 8924,\n    \"diskGb\": 1731,\n    \"memoryMb\": 570\n  },\n  \"network\": {\n    \"mode\": \"blocked\"\n  },\n  \"env\": {\n    \"key_0\": \"string\"\n  },\n  \"ephemeral\": false,\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"autoStopSeconds\": 8679,\n  \"lastActivityAt\": \"string\",\n  \"name\": \"string\",\n  \"ttlSeconds\": 8313,\n  \"workdir\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d0e2864-6563-4379-997d-c073b6bda6a5",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fee03ada-b17a-4e8f-ac69-03b9ed0c7737",
+          "name": "machine delete",
+          "request": {
+            "name": "machine delete",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd1efc55-28f2-49c6-aa78-1542d7bb9f66",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4fdd9ad-133e-4a3d-a3a4-79b87777c243",
+          "name": "machine code",
+          "request": {
+            "name": "machine code",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"<string>\",\n  \"code\": \"<string>\",\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"timeoutSeconds\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "680320a6-0d8c-4a05-b158-3735978c34de",
+              "name": "Code result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"<string>\",\n  \"code\": \"<string>\",\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\"\n  },\n  \"timeoutSeconds\": \"<integer,null-int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stdout\": \"string\",\n  \"stderr\": \"string\",\n  \"exitCode\": 140,\n  \"durationMs\": 2390,\n  \"machineId\": \"string\",\n  \"stderrTruncated\": false,\n  \"stdoutTruncated\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efeec3df-6d42-4cac-a615-51b9dc11ab40",
+          "name": "machine events",
+          "request": {
+            "name": "machine events",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f37cef9-dc26-4114-85b2-e78100e49f62",
+              "name": "Machine events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"level\": \"string\",\n    \"message\": \"string\",\n    \"createdAt\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"level\": \"string\",\n    \"message\": \"string\",\n    \"createdAt\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0d3fb9a-9015-43d1-9fc4-51165375a50f",
+          "name": "machine exec",
+          "request": {
+            "name": "machine exec",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "exec"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"stdin\": \"<string,null>\",\n  \"stream\": \"<boolean>\",\n  \"timeoutSeconds\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2224e5ca-e695-4677-97a2-768042cc1f08",
+              "name": "Command result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"string\",\n    \"string\"\n  ],\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"stdin\": \"<string,null>\",\n  \"stream\": \"<boolean>\",\n  \"timeoutSeconds\": \"<integer,null-int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stdout\": \"string\",\n  \"stderr\": \"string\",\n  \"exitCode\": 140,\n  \"durationMs\": 2390,\n  \"machineId\": \"string\",\n  \"stderrTruncated\": false,\n  \"stdoutTruncated\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4686878b-1791-416c-a738-b23636bf5cb6",
+          "name": "machine file download",
+          "request": {
+            "name": "machine file download",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c37996ee-e147-4e01-b5f2-a081a4ac619c",
+              "name": "File bytes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "682ff091-6ef7-4819-bfac-4e91b4ad85ac",
+          "name": "machine file upload",
+          "request": {
+            "name": "machine file upload",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<integer>\",\n  \"<integer>\"\n]"
+            }
+          },
+          "response": [
+            {
+              "id": "265d01e4-900e-4c66-b2c8-c93bf42eeddd",
+              "name": "File uploaded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<integer>\",\n  \"<integer>\"\n]"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87d87c11-0c51-439e-aac1-b008325f75e1",
+          "name": "machine session list",
+          "request": {
+            "name": "machine session list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71267f3a-e5e1-4aaf-9a32-e69745c47cdc",
+              "name": "List sessions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"machineId\": \"string\",\n    \"status\": \"string\",\n    \"env\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"createdAt\": \"string\",\n    \"cwd\": \"string\",\n    \"lastExecAt\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"machineId\": \"string\",\n    \"status\": \"string\",\n    \"env\": {\n      \"key_0\": \"string\"\n    },\n    \"createdAt\": \"string\",\n    \"cwd\": \"string\",\n    \"lastExecAt\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "033de818-ac9b-4d37-b103-cde70936c368",
+          "name": "machine session create",
+          "request": {
+            "name": "machine session create",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"id\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fab72903-807c-4e34-98a3-3db891ff607d",
+              "name": "Session created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"id\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"machineId\": \"string\",\n  \"status\": \"string\",\n  \"env\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"createdAt\": \"string\",\n  \"cwd\": \"string\",\n  \"lastExecAt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "363518b3-1433-4e86-af2f-e5efdd95a9b4",
+          "name": "machine session delete",
+          "request": {
+            "name": "machine session delete",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) Session id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1341a4f0-53f4-4b60-a81a-14183157a78c",
+              "name": "Session deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) Session id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffdce14e-443e-4a46-babf-9ade74cf978e",
+          "name": "machine session exec",
+          "request": {
+            "name": "machine session exec",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "sessions",
+                ":session_id",
+                "exec"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) Session id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"stdin\": \"<string,null>\",\n  \"stream\": \"<boolean>\",\n  \"timeoutSeconds\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "630d94dc-82a4-4552-ab28-9ad99d971bd8",
+              "name": "Command result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "sessions",
+                    ":session_id",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) Session id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"string\",\n    \"string\"\n  ],\n  \"cwd\": \"<string,null>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"stdin\": \"<string,null>\",\n  \"stream\": \"<boolean>\",\n  \"timeoutSeconds\": \"<integer,null-int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stdout\": \"string\",\n  \"stderr\": \"string\",\n  \"exitCode\": 140,\n  \"durationMs\": 2390,\n  \"machineId\": \"string\",\n  \"stderrTruncated\": false,\n  \"stdoutTruncated\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd437757-e345-458f-b87d-c2a770d80d65",
+          "name": "machine start",
+          "request": {
+            "name": "machine start",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e02cf30-40ad-4ae3-bf53-0e9d308e7379",
+              "name": "Started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source\": {\n    \"reference\": \"string\",\n    \"type\": \"image\"\n  },\n  \"state\": \"string\",\n  \"resources\": {\n    \"cpus\": 8924,\n    \"diskGb\": 1731,\n    \"memoryMb\": 570\n  },\n  \"network\": {\n    \"mode\": \"blocked\"\n  },\n  \"env\": {\n    \"key_0\": \"string\"\n  },\n  \"ephemeral\": false,\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"autoStopSeconds\": 8679,\n  \"lastActivityAt\": \"string\",\n  \"name\": \"string\",\n  \"ttlSeconds\": 8313,\n  \"workdir\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a6d35ae-1ec2-4153-8478-8e735262a368",
+          "name": "machine stop",
+          "request": {
+            "name": "machine stop",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "machines",
+                ":id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Machine id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ece7f0de-eeb5-4639-a9e6-cb2c90fbb653",
+              "name": "Stopped",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "machines",
+                    ":id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Machine id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source\": {\n    \"reference\": \"string\",\n    \"type\": \"image\"\n  },\n  \"state\": \"string\",\n  \"resources\": {\n    \"cpus\": 8924,\n    \"diskGb\": 1731,\n    \"memoryMb\": 570\n  },\n  \"network\": {\n    \"mode\": \"blocked\"\n  },\n  \"env\": {\n    \"key_0\": \"string\"\n  },\n  \"ephemeral\": false,\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"autoStopSeconds\": 8679,\n  \"lastActivityAt\": \"string\",\n  \"name\": \"string\",\n  \"ttlSeconds\": 8313,\n  \"workdir\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "71d10a07-6b33-4c4a-a744-dec045112cdf",
+    "name": "smolfleet apikeys machines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

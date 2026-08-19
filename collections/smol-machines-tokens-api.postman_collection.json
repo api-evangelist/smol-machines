@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "fb489bdb-03c8-4c54-b306-f5d4094c8f9e",
+      "name": "tokens",
+      "description": {
+        "content": "Node join tokens",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5a267be-86b7-4631-a877-1c2a31081b15",
+          "name": "token list",
+          "request": {
+            "name": "token list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "113d38ab-1076-4668-b5c3-09f969657222",
+              "name": "List join tokens",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f247daa8-02a6-4675-90ea-82557e129e59",
+          "name": "token create",
+          "request": {
+            "name": "token create",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92b8dd48-2eeb-4fe8-a4c0-bb261572e9ac",
+              "name": "Join token created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e38c646-5b3e-48a6-bd46-aa61f2eea4ec",
+          "name": "token delete",
+          "request": {
+            "name": "token delete",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tokens",
+                ":prefix"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prefix",
+                  "description": "(Required) Token prefix"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2cd15da-90c7-48ce-aee4-eb7ccac9d425",
+              "name": "Token deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) Token prefix"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1d9cf336-6e4a-4980-9ff9-443cedaa596e",
+    "name": "smolfleet apikeys tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

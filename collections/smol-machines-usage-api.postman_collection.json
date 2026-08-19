@@ -1,0 +1,101 @@
+{
+  "item": [
+    {
+      "id": "b147ae1f-2ca7-45ce-89a1-24c6826ff459",
+      "name": "usage",
+      "description": {
+        "content": "Usage and billing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "121417f0-c530-4191-a591-7a3db4b32b15",
+          "name": "usage query",
+          "request": {
+            "name": "usage query",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71e71187-6d2f-4f3c-ac52-27ec8b06cbc9",
+              "name": "Usage report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantId\": \"string\",\n  \"from\": \"string\",\n  \"to\": \"string\",\n  \"totalUptimeSeconds\": 2271,\n  \"cpuHours\": 7373.453288915446,\n  \"memoryGbHours\": 9779.387160568926,\n  \"machineCount\": 6341,\n  \"execCount\": 8280,\n  \"execDurationMs\": 7319\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5ccee56e-1fa7-48d7-9922-7d3844cc4e0e",
+    "name": "smolfleet apikeys usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,592 @@
+{
+  "item": [
+    {
+      "id": "bc125a02-0435-4b3b-b297-05e1dad7482c",
+      "name": "Execution",
+      "description": {
+        "content": "Command execution in sandboxes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e82b6b6d-3eb1-4078-9181-70c0d7eb6a78",
+          "name": "Execute a command in a sandbox.",
+          "request": {
+            "name": "Execute a command in a sandbox.",
+            "description": {
+              "content": "This executes directly in the VM (not in a container).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes",
+                ":id",
+                "exec"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f69a13d-b1ae-405e-8afa-07c252d01fe9",
+              "name": "Command executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": 30,\n  \"workdir\": \"/workspace\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"exitCode\": 0,\n  \"stdout\": \"hello\\n\",\n  \"stderr\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ddbe7ae-4453-4494-84ea-31a06f290f12",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": 30,\n  \"workdir\": \"/workspace\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98d2e160-ab70-4775-8abf-acee94017e00",
+              "name": "Sandbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": 30,\n  \"workdir\": \"/workspace\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4a96950-4ca9-43f6-978b-4bc084715322",
+              "name": "Execution failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": 30,\n  \"workdir\": \"/workspace\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77eb2151-f0e5-4e26-b4ad-d4a91bdae982",
+          "name": "Run a command in an image.",
+          "request": {
+            "name": "Run a command in an image.",
+            "description": {
+              "content": "This creates a temporary overlay from the image and runs the command.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes",
+                ":id",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"command\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb95764d-ac40-43ff-b472-289deb7b7696",
+              "name": "Command executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"python:3.12-alpine\",\n  \"command\": [\n    \"python\",\n    \"-c\",\n    \"print('hello')\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"exitCode\": 0,\n  \"stdout\": \"hello\\n\",\n  \"stderr\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "696a8732-bc9c-4bc4-85da-ada792c06533",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"python:3.12-alpine\",\n  \"command\": [\n    \"python\",\n    \"-c\",\n    \"print('hello')\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0edb9d5-4214-4c9e-a134-eb3dbbacd5a2",
+              "name": "Sandbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"python:3.12-alpine\",\n  \"command\": [\n    \"python\",\n    \"-c\",\n    \"print('hello')\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c6d6c59-197a-40ec-bb6b-87f0155c43b8",
+              "name": "Execution failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"python:3.12-alpine\",\n  \"command\": [\n    \"python\",\n    \"-c\",\n    \"print('hello')\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "58b53c2d-2df5-483d-bf4c-686c95ee0eee",
+    "name": "smolfleet apikeys Execution API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

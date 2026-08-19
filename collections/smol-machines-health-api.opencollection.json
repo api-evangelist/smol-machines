@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys health API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "health_check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/health"
+          }
+        },
+        {
+          "info": {
+            "name": "livez",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/livez"
+          }
+        },
+        {
+          "info": {
+            "name": "metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/metrics"
+          }
+        },
+        {
+          "info": {
+            "name": "readyz",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/readyz"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

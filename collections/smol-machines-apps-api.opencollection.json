@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys apps API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "app_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/v1/apps"
+          }
+        },
+        {
+          "info": {
+            "name": "app_deploy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/apps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "app_get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/v1/apps/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "App name"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "app_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smolmachines.com/v1/apps/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "App name"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "app_logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/v1/apps/:name/logs",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "App name"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "app_promote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/apps/:name/promote",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "App name"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "app_redeploy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/apps/:name/redeploy",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "App name"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "app_scale",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/apps/:name/scale",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "App name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

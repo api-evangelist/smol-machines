@@ -2,12 +2,10 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/smol-machines-smolfleet-openapi.json
-note: >-
-  No official hosted/remote MCP server was found for Smol Machines (searched the
-  GitHub org, docs, and npm @modelcontextprotocol). The provider does publish an
-  AGENTS.md agent reference for the smolvm CLI (saved under skills/). The tool
-  list below is a CANDIDATE derived from the smolfleet Cloud API operations, one
-  tool per operationId, for a would-be MCP server over the REST API.
+note: No official hosted/remote MCP server was found for Smol Machines (searched the GitHub org, docs,
+  and npm @modelcontextprotocol). The provider does publish an AGENTS.md agent reference for the smolvm
+  CLI (saved under skills/). The tool list below is a CANDIDATE derived from the smolfleet Cloud API operations,
+  one tool per operationId, for a would-be MCP server over the REST API.
 server:
   name: smol-machines
   transport: http
@@ -50,3 +48,9 @@ tools:
 - name: volume_create
   description: Create a volume.
   source_operation: openapi/smol-machines-smolfleet-openapi.json#volume_create
+deployment:
+  mode: none
+  verified: derived
+  tools: 12
+  checked: '2026-08-12'
+  source: catalog MCP census

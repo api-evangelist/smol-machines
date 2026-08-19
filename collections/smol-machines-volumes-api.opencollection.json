@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys volumes API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "volumes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "volume_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/v1/volumes"
+          }
+        },
+        {
+          "info": {
+            "name": "volume_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/volumes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "volume_get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/v1/volumes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Volume id"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "volume_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smolmachines.com/v1/volumes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Volume id"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

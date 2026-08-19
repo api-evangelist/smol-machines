@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys Images API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List images in a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/images",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ]
+          },
+          "docs": "List images in a sandbox."
+        },
+        {
+          "info": {
+            "name": "Pull an image into a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/images/pull",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pull an image into a sandbox."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

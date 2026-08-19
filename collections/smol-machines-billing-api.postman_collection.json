@@ -1,0 +1,172 @@
+{
+  "item": [
+    {
+      "id": "e201d0f3-548c-4937-ae6a-eac60181232b",
+      "name": "billing",
+      "description": {
+        "content": "Self-service account and metering",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "426d04b5-4c6a-4110-997f-944cfb8ee590",
+          "name": "account get",
+          "request": {
+            "name": "account get",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8e71731-3a0b-496f-bd7a-0714ff6a3a01",
+              "name": "Tenant account: plan, effective limits, period usage + spend",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tenantId\": \"string\",\n  \"status\": \"string\",\n  \"effectiveMaxCpus\": 2886,\n  \"effectiveMaxMemoryMb\": 3510,\n  \"effectiveMaxMachines\": 3765,\n  \"periodUsage\": {\n    \"tenantId\": \"string\",\n    \"from\": \"string\",\n    \"to\": \"string\",\n    \"totalUptimeSeconds\": 839,\n    \"cpuHours\": 8359.97441077822,\n    \"memoryGbHours\": 6797.581790685919,\n    \"machineCount\": 5267,\n    \"execCount\": 7560,\n    \"execDurationMs\": 4346\n  },\n  \"periodCost\": {\n    \"cpuMicros\": 6613,\n    \"memoryMicros\": 1449,\n    \"execMicros\": 1596,\n    \"totalMicros\": 2767\n  },\n  \"budgetRemainingMicros\": 9629,\n  \"monthlyBudgetMicros\": 119,\n  \"plan\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bab5f81-29d2-40b7-b5c8-7dea7fd52f21",
+          "name": "billing meters",
+          "request": {
+            "name": "billing meters",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "billing",
+                "meters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f0495f1-51e8-49b6-aac1-d89f505c76a3",
+              "name": "Per-tenant metered usage + cost for the period",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "billing",
+                    "meters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"tenantId\": \"string\",\n    \"cpuHours\": 4647.290090638936,\n    \"memoryGbHours\": 325.12626347938055,\n    \"execCount\": 8865,\n    \"cost\": {\n      \"cpuMicros\": 7333,\n      \"memoryMicros\": 8462,\n      \"execMicros\": 279,\n      \"totalMicros\": 7235\n    },\n    \"externalBillingId\": \"string\"\n  },\n  {\n    \"tenantId\": \"string\",\n    \"cpuHours\": 3732.0732718895088,\n    \"memoryGbHours\": 8679.802577162007,\n    \"execCount\": 3282,\n    \"cost\": {\n      \"cpuMicros\": 5391,\n      \"memoryMicros\": 3671,\n      \"execMicros\": 4947,\n      \"totalMicros\": 6261\n    },\n    \"externalBillingId\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a77431fc-b16e-4939-b2dd-f307e09e1594",
+    "name": "smolfleet apikeys billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

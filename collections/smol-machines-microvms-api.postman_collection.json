@@ -1,0 +1,1340 @@
+{
+  "item": [
+    {
+      "id": "8da08590-a3e3-42d9-a3f7-be67aa36dd3b",
+      "name": "MicroVMs",
+      "description": {
+        "content": "Persistent microVM management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "183e3c30-f936-4474-becf-1f91f04173c5",
+          "name": "List all microvms.",
+          "request": {
+            "name": "List all microvms.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "microvms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f8faa55-d385-422a-82ec-f7d993337a88",
+              "name": "List of microvms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"microvms\": [\n    {\n      \"name\": \"my-vm\",\n      \"state\": \"running\",\n      \"cpus\": 2,\n      \"memoryMb\": 1024,\n      \"mounts\": 4846,\n      \"ports\": 5590,\n      \"network\": false,\n      \"createdAt\": \"string\",\n      \"pid\": 12345\n    },\n    {\n      \"name\": \"my-vm\",\n      \"state\": \"running\",\n      \"cpus\": 2,\n      \"memoryMb\": 1024,\n      \"mounts\": 5401,\n      \"ports\": 5715,\n      \"network\": false,\n      \"createdAt\": \"string\",\n      \"pid\": 12345\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98c594c0-a6c5-4927-aaf5-ea50b7dc70da",
+              "name": "Database error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec9ba1d1-e464-4775-8f89-93885c7a0904",
+          "name": "Create a new microvm.",
+          "request": {
+            "name": "Create a new microvm.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "microvms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"cpus\": \"<integer>\",\n  \"memoryMb\": \"<integer>\",\n  \"mounts\": [\n    {\n      \"source\": \"<string>\",\n      \"target\": \"<string>\",\n      \"readonly\": \"<boolean>\"\n    },\n    {\n      \"source\": \"<string>\",\n      \"target\": \"<string>\",\n      \"readonly\": \"<boolean>\"\n    }\n  ],\n  \"network\": \"<boolean>\",\n  \"overlayGb\": \"<integer,null-int64>\",\n  \"ports\": [\n    {\n      \"host\": \"<integer>\",\n      \"guest\": \"<integer>\"\n    },\n    {\n      \"host\": \"<integer>\",\n      \"guest\": \"<integer>\"\n    }\n  ],\n  \"storageGb\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1034e3b-bee5-43cf-9070-8ceb87ce28bc",
+              "name": "MicroVM created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-vm\",\n  \"cpus\": 2,\n  \"memoryMb\": 1024,\n  \"mounts\": [\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"network\": \"<boolean>\",\n  \"overlayGb\": \"<integer,null-int64>\",\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"storageGb\": \"<integer,null-int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-vm\",\n  \"state\": \"running\",\n  \"cpus\": 2,\n  \"memoryMb\": 1024,\n  \"mounts\": 8975,\n  \"ports\": 4243,\n  \"network\": false,\n  \"createdAt\": \"string\",\n  \"pid\": 12345\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f06b9969-3d7f-429b-a5a9-fad050a2b885",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-vm\",\n  \"cpus\": 2,\n  \"memoryMb\": 1024,\n  \"mounts\": [\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"network\": \"<boolean>\",\n  \"overlayGb\": \"<integer,null-int64>\",\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"storageGb\": \"<integer,null-int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "580a1c35-6d7b-4e7b-ad1f-7763418940ea",
+              "name": "MicroVM already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-vm\",\n  \"cpus\": 2,\n  \"memoryMb\": 1024,\n  \"mounts\": [\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"network\": \"<boolean>\",\n  \"overlayGb\": \"<integer,null-int64>\",\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"storageGb\": \"<integer,null-int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "087eb657-fe41-40ed-9b34-948fa4f69bfb",
+          "name": "Get microvm status.",
+          "request": {
+            "name": "Get microvm status.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "microvms",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) MicroVM name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f219ced-15ec-4b06-8928-4337f0b8a091",
+              "name": "MicroVM details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-vm\",\n  \"state\": \"running\",\n  \"cpus\": 2,\n  \"memoryMb\": 1024,\n  \"mounts\": 8975,\n  \"ports\": 4243,\n  \"network\": false,\n  \"createdAt\": \"string\",\n  \"pid\": 12345\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4898a3e-94ff-4a26-acb2-274955f82b90",
+              "name": "MicroVM not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94e295a8-38db-481a-813d-31ba1d1c65c7",
+          "name": "Delete a microvm.",
+          "request": {
+            "name": "Delete a microvm.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "microvms",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) MicroVM name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70811d6d-64d9-440f-89db-13c284bef5b3",
+              "name": "MicroVM deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deleted\": \"my-sandbox\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9e4ff77-8e6d-4fe7-a74e-7c46e4a7abe5",
+              "name": "MicroVM not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d2fbc1e-4ba3-4890-9734-06790f27b9ee",
+              "name": "Failed to delete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5d79ef4-8365-4233-8c3d-fb2942976b1c",
+          "name": "Execute a command in a microvm.",
+          "request": {
+            "name": "Execute a command in a microvm.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "microvms",
+                ":name",
+                "exec"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) MicroVM name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "73784aee-76c8-40ad-8bf4-cbe85f732a74",
+              "name": "Command executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"exitCode\": 0,\n  \"stdout\": \"hello\\n\",\n  \"stderr\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1aeec958-d878-4ae1-97f2-69edab37741d",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbe00837-9f32-49a8-9a81-d1d83442e55c",
+              "name": "MicroVM not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01da2ba2-1efc-4b42-89fa-f2cf801ad441",
+              "name": "MicroVM not running",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "800e4c46-322d-44a0-91d6-ccdcef27332e",
+              "name": "Execution failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "exec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": [\n    \"echo\",\n    \"hello\"\n  ],\n  \"env\": [\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    },\n    {\n      \"name\": \"MY_VAR\",\n      \"value\": \"my_value\"\n    }\n  ],\n  \"timeoutSecs\": \"<integer,null-int64>\",\n  \"workdir\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b4087c4-f2d0-4b59-8629-8516177977a9",
+          "name": "Start a microvm.",
+          "request": {
+            "name": "Start a microvm.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "microvms",
+                ":name",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) MicroVM name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7fd17e10-4764-46bb-bedc-16874fe6b440",
+              "name": "MicroVM started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-vm\",\n  \"state\": \"running\",\n  \"cpus\": 2,\n  \"memoryMb\": 1024,\n  \"mounts\": 8975,\n  \"ports\": 4243,\n  \"network\": false,\n  \"createdAt\": \"string\",\n  \"pid\": 12345\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b5448b3-79ad-4462-9709-08254d976035",
+              "name": "MicroVM not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb536ab4-2862-4ce0-9d31-9b9e999abf98",
+              "name": "Failed to start",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ac927d1-163a-497c-9f1d-fb80b7a5324b",
+          "name": "Stop a microvm.",
+          "request": {
+            "name": "Stop a microvm.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "microvms",
+                ":name",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) MicroVM name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae46d00a-f2de-48f2-a7bc-e1a7bc8392bd",
+              "name": "MicroVM stopped",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-vm\",\n  \"state\": \"running\",\n  \"cpus\": 2,\n  \"memoryMb\": 1024,\n  \"mounts\": 8975,\n  \"ports\": 4243,\n  \"network\": false,\n  \"createdAt\": \"string\",\n  \"pid\": 12345\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b62c962-4eae-43d7-a9fb-487d3dc96058",
+              "name": "MicroVM not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f515f8cd-3e75-4536-bd68-0cad4e3383df",
+              "name": "Failed to stop",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "microvms",
+                    ":name",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) MicroVM name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "44545ef5-1f34-4bb0-9881-d4bb1252907c",
+    "name": "smolfleet apikeys MicroVMs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

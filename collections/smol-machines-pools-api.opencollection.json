@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys pools API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "pool_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/v1/pools"
+          }
+        },
+        {
+          "info": {
+            "name": "pool_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/pools",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "pool_claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/v1/pools/:id/claim",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pool id"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

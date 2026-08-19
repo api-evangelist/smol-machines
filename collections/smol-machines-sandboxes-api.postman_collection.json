@@ -1,0 +1,993 @@
+{
+  "item": [
+    {
+      "id": "f023ccfb-c9d7-466b-8fc7-7e1980d47266",
+      "name": "Sandboxes",
+      "description": {
+        "content": "Sandbox lifecycle management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8cf8a82e-a9aa-495d-a6b1-ca8418f2e959",
+          "name": "List all sandboxes.",
+          "request": {
+            "name": "List all sandboxes.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "866dc926-d37d-422d-87f9-6665c3d166ab",
+              "name": "List of sandboxes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sandboxes\": [\n    {\n      \"name\": \"my-sandbox\",\n      \"state\": \"running\",\n      \"mounts\": [\n        {\n          \"tag\": \"smolvm0\",\n          \"source\": \"/Users/me/code\",\n          \"target\": \"/workspace\",\n          \"readonly\": true\n        },\n        {\n          \"tag\": \"smolvm0\",\n          \"source\": \"/Users/me/code\",\n          \"target\": \"/workspace\",\n          \"readonly\": false\n        }\n      ],\n      \"ports\": [\n        {\n          \"host\": 8080,\n          \"guest\": 80\n        },\n        {\n          \"host\": 8080,\n          \"guest\": 80\n        }\n      ],\n      \"resources\": {\n        \"cpus\": 2,\n        \"memoryMb\": 1024,\n        \"network\": false,\n        \"overlayGb\": 2,\n        \"storageGb\": 20\n      },\n      \"network\": false,\n      \"pid\": 12345,\n      \"restartCount\": 4807\n    },\n    {\n      \"name\": \"my-sandbox\",\n      \"state\": \"running\",\n      \"mounts\": [\n        {\n          \"tag\": \"smolvm0\",\n          \"source\": \"/Users/me/code\",\n          \"target\": \"/workspace\",\n          \"readonly\": false\n        },\n        {\n          \"tag\": \"smolvm0\",\n          \"source\": \"/Users/me/code\",\n          \"target\": \"/workspace\",\n          \"readonly\": true\n        }\n      ],\n      \"ports\": [\n        {\n          \"host\": 8080,\n          \"guest\": 80\n        },\n        {\n          \"host\": 8080,\n          \"guest\": 80\n        }\n      ],\n      \"resources\": {\n        \"cpus\": 2,\n        \"memoryMb\": 1024,\n        \"network\": false,\n        \"overlayGb\": 2,\n        \"storageGb\": 20\n      },\n      \"network\": false,\n      \"pid\": 12345,\n      \"restartCount\": 2972\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c215efe3-e5b2-4c05-ba8f-d92b1b51a20f",
+          "name": "Create a new sandbox.",
+          "request": {
+            "name": "Create a new sandbox.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"mounts\": [\n    {\n      \"source\": \"<string>\",\n      \"target\": \"<string>\",\n      \"readonly\": \"<boolean>\"\n    },\n    {\n      \"source\": \"<string>\",\n      \"target\": \"<string>\",\n      \"readonly\": \"<boolean>\"\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": \"<integer>\",\n      \"guest\": \"<integer>\"\n    },\n    {\n      \"host\": \"<integer>\",\n      \"guest\": \"<integer>\"\n    }\n  ],\n  \"resources\": \"<null>\",\n  \"restart\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8574bc46-a8d1-420b-a603-44e405ddc246",
+              "name": "Sandbox created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-sandbox\",\n  \"mounts\": [\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"resources\": \"<null>\",\n  \"restart\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-sandbox\",\n  \"state\": \"running\",\n  \"mounts\": [\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"resources\": {\n    \"cpus\": 2,\n    \"memoryMb\": 1024,\n    \"network\": false,\n    \"overlayGb\": 2,\n    \"storageGb\": 20\n  },\n  \"network\": false,\n  \"pid\": 12345,\n  \"restartCount\": 430\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8968c0cd-abab-4f16-9dc1-8286a3c4b34c",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-sandbox\",\n  \"mounts\": [\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"resources\": \"<null>\",\n  \"restart\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e7a5aa9-bcd3-4c78-8b64-be83486da96b",
+              "name": "Sandbox already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"my-sandbox\",\n  \"mounts\": [\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"resources\": \"<null>\",\n  \"restart\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c845a91-10e0-448a-bf0b-9def4e041a1d",
+          "name": "Get sandbox status.",
+          "request": {
+            "name": "Get sandbox status.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c280825-0ea2-447b-8db8-213d5e748013",
+              "name": "Sandbox details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-sandbox\",\n  \"state\": \"running\",\n  \"mounts\": [\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"resources\": {\n    \"cpus\": 2,\n    \"memoryMb\": 1024,\n    \"network\": false,\n    \"overlayGb\": 2,\n    \"storageGb\": 20\n  },\n  \"network\": false,\n  \"pid\": 12345,\n  \"restartCount\": 430\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd637046-8869-4fb2-a503-99bc5a964a51",
+              "name": "Sandbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e48f7ee-3d14-4545-843d-3951a4235ce2",
+          "name": "Delete a sandbox.",
+          "request": {
+            "name": "Delete a sandbox.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "<boolean>",
+                  "description": "Force delete even if VM is still running"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "027222b6-0625-459b-854e-a5fcec64c87a",
+              "name": "Sandbox deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deleted\": \"my-sandbox\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cddc410b-ce5e-42db-9450-d978a3ed9d8e",
+              "name": "Sandbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14ed3c36-874e-44f4-abbd-3c93042df138",
+              "name": "VM still running, use force=true",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89beadc3-a3ce-401d-8a71-d5bfb242e576",
+          "name": "Start a sandbox.",
+          "request": {
+            "name": "Start a sandbox.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes",
+                ":id",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e51c0297-6650-47d5-bc1e-664f373c0be2",
+              "name": "Sandbox started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-sandbox\",\n  \"state\": \"running\",\n  \"mounts\": [\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"resources\": {\n    \"cpus\": 2,\n    \"memoryMb\": 1024,\n    \"network\": false,\n    \"overlayGb\": 2,\n    \"storageGb\": 20\n  },\n  \"network\": false,\n  \"pid\": 12345,\n  \"restartCount\": 430\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c20e213-93e9-4537-bc19-36e790706d8a",
+              "name": "Sandbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be590b4e-a0d8-492c-a234-0f280cda9ac3",
+              "name": "Failed to start",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72cf053b-8c9c-4838-b52b-4c59e497ea20",
+          "name": "Stop a sandbox.",
+          "request": {
+            "name": "Stop a sandbox.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sandboxes",
+                ":id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Sandbox name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24ded3c2-e055-49ef-a8d8-f8026a256338",
+              "name": "Sandbox stopped",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"my-sandbox\",\n  \"state\": \"running\",\n  \"mounts\": [\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": false\n    },\n    {\n      \"tag\": \"smolvm0\",\n      \"source\": \"/Users/me/code\",\n      \"target\": \"/workspace\",\n      \"readonly\": true\n    }\n  ],\n  \"ports\": [\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    },\n    {\n      \"host\": 8080,\n      \"guest\": 80\n    }\n  ],\n  \"resources\": {\n    \"cpus\": 2,\n    \"memoryMb\": 1024,\n    \"network\": false,\n    \"overlayGb\": 2,\n    \"storageGb\": 20\n  },\n  \"network\": false,\n  \"pid\": 12345,\n  \"restartCount\": 430\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c043c75-9051-469e-8d60-6841276cc6e1",
+              "name": "Sandbox not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "832592c0-7af6-4766-9ec0-0b8dba198309",
+              "name": "Failed to stop",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sandboxes",
+                    ":id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Sandbox name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"sandbox 'test' not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "acb75485-2081-4a3e-8672-4293823bddde",
+    "name": "smolfleet apikeys Sandboxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

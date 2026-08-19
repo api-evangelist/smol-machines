@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys MicroVMs API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MicroVMs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all microvms.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/api/v1/microvms"
+          },
+          "docs": "List all microvms."
+        },
+        {
+          "info": {
+            "name": "Create a new microvm.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/microvms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new microvm."
+        },
+        {
+          "info": {
+            "name": "Get microvm status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/api/v1/microvms/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "MicroVM name"
+              }
+            ]
+          },
+          "docs": "Get microvm status."
+        },
+        {
+          "info": {
+            "name": "Delete a microvm.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smolmachines.com/api/v1/microvms/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "MicroVM name"
+              }
+            ]
+          },
+          "docs": "Delete a microvm."
+        },
+        {
+          "info": {
+            "name": "Execute a command in a microvm.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/microvms/:name/exec",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "MicroVM name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a command in a microvm."
+        },
+        {
+          "info": {
+            "name": "Start a microvm.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/microvms/:name/start",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "MicroVM name"
+              }
+            ]
+          },
+          "docs": "Start a microvm."
+        },
+        {
+          "info": {
+            "name": "Stop a microvm.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/microvms/:name/stop",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "MicroVM name"
+              }
+            ]
+          },
+          "docs": "Stop a microvm."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys Containers API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List containers in a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/containers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ]
+          },
+          "docs": "List containers in a sandbox."
+        },
+        {
+          "info": {
+            "name": "Create a container in a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/containers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a container in a sandbox."
+        },
+        {
+          "info": {
+            "name": "Delete a container.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/containers/:cid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              },
+              {
+                "name": "cid",
+                "value": "",
+                "type": "path",
+                "description": "Container ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete a container."
+        },
+        {
+          "info": {
+            "name": "Execute a command in a container.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/containers/:cid/exec",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              },
+              {
+                "name": "cid",
+                "value": "",
+                "type": "path",
+                "description": "Container ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a command in a container."
+        },
+        {
+          "info": {
+            "name": "Start a container.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/containers/:cid/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              },
+              {
+                "name": "cid",
+                "value": "",
+                "type": "path",
+                "description": "Container ID"
+              }
+            ]
+          },
+          "docs": "Start a container."
+        },
+        {
+          "info": {
+            "name": "Stop a container.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/containers/:cid/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              },
+              {
+                "name": "cid",
+                "value": "",
+                "type": "path",
+                "description": "Container ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stop a container."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

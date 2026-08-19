@@ -1,0 +1,191 @@
+{
+  "item": [
+    {
+      "id": "d23c334f-69e5-4b77-96bb-13b4d12eb41c",
+      "name": "plans",
+      "description": {
+        "content": "Quota + rate + budget plans",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6d8e144-98f8-4c9b-9be1-d4304651e9ea",
+          "name": "plan list",
+          "request": {
+            "name": "plan list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e446bc8c-6cf1-460b-a8a0-c01d21bd0535",
+              "name": "List plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"maxApps\": 2240,\n    \"maxCpus\": 6082,\n    \"maxMemoryMb\": 4828,\n    \"maxMachines\": 1192,\n    \"maxConcurrentMachines\": 943,\n    \"rateCpuHourMicros\": 7026,\n    \"rateMemoryGbHourMicros\": 6087,\n    \"rateExecMicros\": 8829,\n    \"budgetPolicy\": \"string\",\n    \"isDefault\": true,\n    \"createdAt\": \"string\",\n    \"maxEgressGb\": 495,\n    \"monthlyBudgetMicros\": 3680\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"maxApps\": 8207,\n    \"maxCpus\": 1854,\n    \"maxMemoryMb\": 6373,\n    \"maxMachines\": 5562,\n    \"maxConcurrentMachines\": 2631,\n    \"rateCpuHourMicros\": 4674,\n    \"rateMemoryGbHourMicros\": 8991,\n    \"rateExecMicros\": 2844,\n    \"budgetPolicy\": \"string\",\n    \"isDefault\": true,\n    \"createdAt\": \"string\",\n    \"maxEgressGb\": 2873,\n    \"monthlyBudgetMicros\": 1136\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7484a63-0cae-48dd-a4ab-cf33aaaf8da9",
+          "name": "plan create",
+          "request": {
+            "name": "plan create",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"budgetPolicy\": \"<string>\",\n  \"id\": \"<string,null>\",\n  \"isDefault\": \"<boolean>\",\n  \"maxApps\": \"<integer>\",\n  \"maxConcurrentMachines\": \"<integer>\",\n  \"maxCpus\": \"<integer>\",\n  \"maxEgressGb\": \"<integer,null-int64>\",\n  \"maxMachines\": \"<integer>\",\n  \"maxMemoryMb\": \"<long>\",\n  \"monthlyBudgetMicros\": \"<integer,null-int64>\",\n  \"rateCpuHourMicros\": \"<long>\",\n  \"rateExecMicros\": \"<long>\",\n  \"rateMemoryGbHourMicros\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50fb7f54-a238-4c0e-b5d4-86740b279a19",
+              "name": "Plan created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"budgetPolicy\": \"<string>\",\n  \"id\": \"<string,null>\",\n  \"isDefault\": \"<boolean>\",\n  \"maxApps\": \"<integer>\",\n  \"maxConcurrentMachines\": \"<integer>\",\n  \"maxCpus\": \"<integer>\",\n  \"maxEgressGb\": \"<integer,null-int64>\",\n  \"maxMachines\": \"<integer>\",\n  \"maxMemoryMb\": \"<long>\",\n  \"monthlyBudgetMicros\": \"<integer,null-int64>\",\n  \"rateCpuHourMicros\": \"<long>\",\n  \"rateExecMicros\": \"<long>\",\n  \"rateMemoryGbHourMicros\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"maxApps\": 2553,\n  \"maxCpus\": 1519,\n  \"maxMemoryMb\": 9294,\n  \"maxMachines\": 9118,\n  \"maxConcurrentMachines\": 3187,\n  \"rateCpuHourMicros\": 9069,\n  \"rateMemoryGbHourMicros\": 9455,\n  \"rateExecMicros\": 4199,\n  \"budgetPolicy\": \"string\",\n  \"isDefault\": false,\n  \"createdAt\": \"string\",\n  \"maxEgressGb\": 3297,\n  \"monthlyBudgetMicros\": 7437\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fee38a8a-c6eb-4d59-9bd4-96f1c1255cfa",
+    "name": "smolfleet apikeys plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

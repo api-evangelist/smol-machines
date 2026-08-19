@@ -1,0 +1,757 @@
+{
+  "item": [
+    {
+      "id": "752fe691-5e1f-453a-afa1-c297278f587d",
+      "name": "apps",
+      "description": {
+        "content": "Long-running app deployments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d07ceea5-6250-42d3-9c5b-72142e8d0e3e",
+          "name": "app list",
+          "request": {
+            "name": "app list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84e91ec4-43b9-4f77-ae3b-834034515952",
+              "name": "List apps",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"image\": \"string\",\n    \"replicas\": 8896,\n    \"status\": \"string\",\n    \"port\": 1407,\n    \"instances\": [\n      {\n        \"id\": \"string\",\n        \"nodeId\": \"string\",\n        \"status\": \"string\",\n        \"generation\": 9385,\n        \"hostPort\": 2465\n      },\n      {\n        \"id\": \"string\",\n        \"nodeId\": \"string\",\n        \"status\": \"string\",\n        \"generation\": 2857,\n        \"hostPort\": 7303\n      }\n    ],\n    \"createdAt\": \"string\",\n    \"updatedAt\": \"string\",\n    \"domain\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"image\": \"string\",\n    \"replicas\": 1574,\n    \"status\": \"string\",\n    \"port\": 9923,\n    \"instances\": [\n      {\n        \"id\": \"string\",\n        \"nodeId\": \"string\",\n        \"status\": \"string\",\n        \"generation\": 1866,\n        \"hostPort\": 6769\n      },\n      {\n        \"id\": \"string\",\n        \"nodeId\": \"string\",\n        \"status\": \"string\",\n        \"generation\": 1002,\n        \"hostPort\": 8324\n      }\n    ],\n    \"createdAt\": \"string\",\n    \"updatedAt\": \"string\",\n    \"domain\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc06be5b-52d9-4c10-8fe3-dcb7588ecc52",
+          "name": "app deploy",
+          "request": {
+            "name": "app deploy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"image\": \"<string>\",\n  \"coLocateWith\": \"<string,null>\",\n  \"cpus\": \"<integer>\",\n  \"domain\": \"<string,null>\",\n  \"env\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"health\": \"<null>\",\n  \"memoryMb\": \"<integer>\",\n  \"network\": \"<boolean>\",\n  \"port\": \"<integer>\",\n  \"stopGraceSecs\": \"<long>\",\n  \"strategy\": {\n    \"type\": \"<string>\",\n    \"batchSize\": \"<integer>\",\n    \"useHealthCheck\": \"<boolean>\",\n    \"waitSeconds\": \"<long>\"\n  },\n  \"volume\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a307d6e6-5ef1-479d-b16e-8a0bbca8483c",
+              "name": "App deployed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"image\": \"<string>\",\n  \"coLocateWith\": \"<string,null>\",\n  \"cpus\": \"<integer>\",\n  \"domain\": \"<string,null>\",\n  \"env\": [\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"health\": \"<null>\",\n  \"memoryMb\": \"<integer>\",\n  \"network\": \"<boolean>\",\n  \"port\": \"<integer>\",\n  \"stopGraceSecs\": \"<long>\",\n  \"strategy\": {\n    \"type\": \"rolling\",\n    \"batchSize\": 4710,\n    \"useHealthCheck\": false,\n    \"waitSeconds\": 7430\n  },\n  \"volume\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"image\": \"string\",\n  \"replicas\": 9555,\n  \"status\": \"string\",\n  \"port\": 3499,\n  \"instances\": [\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 3025,\n      \"hostPort\": 8640\n    },\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 6967,\n      \"hostPort\": 5092\n    }\n  ],\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"domain\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3557d6f9-f020-48fd-8f45-c29ec9fb7375",
+          "name": "app get",
+          "request": {
+            "name": "app get",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) App name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b5f341e-6c04-446f-ab57-c9eb1c4bbba5",
+              "name": "App",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) App name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"image\": \"string\",\n  \"replicas\": 9555,\n  \"status\": \"string\",\n  \"port\": 3499,\n  \"instances\": [\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 3025,\n      \"hostPort\": 8640\n    },\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 6967,\n      \"hostPort\": 5092\n    }\n  ],\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"domain\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ac084a6-2c04-445c-88cd-76d0f188dde6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) App name"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85932fe3-8694-48a9-a297-72f72e0bf16c",
+          "name": "app destroy",
+          "request": {
+            "name": "app destroy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) App name"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1137b57d-c340-4491-bbd0-1b2617f931ab",
+              "name": "Destroyed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) App name"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b522ff69-c5f2-4f6c-9c63-58befb0ea42e",
+          "name": "app logs",
+          "request": {
+            "name": "app logs",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps",
+                ":name",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) App name"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1dc9da7-d18a-483f-9926-36ecfbbe75b8",
+              "name": "Streamed log lines (text/event-stream)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps",
+                    ":name",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) App name"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8f815f3-6ca8-484a-887e-d4eff96c2398",
+          "name": "app promote",
+          "request": {
+            "name": "app promote",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps",
+                ":name",
+                "promote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) App name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db9cce89-c301-4014-805d-4c9b475b81c6",
+              "name": "Canary promoted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps",
+                    ":name",
+                    "promote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) App name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"image\": \"string\",\n  \"replicas\": 9555,\n  \"status\": \"string\",\n  \"port\": 3499,\n  \"instances\": [\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 3025,\n      \"hostPort\": 8640\n    },\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 6967,\n      \"hostPort\": 5092\n    }\n  ],\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"domain\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2aa9c71-91e0-4a97-b9e3-bcfbe4b124ea",
+          "name": "app redeploy",
+          "request": {
+            "name": "app redeploy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps",
+                ":name",
+                "redeploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) App name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6790754b-9738-41a1-bad8-29e0bad33d9e",
+              "name": "Redeployed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps",
+                    ":name",
+                    "redeploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) App name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"image\": \"string\",\n  \"replicas\": 9555,\n  \"status\": \"string\",\n  \"port\": 3499,\n  \"instances\": [\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 3025,\n      \"hostPort\": 8640\n    },\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 6967,\n      \"hostPort\": 5092\n    }\n  ],\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"domain\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7dd1c272-b9be-4899-9a6b-90259c2c23f6",
+          "name": "app scale",
+          "request": {
+            "name": "app scale",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "apps",
+                ":name",
+                "scale"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) App name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"count\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64e923b9-32ae-451d-aaa0-026dd174fde1",
+              "name": "Scaled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "apps",
+                    ":name",
+                    "scale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) App name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"count\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"image\": \"string\",\n  \"replicas\": 9555,\n  \"status\": \"string\",\n  \"port\": 3499,\n  \"instances\": [\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 3025,\n      \"hostPort\": 8640\n    },\n    {\n      \"id\": \"string\",\n      \"nodeId\": \"string\",\n      \"status\": \"string\",\n      \"generation\": 6967,\n      \"hostPort\": 5092\n    }\n  ],\n  \"createdAt\": \"string\",\n  \"updatedAt\": \"string\",\n  \"domain\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7809b5da-40e5-477c-bc1f-0c611e30927c",
+    "name": "smolfleet apikeys apps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

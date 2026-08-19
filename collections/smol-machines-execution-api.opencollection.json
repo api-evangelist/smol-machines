@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys Execution API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Execution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a command in a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/exec",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This executes directly in the VM (not in a container)."
+        },
+        {
+          "info": {
+            "name": "Run a command in an image.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/run",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This creates a temporary overlay from the image and runs the command."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

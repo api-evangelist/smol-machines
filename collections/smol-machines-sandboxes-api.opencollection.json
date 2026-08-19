@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys Sandboxes API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sandboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all sandboxes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes"
+          },
+          "docs": "List all sandboxes."
+        },
+        {
+          "info": {
+            "name": "Create a new sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new sandbox."
+        },
+        {
+          "info": {
+            "name": "Get sandbox status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ]
+          },
+          "docs": "Get sandbox status."
+        },
+        {
+          "info": {
+            "name": "Delete a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force delete even if VM is still running"
+              }
+            ]
+          },
+          "docs": "Delete a sandbox."
+        },
+        {
+          "info": {
+            "name": "Start a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ]
+          },
+          "docs": "Start a sandbox."
+        },
+        {
+          "info": {
+            "name": "Stop a sandbox.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              }
+            ]
+          },
+          "docs": "Stop a sandbox."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

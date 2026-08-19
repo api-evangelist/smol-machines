@@ -1,0 +1,424 @@
+{
+  "item": [
+    {
+      "id": "8c9914e9-76bf-4c76-8d33-eebab8adcb19",
+      "name": "nodes",
+      "description": {
+        "content": "Cluster node enrollment and status",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1f19587-e07a-49cc-ac84-cc8fb9b9f72b",
+          "name": "node list",
+          "request": {
+            "name": "node list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5890a25-6f64-41a5-bd9a-ecd406cb4aa3",
+              "name": "List nodes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"address\": \"string\",\n    \"smolvmAddress\": \"string\",\n    \"status\": \"string\",\n    \"totalCpus\": 6337,\n    \"availableCpus\": 6950,\n    \"totalMemoryMb\": 1219,\n    \"availableMemoryMb\": 1185,\n    \"totalDiskGb\": 6763,\n    \"availableDiskGb\": 9260,\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"registeredAt\": \"string\",\n    \"lastHeartbeatAt\": \"string\",\n    \"runtime\": \"string\",\n    \"usedCpus\": 2186.110505901263,\n    \"usedDiskGb\": 9491,\n    \"usedMemoryMb\": 6560\n  },\n  {\n    \"id\": \"string\",\n    \"address\": \"string\",\n    \"smolvmAddress\": \"string\",\n    \"status\": \"string\",\n    \"totalCpus\": 2661,\n    \"availableCpus\": 8100,\n    \"totalMemoryMb\": 8194,\n    \"availableMemoryMb\": 4324,\n    \"totalDiskGb\": 7251,\n    \"availableDiskGb\": 4894,\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"registeredAt\": \"string\",\n    \"lastHeartbeatAt\": \"string\",\n    \"runtime\": \"string\",\n    \"usedCpus\": 1398.1684865692334,\n    \"usedDiskGb\": 5654,\n    \"usedMemoryMb\": 6662\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "431fa883-fd69-48f7-975c-1adfa7597c04",
+          "name": "node register",
+          "request": {
+            "name": "node register",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nodes",
+                "register"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"address\": \"<string>\",\n  \"smolvmAddress\": \"<string>\",\n  \"status\": \"<string>\",\n  \"totalCpus\": \"<integer>\",\n  \"availableCpus\": \"<integer>\",\n  \"totalMemoryMb\": \"<long>\",\n  \"availableMemoryMb\": \"<long>\",\n  \"totalDiskGb\": \"<long>\",\n  \"availableDiskGb\": \"<long>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"registeredAt\": \"<string>\",\n  \"lastHeartbeatAt\": \"<string,null>\",\n  \"runtime\": \"<string>\",\n  \"usedCpus\": \"<double>\",\n  \"usedDiskGb\": \"<long>\",\n  \"usedMemoryMb\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6fecb1a7-c5e9-4775-8101-765f6fbff02a",
+              "name": "Node registered",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nodes",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"address\": \"<string>\",\n  \"smolvmAddress\": \"<string>\",\n  \"status\": \"<string>\",\n  \"totalCpus\": \"<integer>\",\n  \"availableCpus\": \"<integer>\",\n  \"totalMemoryMb\": \"<long>\",\n  \"availableMemoryMb\": \"<long>\",\n  \"totalDiskGb\": \"<long>\",\n  \"availableDiskGb\": \"<long>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"registeredAt\": \"<string>\",\n  \"lastHeartbeatAt\": \"<string,null>\",\n  \"runtime\": \"<string>\",\n  \"usedCpus\": \"<double>\",\n  \"usedDiskGb\": \"<long>\",\n  \"usedMemoryMb\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"address\": \"string\",\n  \"smolvmAddress\": \"string\",\n  \"status\": \"string\",\n  \"totalCpus\": 9196,\n  \"availableCpus\": 9300,\n  \"totalMemoryMb\": 6323,\n  \"availableMemoryMb\": 6639,\n  \"totalDiskGb\": 7346,\n  \"availableDiskGb\": 1552,\n  \"labels\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"registeredAt\": \"string\",\n  \"lastHeartbeatAt\": \"string\",\n  \"runtime\": \"string\",\n  \"usedCpus\": 9423.75776859819,\n  \"usedDiskGb\": 7559,\n  \"usedMemoryMb\": 9113\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f96e9dc-baf4-440e-80e7-a10d3c07ae5f",
+          "name": "node credential revoke",
+          "request": {
+            "name": "node credential revoke",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nodes",
+                ":id",
+                "credential"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Node id"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "204a032e-ddc7-4f34-bfe4-ad236fab108f",
+              "name": "Credential revoked",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nodes",
+                    ":id",
+                    "credential"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Node id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b66965a1-8ef3-40ca-9f87-4659ef6cd605",
+          "name": "node drain",
+          "request": {
+            "name": "node drain",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nodes",
+                ":id",
+                "drain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Node id"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1b5ff6d-ee9d-48e7-94d8-cfca0a390598",
+              "name": "Node draining",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nodes",
+                    ":id",
+                    "drain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Node id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "873fca85-95b7-43e0-888c-249900d20857",
+          "name": "node heartbeat",
+          "request": {
+            "name": "node heartbeat",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nodes",
+                ":id",
+                "heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Node id"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e46d41b-47ee-4280-9978-affe5ea45f61",
+              "name": "Heartbeat accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nodes",
+                    ":id",
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Node id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smolmachines.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9d7f11ed-a5ae-4659-951b-7f2a901e7b3f",
+    "name": "smolfleet apikeys nodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Control plane for smolvm — deploy and run machines across a cluster.",
+      "type": "text/plain"
+    }
+  }
+}

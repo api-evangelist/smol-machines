@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "smolfleet apikeys Logs API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Stream sandbox console logs via SSE.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smolmachines.com/api/v1/sandboxes/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox name"
+              },
+              {
+                "name": "follow",
+                "value": "",
+                "type": "query",
+                "description": "Follow the logs (like tail -f)"
+              },
+              {
+                "name": "tail",
+                "value": "",
+                "type": "query",
+                "description": "Number of lines to show from the end"
+              }
+            ]
+          },
+          "docs": "Stream sandbox console logs via SSE."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
