@@ -52,6 +52,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - APIKeys
+  tags_raw:
   - apikeys
   properties:
   - type: OpenAPI
@@ -64,6 +66,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Application
+  tags_raw:
   - apps
   properties:
   - type: OpenAPI
@@ -76,6 +80,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Billing
+  tags_raw:
   - billing
   properties:
   - type: OpenAPI
@@ -112,6 +118,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -124,6 +132,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
@@ -148,6 +158,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Machines
+  tags_raw:
   - machines
   properties:
   - type: OpenAPI
@@ -172,6 +184,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Nodes
+  tags_raw:
   - nodes
   properties:
   - type: OpenAPI
@@ -183,7 +197,8 @@ apis:
   description: Async operations
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
-  tags:
+  tags: []
+  tags_raw:
   - operations
   properties:
   - type: OpenAPI
@@ -196,6 +211,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Plans
+  tags_raw:
   - plans
   properties:
   - type: OpenAPI
@@ -208,6 +225,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Pools
+  tags_raw:
   - pools
   properties:
   - type: OpenAPI
@@ -232,6 +251,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Tenants
+  tags_raw:
   - tenants
   properties:
   - type: OpenAPI
@@ -244,6 +265,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Tokens
+  tags_raw:
   - tokens
   properties:
   - type: OpenAPI
@@ -256,6 +279,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Usage
+  tags_raw:
   - usage
   properties:
   - type: OpenAPI
@@ -268,6 +293,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - Volumes
+  tags_raw:
   - volumes
   properties:
   - type: OpenAPI
