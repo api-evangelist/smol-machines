@@ -64,7 +64,7 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
-  - apikeys
+  - APIKeys
   tags_raw:
   - apikeys
   properties:
@@ -170,7 +170,7 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
-  - machines
+  - Machines
   tags_raw:
   - machines
   properties:
@@ -196,7 +196,7 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
-  - nodes
+  - Nodes
   tags_raw:
   - nodes
   properties:
@@ -305,7 +305,7 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
-  - volumes
+  - Volumes
   tags_raw:
   - volumes
   properties:
