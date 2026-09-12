@@ -314,6 +314,8 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 common:
+- type: Website
+  url: https://www.smolmachines.com/
 - type: Overlay
   url: overlays/smol-machines-smolfleet-overlay.yaml
 - type: Authentication
