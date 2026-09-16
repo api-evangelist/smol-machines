@@ -1,16 +1,13 @@
 aid: smol-machines
 name: Smol Machines
-description: >-
-  Smol Machines (smol machines, inc.) is a Y Combinator-backed developer
-  infrastructure company building portable, self-contained Linux microVMs.
-  Its open-source `smolvm` engine and `smol` CLI (both Rust, Apache-2.0) boot
-  hardware-isolated virtual machines from any OCI image in under 200ms — on a
-  laptop, in the smolfleet cloud, or self-hosted — with no daemon and no Docker.
-  The same Machine API runs locally as an in-process microVM or against the
-  hosted smolfleet control plane at api.smolmachines.com, so teams sandbox
-  untrusted code and AI-agent workloads, ship stateful `.smolmachine` artifacts,
-  and deploy machines across a cluster without changing a line. Node and Python
-  SDKs (`smolmachines`), a local REST API, and a cloud REST API are all public.
+description: Smol Machines (smol machines, inc.) is a Y Combinator-backed developer infrastructure company
+  building portable, self-contained Linux microVMs. Its open-source `smolvm` engine and `smol` CLI (both
+  Rust, Apache-2.0) boot hardware-isolated virtual machines from any OCI image in under 200ms — on a laptop,
+  in the smolfleet cloud, or self-hosted — with no daemon and no Docker. The same Machine API runs locally
+  as an in-process microVM or against the hosted smolfleet control plane at api.smolmachines.com, so teams
+  sandbox untrusted code and AI-agent workloads, ship stateful `.smolmachine` artifacts, and deploy machines
+  across a cluster without changing a line. Node and Python SDKs (`smolmachines`), a local REST API, and
+  a cloud REST API are all public.
 url: https://raw.githubusercontent.com/api-evangelist/smol-machines/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -44,7 +41,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 image: https://smolmachines.com/install.sh
 tags:
 - Company
@@ -165,7 +162,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-machines-api
-  name: Smol Machines machines API
+  name: Smol Machines API
   description: First-class machine lifecycle and exec
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -366,7 +363,10 @@ common:
   url: cli/smol-machines-cli.yml
 - type: X-MCPServerCandidate
   url: mcp/smol-machines-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: WellKnown
   url: well-known/smol-machines-well-known.yml
 - type: Conformance
