@@ -55,20 +55,6 @@ tags:
 - Containers
 - Cloud
 apis:
-- aid: smol-machines:smol-machines-apikeys-api
-  name: Smol Machines apikeys API
-  description: API key management
-  humanURL: https://smolmachines.com/docs/cloud-api
-  baseURL: https://api.smolmachines.com
-  tags:
-  - APIKeys
-  tags_raw:
-  - apikeys
-  properties:
-  - type: OpenAPI
-    url: openapi/smol-machines-apikeys-api-openapi.yml
-  - type: Documentation
-    url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-apps-api
   name: Smol Machines apps API
   description: Long-running app deployments
@@ -308,6 +294,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/smol-machines-volumes-api-openapi.yml
+  - type: Documentation
+    url: https://smolmachines.com/docs/cloud-api
+- aid: smol-machines:smol-machines-api-keys-api
+  name: Smol Machines API Keys API
+  description: API key management
+  humanURL: https://smolmachines.com/docs/cloud-api
+  baseURL: https://api.smolmachines.com
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/smol-machines-api-keys-api-openapi.yml
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 common:
