@@ -1,13 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys MicroVMs API
-  description: Control plane for smolvm — deploy and run machines across a cluster.
+  title: smolvm Micro V Ms API
+  description: OCI-native microVM runtime API for managing sandboxes, containers, images, and microvms.
   license:
     name: Apache-2.0
-  version: 0.1.0
-servers:
-- url: https://api.smolmachines.com
-  description: Hosted smolfleet
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 0.1.6
 tags:
 - name: MicroVMs
   description: Persistent microVM management
@@ -16,7 +14,7 @@ paths:
     get:
       tags:
       - MicroVMs
-      summary: List all microvms.
+      summary: List all microvms
       operationId: list_microvms
       responses:
         '200':
@@ -34,7 +32,7 @@ paths:
     post:
       tags:
       - MicroVMs
-      summary: Create a new microvm.
+      summary: Create a new microvm
       operationId: create_microvm
       requestBody:
         content:
@@ -65,7 +63,7 @@ paths:
     get:
       tags:
       - MicroVMs
-      summary: Get microvm status.
+      summary: Get microvm status
       operationId: get_microvm
       parameters:
       - name: name
@@ -90,7 +88,7 @@ paths:
     delete:
       tags:
       - MicroVMs
-      summary: Delete a microvm.
+      summary: Delete a microvm
       operationId: delete_microvm
       parameters:
       - name: name
@@ -122,7 +120,7 @@ paths:
     post:
       tags:
       - MicroVMs
-      summary: Execute a command in a microvm.
+      summary: Execute a command in a microvm
       operationId: exec_microvm
       parameters:
       - name: name
@@ -172,7 +170,7 @@ paths:
     post:
       tags:
       - MicroVMs
-      summary: Start a microvm.
+      summary: Start a microvm
       operationId: start_microvm
       parameters:
       - name: name
@@ -204,7 +202,7 @@ paths:
     post:
       tags:
       - MicroVMs
-      summary: Stop a microvm.
+      summary: Stop a microvm
       operationId: stop_microvm
       parameters:
       - name: name
@@ -234,50 +232,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
-    DeleteResponse:
-      type: object
-      description: Generic delete response.
-      required:
-      - deleted
-      properties:
-        deleted:
-          type: string
-          description: Name of deleted resource.
-          example: my-sandbox
-    PortSpec:
-      type: object
-      description: Port mapping specification.
-      required:
-      - host
-      - guest
-      properties:
-        guest:
-          type: integer
-          format: int32
-          description: Port inside the sandbox.
-          example: 80
-          minimum: 0
-        host:
-          type: integer
-          format: int32
-          description: Port on the host.
-          example: 8080
-          minimum: 0
     MicrovmInfo:
       type: object
       description: MicroVM status information.
@@ -332,29 +286,6 @@ components:
           type: string
           description: Current state ("created", "running", "stopped").
           example: running
-    ExecResponse:
-      type: object
-      description: Command execution result.
-      required:
-      - exitCode
-      - stdout
-      - stderr
-      properties:
-        exitCode:
-          type: integer
-          format: int32
-          description: Exit code.
-          example: 0
-        stderr:
-          type: string
-          description: Standard error.
-          example: ''
-        stdout:
-          type: string
-          description: Standard output.
-          example: 'hello
-
-            '
     MicrovmExecRequest:
       type: object
       description: Request to execute a command in a microvm.
@@ -386,6 +317,29 @@ components:
           - string
           - 'null'
           description: Working directory.
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '
     MountSpec:
       type: object
       description: Mount specification (for requests).
@@ -404,32 +358,31 @@ components:
           type: string
           description: Path inside the sandbox.
           example: /workspace
-    ListMicrovmsResponse:
+    DeleteResponse:
       type: object
-      description: List microvms response.
+      description: Generic delete response.
       required:
-      - microvms
+      - deleted
       properties:
-        microvms:
-          type: array
-          items:
-            $ref: '#/components/schemas/MicrovmInfo'
-          description: List of microvms.
-    EnvVar:
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
+    ApiErrorResponse:
       type: object
-      description: Environment variable.
+      description: API error response.
       required:
-      - name
-      - value
+      - error
+      - code
       properties:
-        name:
+        code:
           type: string
-          description: Variable name.
-          example: MY_VAR
-        value:
+          description: Error code.
+          example: NOT_FOUND
+        error:
           type: string
-          description: Variable value.
-          example: my_value
+          description: Error message.
+          example: sandbox 'test' not found
     CreateMicrovmRequest:
       type: object
       description: Request to create a new microvm.
@@ -481,3 +434,48 @@ components:
           format: int64
           description: 'Storage disk size in GiB (default: 20).'
           minimum: 0
+    EnvVar:
+      type: object
+      description: Environment variable.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
+    PortSpec:
+      type: object
+      description: Port mapping specification.
+      required:
+      - host
+      - guest
+      properties:
+        guest:
+          type: integer
+          format: int32
+          description: Port inside the sandbox.
+          example: 80
+          minimum: 0
+        host:
+          type: integer
+          format: int32
+          description: Port on the host.
+          example: 8080
+          minimum: 0
+    ListMicrovmsResponse:
+      type: object
+      description: List microvms response.
+      required:
+      - microvms
+      properties:
+        microvms:
+          type: array
+          items:
+            $ref: '#/components/schemas/MicrovmInfo'
+          description: List of microvms.

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys apps API
+  title: smolfleet Apps API
   description: Control plane for smolvm — deploy and run machines across a cluster.
   license:
     name: Apache-2.0
@@ -9,13 +9,13 @@ servers:
 - url: https://api.smolmachines.com
   description: Hosted smolfleet
 tags:
-- name: apps
+- name: Apps
   description: Long-running app deployments
 paths:
   /v1/apps:
     get:
       tags:
-      - apps
+      - Apps
       operationId: app_list
       responses:
         '200':
@@ -26,9 +26,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AppInfo'
+      summary: App list
+      x-summary-source: derived
     post:
       tags:
-      - apps
+      - Apps
       operationId: app_deploy
       requestBody:
         content:
@@ -43,10 +45,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AppInfo'
+      summary: App deploy
+      x-summary-source: derived
   /v1/apps/{name}:
     get:
       tags:
-      - apps
+      - Apps
       operationId: app_get
       parameters:
       - name: name
@@ -64,9 +68,11 @@ paths:
                 $ref: '#/components/schemas/AppInfo'
         '404':
           description: Not found
+      summary: App get
+      x-summary-source: derived
     delete:
       tags:
-      - apps
+      - Apps
       operationId: app_destroy
       parameters:
       - name: name
@@ -78,10 +84,12 @@ paths:
       responses:
         '204':
           description: Destroyed
+      summary: App destroy
+      x-summary-source: derived
   /v1/apps/{name}/logs:
     get:
       tags:
-      - apps
+      - Apps
       operationId: app_logs
       parameters:
       - name: name
@@ -93,10 +101,12 @@ paths:
       responses:
         '200':
           description: Streamed log lines (text/event-stream)
+      summary: App logs
+      x-summary-source: derived
   /v1/apps/{name}/promote:
     post:
       tags:
-      - apps
+      - Apps
       operationId: app_promote
       parameters:
       - name: name
@@ -112,10 +122,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AppInfo'
+      summary: App promote
+      x-summary-source: derived
   /v1/apps/{name}/redeploy:
     post:
       tags:
-      - apps
+      - Apps
       operationId: app_redeploy
       parameters:
       - name: name
@@ -131,10 +143,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AppInfo'
+      summary: App redeploy
+      x-summary-source: derived
   /v1/apps/{name}/scale:
     post:
       tags:
-      - apps
+      - Apps
       operationId: app_scale
       parameters:
       - name: name
@@ -156,31 +170,110 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AppInfo'
+      summary: App scale
+      x-summary-source: derived
 components:
   schemas:
-    InstanceInfo:
+    HealthCheckType:
+      type: string
+      enum:
+      - http
+      - tcp
+      - exec
+    DeployStrategy:
+      oneOf:
+      - type: object
+        description: 'Replace instances in batches. Each batch: start new → health check → destroy old.'
+        required:
+        - type
+        properties:
+          batchSize:
+            type: integer
+            format: int32
+            description: 'Instances to replace per batch (default: 1).'
+            minimum: 0
+          type:
+            type: string
+            enum:
+            - rolling
+          useHealthCheck:
+            type: boolean
+            description: Wait for health check to pass before destroying old instances.
+          waitSeconds:
+            type: integer
+            format: int64
+            description: 'Seconds to wait between batches if not using health checks (default: 5).'
+            minimum: 0
+      - type: object
+        description: 'Deploy N canary instances first. If healthy, replace the rest.
+
+          If canaries fail, roll back without touching existing instances.'
+        required:
+        - type
+        properties:
+          autoPromote:
+            type: boolean
+            description: Auto-promote after health check passes. If false, requires manual promotion.
+          canaryCount:
+            type: integer
+            format: int32
+            description: 'Number of canary instances to deploy (default: 1).'
+            minimum: 0
+          type:
+            type: string
+            enum:
+            - canary
+      - type: object
+        description: 'Deploy a complete new set alongside the old. Switch traffic atomically,
+
+          then destroy old instances.'
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - blueGreen
+    AppInfo:
       type: object
       required:
       - id
-      - nodeId
+      - name
+      - image
+      - replicas
       - status
-      - generation
+      - port
+      - instances
+      - createdAt
+      - updatedAt
       properties:
-        generation:
-          type: integer
-          format: int64
-          minimum: 0
-        hostPort:
+        createdAt:
+          type: string
+        domain:
           type:
-          - integer
+          - string
           - 'null'
-          format: int32
-          minimum: 0
         id:
           type: string
-        nodeId:
+        image:
           type: string
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstanceInfo'
+        name:
+          type: string
+        port:
+          type: integer
+          format: int32
+          minimum: 0
+        replicas:
+          type: integer
+          format: int32
+          minimum: 0
         status:
+          type: string
+        updatedAt:
           type: string
     ScaleRequest:
       type: object
@@ -241,12 +334,6 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/VolumeMount'
-    HealthCheckType:
-      type: string
-      enum:
-      - http
-      - tcp
-      - exec
     HealthCheck:
       type: object
       required:
@@ -276,46 +363,39 @@ components:
           minimum: 0
         type:
           $ref: '#/components/schemas/HealthCheckType'
-    AppInfo:
+    InstanceInfo:
       type: object
       required:
       - id
-      - name
-      - image
-      - replicas
+      - nodeId
       - status
-      - port
-      - instances
-      - createdAt
-      - updatedAt
+      - generation
       properties:
-        createdAt:
-          type: string
-        domain:
+        generation:
+          type: integer
+          format: int64
+          minimum: 0
+        hostPort:
           type:
-          - string
+          - integer
           - 'null'
+          format: int32
+          minimum: 0
         id:
           type: string
-        image:
+        nodeId:
           type: string
-        instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstanceInfo'
-        name:
-          type: string
-        port:
-          type: integer
-          format: int32
-          minimum: 0
-        replicas:
-          type: integer
-          format: int32
-          minimum: 0
         status:
           type: string
-        updatedAt:
+    EnvVar:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          type: string
+        value:
           type: string
     VolumeMount:
       type: object
@@ -331,67 +411,3 @@ components:
           type: integer
           format: int64
           minimum: 0
-    EnvVar:
-      type: object
-      required:
-      - key
-      - value
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    DeployStrategy:
-      oneOf:
-      - type: object
-        description: 'Replace instances in batches. Each batch: start new → health check → destroy old.'
-        required:
-        - type
-        properties:
-          batchSize:
-            type: integer
-            format: int32
-            description: 'Instances to replace per batch (default: 1).'
-            minimum: 0
-          type:
-            type: string
-            enum:
-            - rolling
-          useHealthCheck:
-            type: boolean
-            description: Wait for health check to pass before destroying old instances.
-          waitSeconds:
-            type: integer
-            format: int64
-            description: 'Seconds to wait between batches if not using health checks (default: 5).'
-            minimum: 0
-      - type: object
-        description: 'Deploy N canary instances first. If healthy, replace the rest.
-
-          If canaries fail, roll back without touching existing instances.'
-        required:
-        - type
-        properties:
-          autoPromote:
-            type: boolean
-            description: Auto-promote after health check passes. If false, requires manual promotion.
-          canaryCount:
-            type: integer
-            format: int32
-            description: 'Number of canary instances to deploy (default: 1).'
-            minimum: 0
-          type:
-            type: string
-            enum:
-            - canary
-      - type: object
-        description: 'Deploy a complete new set alongside the old. Switch traffic atomically,
-
-          then destroy old instances.'
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - blueGreen

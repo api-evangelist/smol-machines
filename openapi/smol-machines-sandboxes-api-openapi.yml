@@ -1,13 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys Sandboxes API
-  description: Control plane for smolvm — deploy and run machines across a cluster.
+  title: smolvm Sandboxes API
+  description: OCI-native microVM runtime API for managing sandboxes, containers, images, and microvms.
   license:
     name: Apache-2.0
-  version: 0.1.0
-servers:
-- url: https://api.smolmachines.com
-  description: Hosted smolfleet
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 0.1.6
 tags:
 - name: Sandboxes
   description: Sandbox lifecycle management
@@ -16,7 +14,7 @@ paths:
     get:
       tags:
       - Sandboxes
-      summary: List all sandboxes.
+      summary: List all sandboxes
       operationId: list_sandboxes
       responses:
         '200':
@@ -28,7 +26,7 @@ paths:
     post:
       tags:
       - Sandboxes
-      summary: Create a new sandbox.
+      summary: Create a new sandbox
       operationId: create_sandbox
       requestBody:
         content:
@@ -59,7 +57,7 @@ paths:
     get:
       tags:
       - Sandboxes
-      summary: Get sandbox status.
+      summary: Get sandbox status
       operationId: get_sandbox
       parameters:
       - name: id
@@ -84,7 +82,7 @@ paths:
     delete:
       tags:
       - Sandboxes
-      summary: Delete a sandbox.
+      summary: Delete a sandbox
       operationId: delete_sandbox
       parameters:
       - name: id
@@ -122,7 +120,7 @@ paths:
     post:
       tags:
       - Sandboxes
-      summary: Start a sandbox.
+      summary: Start a sandbox
       operationId: start_sandbox
       parameters:
       - name: id
@@ -154,7 +152,7 @@ paths:
     post:
       tags:
       - Sandboxes
-      summary: Stop a sandbox.
+      summary: Stop a sandbox
       operationId: stop_sandbox
       parameters:
       - name: id
@@ -184,61 +182,94 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ApiErrorResponse:
+    ResourceSpec:
       type: object
-      description: API error response.
-      required:
-      - error
-      - code
+      description: VM resource specification.
       properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
-    CreateSandboxRequest:
+        cpus:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Number of vCPUs.
+          example: 2
+          minimum: 0
+        memoryMb:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Memory in MiB.
+          example: 1024
+          minimum: 0
+        network:
+          type:
+          - boolean
+          - 'null'
+          description: 'Enable outbound network access (TSI).
+
+            Note: Only TCP/UDP supported, not ICMP (ping).'
+        overlayGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Overlay disk size in GiB (default: 2).'
+          example: 2
+          minimum: 0
+        storageGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Storage disk size in GiB (default: 20).'
+          example: 20
+          minimum: 0
+    RestartSpec:
       type: object
-      description: Request to create a new sandbox.
-      required:
-      - name
+      description: Restart policy specification for sandbox creation.
       properties:
-        mounts:
+        maxRetries:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Maximum restart attempts (0 = unlimited).
+          minimum: 0
+        policy:
+          type:
+          - string
+          - 'null'
+          description: 'Restart policy: "never", "always", "on-failure", "unless-stopped".'
+    ListSandboxesResponse:
+      type: object
+      description: List sandboxes response.
+      required:
+      - sandboxes
+      properties:
+        sandboxes:
           type: array
           items:
-            $ref: '#/components/schemas/MountSpec'
-          description: Host mounts to attach.
-        name:
-          type: string
-          description: Unique name for the sandbox.
-          example: my-sandbox
-        ports:
-          type: array
-          items:
-            $ref: '#/components/schemas/PortSpec'
-          description: Port mappings (host:guest).
-        resources:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ResourceSpec'
-            description: VM resource configuration.
-        restart:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/RestartSpec'
-            description: Restart policy configuration.
-    DeleteResponse:
+            $ref: '#/components/schemas/SandboxInfo'
+          description: List of sandboxes.
+    MountSpec:
       type: object
-      description: Generic delete response.
+      description: Mount specification (for requests).
       required:
-      - deleted
+      - source
+      - target
       properties:
-        deleted:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
           type: string
-          description: Name of deleted resource.
-          example: my-sandbox
+          description: Host path to mount.
+          example: /Users/me/code
+        target:
+          type: string
+          description: Path inside the sandbox.
+          example: /workspace
     SandboxInfo:
       type: object
       description: Sandbox status information.
@@ -288,25 +319,31 @@ components:
           type: string
           description: Current state.
           example: running
-    PortSpec:
+    DeleteResponse:
       type: object
-      description: Port mapping specification.
+      description: Generic delete response.
       required:
-      - host
-      - guest
+      - deleted
       properties:
-        guest:
-          type: integer
-          format: int32
-          description: Port inside the sandbox.
-          example: 80
-          minimum: 0
-        host:
-          type: integer
-          format: int32
-          description: Port on the host.
-          example: 8080
-          minimum: 0
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
     MountInfo:
       type: object
       description: Mount information (for responses, includes virtiofs tag).
@@ -331,91 +368,52 @@ components:
           type: string
           description: Path inside the sandbox.
           example: /workspace
-    ListSandboxesResponse:
+    CreateSandboxRequest:
       type: object
-      description: List sandboxes response.
+      description: Request to create a new sandbox.
       required:
-      - sandboxes
+      - name
       properties:
-        sandboxes:
+        mounts:
           type: array
           items:
-            $ref: '#/components/schemas/SandboxInfo'
-          description: List of sandboxes.
-    RestartSpec:
+            $ref: '#/components/schemas/MountSpec'
+          description: Host mounts to attach.
+        name:
+          type: string
+          description: Unique name for the sandbox.
+          example: my-sandbox
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortSpec'
+          description: Port mappings (host:guest).
+        resources:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ResourceSpec'
+            description: VM resource configuration.
+        restart:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RestartSpec'
+            description: Restart policy configuration.
+    PortSpec:
       type: object
-      description: Restart policy specification for sandbox creation.
-      properties:
-        maxRetries:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          description: Maximum restart attempts (0 = unlimited).
-          minimum: 0
-        policy:
-          type:
-          - string
-          - 'null'
-          description: 'Restart policy: "never", "always", "on-failure", "unless-stopped".'
-    MountSpec:
-      type: object
-      description: Mount specification (for requests).
+      description: Port mapping specification.
       required:
-      - source
-      - target
+      - host
+      - guest
       properties:
-        readonly:
-          type: boolean
-          description: Read-only mount.
-        source:
-          type: string
-          description: Host path to mount.
-          example: /Users/me/code
-        target:
-          type: string
-          description: Path inside the sandbox.
-          example: /workspace
-    ResourceSpec:
-      type: object
-      description: VM resource specification.
-      properties:
-        cpus:
-          type:
-          - integer
-          - 'null'
+        guest:
+          type: integer
           format: int32
-          description: Number of vCPUs.
-          example: 2
+          description: Port inside the sandbox.
+          example: 80
           minimum: 0
-        memoryMb:
-          type:
-          - integer
-          - 'null'
+        host:
+          type: integer
           format: int32
-          description: Memory in MiB.
-          example: 1024
-          minimum: 0
-        network:
-          type:
-          - boolean
-          - 'null'
-          description: 'Enable outbound network access (TSI).
-
-            Note: Only TCP/UDP supported, not ICMP (ping).'
-        overlayGb:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Overlay disk size in GiB (default: 2).'
-          example: 2
-          minimum: 0
-        storageGb:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Storage disk size in GiB (default: 20).'
-          example: 20
+          description: Port on the host.
+          example: 8080
           minimum: 0

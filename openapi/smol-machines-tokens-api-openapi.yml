@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys tokens API
+  title: smolfleet Tokens API
   description: Control plane for smolvm — deploy and run machines across a cluster.
   license:
     name: Apache-2.0
@@ -9,28 +9,32 @@ servers:
 - url: https://api.smolmachines.com
   description: Hosted smolfleet
 tags:
-- name: tokens
+- name: Tokens
   description: Node join tokens
 paths:
   /v1/tokens:
     get:
       tags:
-      - tokens
+      - Tokens
       operationId: token_list
       responses:
         '200':
           description: List join tokens
+      summary: Token list
+      x-summary-source: derived
     post:
       tags:
-      - tokens
+      - Tokens
       operationId: token_create
       responses:
         '200':
           description: Join token created
+      summary: Token create
+      x-summary-source: derived
   /v1/tokens/{prefix}:
     delete:
       tags:
-      - tokens
+      - Tokens
       operationId: token_delete
       parameters:
       - name: prefix
@@ -42,3 +46,5 @@ paths:
       responses:
         '204':
           description: Token deleted
+      summary: Token delete
+      x-summary-source: derived

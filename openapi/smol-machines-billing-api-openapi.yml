@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys billing API
+  title: smolfleet Billing API
   description: Control plane for smolvm — deploy and run machines across a cluster.
   license:
     name: Apache-2.0
@@ -9,13 +9,13 @@ servers:
 - url: https://api.smolmachines.com
   description: Hosted smolfleet
 tags:
-- name: billing
+- name: Billing
   description: Self-service account and metering
 paths:
   /v1/account:
     get:
       tags:
-      - billing
+      - Billing
       operationId: account_get
       responses:
         '200':
@@ -24,10 +24,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountInfo'
+      summary: Account get
+      x-summary-source: derived
   /v1/billing/meters:
     get:
       tags:
-      - billing
+      - Billing
       operationId: billing_meters
       responses:
         '200':
@@ -38,8 +40,58 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TenantMeter'
+      summary: Billing meters
+      x-summary-source: derived
 components:
   schemas:
+    AccountInfo:
+      type: object
+      description: 'The tenant self-service account view: plan, effective limits, usage, spend.'
+      required:
+      - tenantId
+      - status
+      - effectiveMaxCpus
+      - effectiveMaxMemoryMb
+      - effectiveMaxMachines
+      - periodUsage
+      - periodCost
+      properties:
+        budgetRemainingMicros:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        effectiveMaxCpus:
+          type: integer
+          format: int32
+          minimum: 0
+        effectiveMaxMachines:
+          type: integer
+          format: int32
+          minimum: 0
+        effectiveMaxMemoryMb:
+          type: integer
+          format: int64
+          minimum: 0
+        monthlyBudgetMicros:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        periodCost:
+          $ref: '#/components/schemas/CostBreakdown'
+        periodUsage:
+          $ref: '#/components/schemas/UsageResponse'
+        plan:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PlanInfo'
+        status:
+          type: string
+        tenantId:
+          type: string
     PlanInfo:
       type: object
       description: 'A reusable plan: quota + per-unit rates (money in integer micros) + budget.'
@@ -112,6 +164,36 @@ components:
           type: integer
           format: int64
           minimum: 0
+    TenantMeter:
+      type: object
+      description: 'One tenant''s metered usage for a period, in the shape a billing system
+
+        ingests (`GET /v1/billing/meters`).'
+      required:
+      - tenantId
+      - cpuHours
+      - memoryGbHours
+      - execCount
+      - cost
+      properties:
+        cost:
+          $ref: '#/components/schemas/CostBreakdown'
+        cpuHours:
+          type: number
+          format: double
+        execCount:
+          type: integer
+          format: int64
+          minimum: 0
+        externalBillingId:
+          type:
+          - string
+          - 'null'
+        memoryGbHours:
+          type: number
+          format: double
+        tenantId:
+          type: string
     UsageResponse:
       type: object
       required:
@@ -153,36 +235,6 @@ components:
           type: integer
           format: int64
           minimum: 0
-    TenantMeter:
-      type: object
-      description: 'One tenant''s metered usage for a period, in the shape a billing system
-
-        ingests (`GET /v1/billing/meters`).'
-      required:
-      - tenantId
-      - cpuHours
-      - memoryGbHours
-      - execCount
-      - cost
-      properties:
-        cost:
-          $ref: '#/components/schemas/CostBreakdown'
-        cpuHours:
-          type: number
-          format: double
-        execCount:
-          type: integer
-          format: int64
-          minimum: 0
-        externalBillingId:
-          type:
-          - string
-          - 'null'
-        memoryGbHours:
-          type: number
-          format: double
-        tenantId:
-          type: string
     CostBreakdown:
       type: object
       description: Cost breakdown for a usage period (all amounts in integer micros).
@@ -208,51 +260,3 @@ components:
           type: integer
           format: int64
           minimum: 0
-    AccountInfo:
-      type: object
-      description: 'The tenant self-service account view: plan, effective limits, usage, spend.'
-      required:
-      - tenantId
-      - status
-      - effectiveMaxCpus
-      - effectiveMaxMemoryMb
-      - effectiveMaxMachines
-      - periodUsage
-      - periodCost
-      properties:
-        budgetRemainingMicros:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        effectiveMaxCpus:
-          type: integer
-          format: int32
-          minimum: 0
-        effectiveMaxMachines:
-          type: integer
-          format: int32
-          minimum: 0
-        effectiveMaxMemoryMb:
-          type: integer
-          format: int64
-          minimum: 0
-        monthlyBudgetMicros:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        periodCost:
-          $ref: '#/components/schemas/CostBreakdown'
-        periodUsage:
-          $ref: '#/components/schemas/UsageResponse'
-        plan:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/PlanInfo'
-        status:
-          type: string
-        tenantId:
-          type: string

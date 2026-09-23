@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys volumes API
+  title: smolfleet Volumes API
   description: Control plane for smolvm — deploy and run machines across a cluster.
   license:
     name: Apache-2.0
@@ -9,13 +9,13 @@ servers:
 - url: https://api.smolmachines.com
   description: Hosted smolfleet
 tags:
-- name: volumes
+- name: Volumes
   description: Persistent volumes
 paths:
   /v1/volumes:
     get:
       tags:
-      - volumes
+      - Volumes
       operationId: volume_list
       responses:
         '200':
@@ -26,9 +26,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/VolumeInfo'
+      summary: Volume list
+      x-summary-source: derived
     post:
       tags:
-      - volumes
+      - Volumes
       operationId: volume_create
       requestBody:
         content:
@@ -43,10 +45,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VolumeInfo'
+      summary: Volume create
+      x-summary-source: derived
   /v1/volumes/{id}:
     get:
       tags:
-      - volumes
+      - Volumes
       operationId: volume_get
       parameters:
       - name: id
@@ -64,9 +68,11 @@ paths:
                 $ref: '#/components/schemas/VolumeInfo'
         '404':
           description: Not found
+      summary: Volume get
+      x-summary-source: derived
     delete:
       tags:
-      - volumes
+      - Volumes
       operationId: volume_delete
       parameters:
       - name: id
@@ -78,24 +84,10 @@ paths:
       responses:
         '204':
           description: Volume deleted
+      summary: Volume delete
+      x-summary-source: derived
 components:
   schemas:
-    CreateVolumeRequest:
-      type: object
-      required:
-      - name
-      - sizeGb
-      properties:
-        name:
-          type: string
-        node:
-          type:
-          - string
-          - 'null'
-        sizeGb:
-          type: integer
-          format: int64
-          minimum: 0
     VolumeInfo:
       type: object
       required:
@@ -124,3 +116,19 @@ components:
           minimum: 0
         status:
           type: string
+    CreateVolumeRequest:
+      type: object
+      required:
+      - name
+      - sizeGb
+      properties:
+        name:
+          type: string
+        node:
+          type:
+          - string
+          - 'null'
+        sizeGb:
+          type: integer
+          format: int64
+          minimum: 0

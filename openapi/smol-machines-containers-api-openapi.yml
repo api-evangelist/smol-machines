@@ -1,13 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys Containers API
-  description: Control plane for smolvm — deploy and run machines across a cluster.
+  title: smolvm Containers API
+  description: OCI-native microVM runtime API for managing sandboxes, containers, images, and microvms.
   license:
     name: Apache-2.0
-  version: 0.1.0
-servers:
-- url: https://api.smolmachines.com
-  description: Hosted smolfleet
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: 0.1.6
 tags:
 - name: Containers
   description: Container management within sandboxes
@@ -16,7 +14,7 @@ paths:
     get:
       tags:
       - Containers
-      summary: List containers in a sandbox.
+      summary: List containers in a sandbox
       operationId: list_containers
       parameters:
       - name: id
@@ -41,7 +39,7 @@ paths:
     post:
       tags:
       - Containers
-      summary: Create a container in a sandbox.
+      summary: Create a container in a sandbox
       operationId: create_container
       parameters:
       - name: id
@@ -79,7 +77,7 @@ paths:
     delete:
       tags:
       - Containers
-      summary: Delete a container.
+      summary: Delete a container
       operationId: delete_container
       parameters:
       - name: id
@@ -123,7 +121,7 @@ paths:
     post:
       tags:
       - Containers
-      summary: Execute a command in a container.
+      summary: Execute a command in a container
       operationId: exec_in_container
       parameters:
       - name: id
@@ -173,7 +171,7 @@ paths:
     post:
       tags:
       - Containers
-      summary: Start a container.
+      summary: Start a container
       operationId: start_container
       parameters:
       - name: id
@@ -211,7 +209,7 @@ paths:
     post:
       tags:
       - Containers
-      summary: Stop a container.
+      summary: Stop a container
       operationId: stop_container
       parameters:
       - name: id
@@ -253,50 +251,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ContainerInfo:
-      type: object
-      description: Container information.
-      required:
-      - id
-      - image
-      - state
-      - createdAt
-      - command
-      properties:
-        command:
-          type: array
-          items:
-            type: string
-          description: Command.
-        createdAt:
-          type: integer
-          format: int64
-          description: Creation timestamp.
-          minimum: 0
-        id:
-          type: string
-          description: Container ID.
-          example: abc123
-        image:
-          type: string
-          description: Image.
-          example: alpine:latest
-        state:
-          type: string
-          description: State (created, running, stopped).
-          example: running
-    StopContainerRequest:
-      type: object
-      description: Request to stop a container.
-      properties:
-        timeoutSecs:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: Timeout before force kill (seconds).
-          example: 10
-          minimum: 0
     ContainerExecRequest:
       type: object
       description: Request to exec in a container.
@@ -328,74 +282,6 @@ components:
           - string
           - 'null'
           description: Working directory.
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
-    CreateContainerRequest:
-      type: object
-      description: Request to create a container.
-      required:
-      - image
-      properties:
-        command:
-          type: array
-          items:
-            type: string
-          description: Command and arguments.
-          example:
-          - sleep
-          - infinity
-        env:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnvVar'
-          description: Environment variables.
-        image:
-          type: string
-          description: Image to use.
-          example: alpine:latest
-        mounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerMountSpec'
-          description: Volume mounts.
-        workdir:
-          type:
-          - string
-          - 'null'
-          description: Working directory.
-    StartResponse:
-      type: object
-      description: Generic start response.
-      required:
-      - started
-      properties:
-        started:
-          type: string
-          description: Identifier of started resource.
-          example: abc123
-    DeleteResponse:
-      type: object
-      description: Generic delete response.
-      required:
-      - deleted
-      properties:
-        deleted:
-          type: string
-          description: Name of deleted resource.
-          example: my-sandbox
     StopResponse:
       type: object
       description: Generic stop response.
@@ -435,6 +321,39 @@ components:
           type: string
           description: Target path in container.
           example: /app
+    CreateContainerRequest:
+      type: object
+      description: Request to create a container.
+      required:
+      - image
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - sleep
+          - infinity
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        image:
+          type: string
+          description: Image to use.
+          example: alpine:latest
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerMountSpec'
+          description: Volume mounts.
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
     ListContainersResponse:
       type: object
       description: List containers response.
@@ -446,21 +365,60 @@ components:
           items:
             $ref: '#/components/schemas/ContainerInfo'
           description: List of containers.
-    EnvVar:
+    StopContainerRequest:
       type: object
-      description: Environment variable.
-      required:
-      - name
-      - value
+      description: Request to stop a container.
       properties:
-        name:
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout before force kill (seconds).
+          example: 10
+          minimum: 0
+    DeleteResponse:
+      type: object
+      description: Generic delete response.
+      required:
+      - deleted
+      properties:
+        deleted:
           type: string
-          description: Variable name.
-          example: MY_VAR
-        value:
+          description: Name of deleted resource.
+          example: my-sandbox
+    DeleteContainerRequest:
+      type: object
+      description: Request to delete a container.
+      properties:
+        force:
+          type: boolean
+          description: Force delete even if running.
+    StartResponse:
+      type: object
+      description: Generic start response.
+      required:
+      - started
+      properties:
+        started:
           type: string
-          description: Variable value.
-          example: my_value
+          description: Identifier of started resource.
+          example: abc123
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
     ExecResponse:
       type: object
       description: Command execution result.
@@ -484,10 +442,50 @@ components:
           example: 'hello
 
             '
-    DeleteContainerRequest:
+    EnvVar:
       type: object
-      description: Request to delete a container.
+      description: Environment variable.
+      required:
+      - name
+      - value
       properties:
-        force:
-          type: boolean
-          description: Force delete even if running.
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
+    ContainerInfo:
+      type: object
+      description: Container information.
+      required:
+      - id
+      - image
+      - state
+      - createdAt
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command.
+        createdAt:
+          type: integer
+          format: int64
+          description: Creation timestamp.
+          minimum: 0
+        id:
+          type: string
+          description: Container ID.
+          example: abc123
+        image:
+          type: string
+          description: Image.
+          example: alpine:latest
+        state:
+          type: string
+          description: State (created, running, stopped).
+          example: running

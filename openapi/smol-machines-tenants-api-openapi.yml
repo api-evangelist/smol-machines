@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: smolfleet apikeys tenants API
+  title: smolfleet Tenants API
   description: Control plane for smolvm — deploy and run machines across a cluster.
   license:
     name: Apache-2.0
@@ -9,13 +9,13 @@ servers:
 - url: https://api.smolmachines.com
   description: Hosted smolfleet
 tags:
-- name: tenants
+- name: Tenants
   description: Customer accounts (product-backend)
 paths:
   /v1/tenants:
     get:
       tags:
-      - tenants
+      - Tenants
       operationId: tenant_list
       responses:
         '200':
@@ -26,9 +26,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TenantInfo'
+      summary: Tenant list
+      x-summary-source: derived
     post:
       tags:
-      - tenants
+      - Tenants
       operationId: tenant_create
       requestBody:
         content:
@@ -43,10 +45,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantInfo'
+      summary: Tenant create
+      x-summary-source: derived
   /v1/tenants/{id}:
     get:
       tags:
-      - tenants
+      - Tenants
       operationId: tenant_get
       parameters:
       - name: id
@@ -64,9 +68,11 @@ paths:
                 $ref: '#/components/schemas/TenantInfo'
         '404':
           description: Not found
+      summary: Tenant get
+      x-summary-source: derived
     patch:
       tags:
-      - tenants
+      - Tenants
       operationId: tenant_update
       parameters:
       - name: id
@@ -88,10 +94,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantInfo'
+      summary: Tenant update
+      x-summary-source: derived
   /v1/tenants/{id}/reactivate:
     post:
       tags:
-      - tenants
+      - Tenants
       operationId: tenant_reactivate
       parameters:
       - name: id
@@ -103,10 +111,12 @@ paths:
       responses:
         '204':
           description: Reactivated
+      summary: Tenant reactivate
+      x-summary-source: derived
   /v1/tenants/{id}/suspend:
     post:
       tags:
-      - tenants
+      - Tenants
       operationId: tenant_suspend
       parameters:
       - name: id
@@ -118,21 +128,22 @@ paths:
       responses:
         '204':
           description: Suspended
+      summary: Tenant suspend
+      x-summary-source: derived
 components:
   schemas:
-    UpdateTenantRequest:
+    CreateTenantRequest:
       type: object
-      description: Partial update — only present fields change.
+      required:
+      - name
       properties:
-        externalBillingId:
+        id:
           type:
           - string
           - 'null'
+        name:
+          type: string
         planId:
-          type:
-          - string
-          - 'null'
-        status:
           type:
           - string
           - 'null'
@@ -191,18 +202,19 @@ components:
           type:
           - string
           - 'null'
-    CreateTenantRequest:
+    UpdateTenantRequest:
       type: object
-      required:
-      - name
+      description: Partial update — only present fields change.
       properties:
-        id:
+        externalBillingId:
           type:
           - string
           - 'null'
-        name:
-          type: string
         planId:
+          type:
+          - string
+          - 'null'
+        status:
           type:
           - string
           - 'null'
