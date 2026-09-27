@@ -367,287 +367,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MachineSessionInfo:
-      type: object
-      required:
-      - id
-      - machineId
-      - status
-      - env
-      - createdAt
-      properties:
-        createdAt:
-          type: string
-        cwd:
-          type:
-          - string
-          - 'null'
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        id:
-          type: string
-        lastExecAt:
-          type:
-          - string
-          - 'null'
-        machineId:
-          type: string
-        status:
-          type: string
-    MachineResources:
-      type: object
-      properties:
-        cpus:
-          type: integer
-          format: int32
-          minimum: 0
-        diskGb:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        memoryMb:
-          type: integer
-          format: int32
-          minimum: 0
-    MachineSource:
-      oneOf:
-      - type: object
-        required:
-        - reference
-        - type
-        properties:
-          reference:
-            type: string
-          type:
-            type: string
-            enum:
-            - image
-      - type: object
-        required:
-        - reference
-        - type
-        properties:
-          reference:
-            type: string
-          type:
-            type: string
-            enum:
-            - smolmachine
-    CreateMachineSessionRequest:
-      type: object
-      properties:
-        cwd:
-          type:
-          - string
-          - 'null'
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        id:
-          type:
-          - string
-          - 'null'
-    MachineNetwork:
-      oneOf:
-      - type: object
-        required:
-        - mode
-        properties:
-          mode:
-            type: string
-            enum:
-            - blocked
-      - type: object
-        required:
-        - mode
-        properties:
-          mode:
-            type: string
-            enum:
-            - open
-      - type: object
-        required:
-        - cidrs
-        - mode
-        properties:
-          cidrs:
-            type: array
-            items:
-              type: string
-          mode:
-            type: string
-            enum:
-            - allowCidrs
-    EventInfo:
-      type: object
-      required:
-      - id
-      - level
-      - message
-      - createdAt
-      properties:
-        createdAt:
-          type: string
-        id:
-          type: string
-        level:
-          type: string
-        message:
-          type: string
-    MachineCommandRequest:
-      type: object
-      required:
-      - command
-      properties:
-        command:
-          $ref: '#/components/schemas/CommandSpec'
-        cwd:
-          type:
-          - string
-          - 'null'
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        stdin:
-          type:
-          - string
-          - 'null'
-        stream:
-          type: boolean
-        timeoutSeconds:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-    MachineExecResponse:
-      type: object
-      required:
-      - stdout
-      - stderr
-      - exitCode
-      - durationMs
-      - machineId
-      properties:
-        durationMs:
-          type: integer
-          format: int64
-          minimum: 0
-        exitCode:
-          type: integer
-          format: int32
-        machineId:
-          type: string
-        stderr:
-          type: string
-        stderrTruncated:
-          type: boolean
-        stdout:
-          type: string
-        stdoutTruncated:
-          type: boolean
     CommandSpec:
       oneOf:
       - type: array
         items:
           type: string
       - type: string
-    MachineCodeRequest:
-      type: object
-      required:
-      - language
-      - code
-      properties:
-        code:
-          type: string
-        cwd:
-          type:
-          - string
-          - 'null'
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        language:
-          type: string
-        timeoutSeconds:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-    MachineMountSpec:
-      type: object
-      required:
-      - volume
-      - mountPath
-      properties:
-        mountPath:
-          type: string
-          description: Mount path inside the VM.
-        readonly:
-          type: boolean
-          description: Mount as read-only.
-        volume:
-          type: string
-          description: Volume name to mount.
-    CreateMachineRequest:
-      type: object
-      required:
-      - source
-      properties:
-        autoStopSeconds:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        ephemeral:
-          type: boolean
-        mounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/MachineMountSpec'
-        name:
-          type:
-          - string
-          - 'null'
-        network:
-          $ref: '#/components/schemas/MachineNetwork'
-        resources:
-          $ref: '#/components/schemas/MachineResources'
-        source:
-          $ref: '#/components/schemas/MachineSource'
-        ttlSeconds:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        workdir:
-          type:
-          - string
-          - 'null'
     MachineInfo:
       type: object
       required:
@@ -707,3 +432,278 @@ components:
           type:
           - string
           - 'null'
+    MachineExecResponse:
+      type: object
+      required:
+      - stdout
+      - stderr
+      - exitCode
+      - durationMs
+      - machineId
+      properties:
+        durationMs:
+          type: integer
+          format: int64
+          minimum: 0
+        exitCode:
+          type: integer
+          format: int32
+        machineId:
+          type: string
+        stderr:
+          type: string
+        stderrTruncated:
+          type: boolean
+        stdout:
+          type: string
+        stdoutTruncated:
+          type: boolean
+    MachineSessionInfo:
+      type: object
+      required:
+      - id
+      - machineId
+      - status
+      - env
+      - createdAt
+      properties:
+        createdAt:
+          type: string
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        id:
+          type: string
+        lastExecAt:
+          type:
+          - string
+          - 'null'
+        machineId:
+          type: string
+        status:
+          type: string
+    MachineCommandRequest:
+      type: object
+      required:
+      - command
+      properties:
+        command:
+          $ref: '#/components/schemas/CommandSpec'
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        stdin:
+          type:
+          - string
+          - 'null'
+        stream:
+          type: boolean
+        timeoutSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+    EventInfo:
+      type: object
+      required:
+      - id
+      - level
+      - message
+      - createdAt
+      properties:
+        createdAt:
+          type: string
+        id:
+          type: string
+        level:
+          type: string
+        message:
+          type: string
+    MachineCodeRequest:
+      type: object
+      required:
+      - language
+      - code
+      properties:
+        code:
+          type: string
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        language:
+          type: string
+        timeoutSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+    CreateMachineRequest:
+      type: object
+      required:
+      - source
+      properties:
+        autoStopSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        ephemeral:
+          type: boolean
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MachineMountSpec'
+        name:
+          type:
+          - string
+          - 'null'
+        network:
+          $ref: '#/components/schemas/MachineNetwork'
+        resources:
+          $ref: '#/components/schemas/MachineResources'
+        source:
+          $ref: '#/components/schemas/MachineSource'
+        ttlSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+    MachineResources:
+      type: object
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          minimum: 0
+        diskGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          minimum: 0
+    CreateMachineSessionRequest:
+      type: object
+      properties:
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        id:
+          type:
+          - string
+          - 'null'
+    MachineMountSpec:
+      type: object
+      required:
+      - volume
+      - mountPath
+      properties:
+        mountPath:
+          type: string
+          description: Mount path inside the VM.
+        readonly:
+          type: boolean
+          description: Mount as read-only.
+        volume:
+          type: string
+          description: Volume name to mount.
+    MachineNetwork:
+      oneOf:
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - blocked
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - open
+      - type: object
+        required:
+        - cidrs
+        - mode
+        properties:
+          cidrs:
+            type: array
+            items:
+              type: string
+          mode:
+            type: string
+            enum:
+            - allowCidrs
+    MachineSource:
+      oneOf:
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - image
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - smolmachine

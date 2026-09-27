@@ -56,7 +56,7 @@ tags:
 - Cloud
 apis:
 - aid: smol-machines:smol-machines-apps-api
-  name: Smol Machines apps API
+  name: Smol Machines Apps API
   description: Long-running app deployments
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -70,7 +70,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-billing-api
-  name: Smol Machines billing API
+  name: Smol Machines Billing API
   description: Self-service account and metering
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -108,7 +108,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-health-api
-  name: Smol Machines health API
+  name: Smol Machines Health API
   description: Health, probes, and metrics
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -176,7 +176,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-nodes-api
-  name: Smol Machines nodes API
+  name: Smol Machines Nodes API
   description: Cluster node enrollment and status
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -190,7 +190,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-operations-api
-  name: Smol Machines operations API
+  name: Smol Machines Operations API
   description: Async operations
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -203,7 +203,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-plans-api
-  name: Smol Machines plans API
+  name: Smol Machines Plans API
   description: Quota + rate + budget plans
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -217,7 +217,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-pools-api
-  name: Smol Machines pools API
+  name: Smol Machines Pools API
   description: Warm machine pools
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -245,7 +245,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-tenants-api
-  name: Smol Machines tenants API
+  name: Smol Machines Tenants API
   description: Customer accounts (product-backend)
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -259,7 +259,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-tokens-api
-  name: Smol Machines tokens API
+  name: Smol Machines Tokens API
   description: Node join tokens
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -273,7 +273,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-usage-api
-  name: Smol Machines usage API
+  name: Smol Machines Usage API
   description: Usage and billing
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -287,7 +287,7 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 - aid: smol-machines:smol-machines-volumes-api
-  name: Smol Machines volumes API
+  name: Smol Machines Volumes API
   description: Persistent volumes
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
@@ -306,8 +306,6 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
-  - APIKeys
-  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI

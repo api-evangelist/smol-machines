@@ -102,21 +102,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
     ExecRequest:
       type: object
       description: Request to execute a command in a sandbox.
@@ -150,29 +135,21 @@ components:
           - 'null'
           description: Working directory.
           example: /workspace
-    ExecResponse:
+    EnvVar:
       type: object
-      description: Command execution result.
+      description: Environment variable.
       required:
-      - exitCode
-      - stdout
-      - stderr
+      - name
+      - value
       properties:
-        exitCode:
-          type: integer
-          format: int32
-          description: Exit code.
-          example: 0
-        stderr:
+        name:
           type: string
-          description: Standard error.
-          example: ''
-        stdout:
+          description: Variable name.
+          example: MY_VAR
+        value:
           type: string
-          description: Standard output.
-          example: 'hello
-
-            '
+          description: Variable value.
+          example: my_value
     RunRequest:
       type: object
       description: Request to run a command in an image.
@@ -210,18 +187,41 @@ components:
           - string
           - 'null'
           description: Working directory.
-    EnvVar:
+    ApiErrorResponse:
       type: object
-      description: Environment variable.
+      description: API error response.
       required:
-      - name
-      - value
+      - error
+      - code
       properties:
-        name:
+        code:
           type: string
-          description: Variable name.
-          example: MY_VAR
-        value:
+          description: Error code.
+          example: NOT_FOUND
+        error:
           type: string
-          description: Variable value.
-          example: my_value
+          description: Error message.
+          example: sandbox 'test' not found
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '

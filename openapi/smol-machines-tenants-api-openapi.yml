@@ -132,21 +132,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CreateTenantRequest:
-      type: object
-      required:
-      - name
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        planId:
-          type:
-          - string
-          - 'null'
     TenantInfo:
       type: object
       description: 'A tenant (customer account). Quota override fields are `None` when inherited
@@ -199,6 +184,21 @@ components:
         status:
           type: string
         updatedAt:
+          type:
+          - string
+          - 'null'
+    CreateTenantRequest:
+      type: object
+      required:
+      - name
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        planId:
           type:
           - string
           - 'null'

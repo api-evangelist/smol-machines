@@ -174,12 +174,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    HealthCheckType:
-      type: string
-      enum:
-      - http
-      - tcp
-      - exec
+    VolumeMount:
+      type: object
+      required:
+      - name
+      - mountPath
+      properties:
+        mountPath:
+          type: string
+        name:
+          type: string
+        sizeGb:
+          type: integer
+          format: int64
+          minimum: 0
     DeployStrategy:
       oneOf:
       - type: object
@@ -234,6 +242,40 @@ components:
             type: string
             enum:
             - blueGreen
+    EnvVar:
+      type: object
+      required:
+      - key
+      - value
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    InstanceInfo:
+      type: object
+      required:
+      - id
+      - nodeId
+      - status
+      - generation
+      properties:
+        generation:
+          type: integer
+          format: int64
+          minimum: 0
+        hostPort:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        id:
+          type: string
+        nodeId:
+          type: string
+        status:
+          type: string
     AppInfo:
       type: object
       required:
@@ -275,15 +317,12 @@ components:
           type: string
         updatedAt:
           type: string
-    ScaleRequest:
-      type: object
-      required:
-      - count
-      properties:
-        count:
-          type: integer
-          format: int32
-          minimum: 0
+    HealthCheckType:
+      type: string
+      enum:
+      - http
+      - tcp
+      - exec
     DeployRequest:
       type: object
       required:
@@ -363,51 +402,12 @@ components:
           minimum: 0
         type:
           $ref: '#/components/schemas/HealthCheckType'
-    InstanceInfo:
+    ScaleRequest:
       type: object
       required:
-      - id
-      - nodeId
-      - status
-      - generation
+      - count
       properties:
-        generation:
+        count:
           type: integer
-          format: int64
-          minimum: 0
-        hostPort:
-          type:
-          - integer
-          - 'null'
           format: int32
-          minimum: 0
-        id:
-          type: string
-        nodeId:
-          type: string
-        status:
-          type: string
-    EnvVar:
-      type: object
-      required:
-      - key
-      - value
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    VolumeMount:
-      type: object
-      required:
-      - name
-      - mountPath
-      properties:
-        mountPath:
-          type: string
-        name:
-          type: string
-        sizeGb:
-          type: integer
-          format: int64
           minimum: 0

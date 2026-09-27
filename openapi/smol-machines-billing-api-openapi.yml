@@ -44,6 +44,102 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    UsageResponse:
+      type: object
+      required:
+      - tenantId
+      - from
+      - to
+      - totalUptimeSeconds
+      - cpuHours
+      - memoryGbHours
+      - machineCount
+      - execCount
+      - execDurationMs
+      properties:
+        cpuHours:
+          type: number
+          format: double
+        execCount:
+          type: integer
+          format: int32
+          minimum: 0
+        execDurationMs:
+          type: integer
+          format: int64
+          minimum: 0
+        from:
+          type: string
+        machineCount:
+          type: integer
+          format: int32
+          minimum: 0
+        memoryGbHours:
+          type: number
+          format: double
+        tenantId:
+          type: string
+        to:
+          type: string
+        totalUptimeSeconds:
+          type: integer
+          format: int64
+          minimum: 0
+    TenantMeter:
+      type: object
+      description: 'One tenant''s metered usage for a period, in the shape a billing system
+
+        ingests (`GET /v1/billing/meters`).'
+      required:
+      - tenantId
+      - cpuHours
+      - memoryGbHours
+      - execCount
+      - cost
+      properties:
+        cost:
+          $ref: '#/components/schemas/CostBreakdown'
+        cpuHours:
+          type: number
+          format: double
+        execCount:
+          type: integer
+          format: int64
+          minimum: 0
+        externalBillingId:
+          type:
+          - string
+          - 'null'
+        memoryGbHours:
+          type: number
+          format: double
+        tenantId:
+          type: string
+    CostBreakdown:
+      type: object
+      description: Cost breakdown for a usage period (all amounts in integer micros).
+      required:
+      - cpuMicros
+      - memoryMicros
+      - execMicros
+      - totalMicros
+      properties:
+        cpuMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        execMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        memoryMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        totalMicros:
+          type: integer
+          format: int64
+          minimum: 0
     AccountInfo:
       type: object
       description: 'The tenant self-service account view: plan, effective limits, usage, spend.'
@@ -161,102 +257,6 @@ components:
           format: int64
           minimum: 0
         rateMemoryGbHourMicros:
-          type: integer
-          format: int64
-          minimum: 0
-    TenantMeter:
-      type: object
-      description: 'One tenant''s metered usage for a period, in the shape a billing system
-
-        ingests (`GET /v1/billing/meters`).'
-      required:
-      - tenantId
-      - cpuHours
-      - memoryGbHours
-      - execCount
-      - cost
-      properties:
-        cost:
-          $ref: '#/components/schemas/CostBreakdown'
-        cpuHours:
-          type: number
-          format: double
-        execCount:
-          type: integer
-          format: int64
-          minimum: 0
-        externalBillingId:
-          type:
-          - string
-          - 'null'
-        memoryGbHours:
-          type: number
-          format: double
-        tenantId:
-          type: string
-    UsageResponse:
-      type: object
-      required:
-      - tenantId
-      - from
-      - to
-      - totalUptimeSeconds
-      - cpuHours
-      - memoryGbHours
-      - machineCount
-      - execCount
-      - execDurationMs
-      properties:
-        cpuHours:
-          type: number
-          format: double
-        execCount:
-          type: integer
-          format: int32
-          minimum: 0
-        execDurationMs:
-          type: integer
-          format: int64
-          minimum: 0
-        from:
-          type: string
-        machineCount:
-          type: integer
-          format: int32
-          minimum: 0
-        memoryGbHours:
-          type: number
-          format: double
-        tenantId:
-          type: string
-        to:
-          type: string
-        totalUptimeSeconds:
-          type: integer
-          format: int64
-          minimum: 0
-    CostBreakdown:
-      type: object
-      description: Cost breakdown for a usage period (all amounts in integer micros).
-      required:
-      - cpuMicros
-      - memoryMicros
-      - execMicros
-      - totalMicros
-      properties:
-        cpuMicros:
-          type: integer
-          format: int64
-          minimum: 0
-        execMicros:
-          type: integer
-          format: int64
-          minimum: 0
-        memoryMicros:
-          type: integer
-          format: int64
-          minimum: 0
-        totalMicros:
           type: integer
           format: int64
           minimum: 0

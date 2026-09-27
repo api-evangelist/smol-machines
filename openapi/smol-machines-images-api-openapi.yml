@@ -82,26 +82,37 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ListImagesResponse:
+    PullImageRequest:
       type: object
-      description: List images response.
-      required:
-      - images
-      properties:
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageInfo'
-          description: List of images.
-    PullImageResponse:
-      type: object
-      description: Pull image response.
+      description: Request to pull an image.
       required:
       - image
       properties:
         image:
-          $ref: '#/components/schemas/ImageInfo'
-          description: Information about the pulled image.
+          type: string
+          description: Image reference.
+          example: python:3.12-alpine
+        ociPlatform:
+          type:
+          - string
+          - 'null'
+          description: OCI platform for multi-arch images (e.g., "linux/arm64").
+          example: linux/arm64
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
     ImageInfo:
       type: object
       description: Image information.
@@ -140,34 +151,23 @@ components:
           description: Size in bytes.
           example: 7500000
           minimum: 0
-    ApiErrorResponse:
+    PullImageResponse:
       type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
-    PullImageRequest:
-      type: object
-      description: Request to pull an image.
+      description: Pull image response.
       required:
       - image
       properties:
         image:
-          type: string
-          description: Image reference.
-          example: python:3.12-alpine
-        ociPlatform:
-          type:
-          - string
-          - 'null'
-          description: OCI platform for multi-arch images (e.g., "linux/arm64").
-          example: linux/arm64
+          $ref: '#/components/schemas/ImageInfo'
+          description: Information about the pulled image.
+    ListImagesResponse:
+      type: object
+      description: List images response.
+      required:
+      - images
+      properties:
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageInfo'
+          description: List of images.
