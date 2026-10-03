@@ -82,6 +82,15 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
+    PullImageResponse:
+      type: object
+      description: Pull image response.
+      required:
+      - image
+      properties:
+        image:
+          $ref: '#/components/schemas/ImageInfo'
+          description: Information about the pulled image.
     PullImageRequest:
       type: object
       description: Request to pull an image.
@@ -98,21 +107,17 @@ components:
           - 'null'
           description: OCI platform for multi-arch images (e.g., "linux/arm64").
           example: linux/arm64
-    ApiErrorResponse:
+    ListImagesResponse:
       type: object
-      description: API error response.
+      description: List images response.
       required:
-      - error
-      - code
+      - images
       properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageInfo'
+          description: List of images.
     ImageInfo:
       type: object
       description: Image information.
@@ -151,23 +156,18 @@ components:
           description: Size in bytes.
           example: 7500000
           minimum: 0
-    PullImageResponse:
+    ApiErrorResponse:
       type: object
-      description: Pull image response.
+      description: API error response.
       required:
-      - image
+      - error
+      - code
       properties:
-        image:
-          $ref: '#/components/schemas/ImageInfo'
-          description: Information about the pulled image.
-    ListImagesResponse:
-      type: object
-      description: List images response.
-      required:
-      - images
-      properties:
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageInfo'
-          description: List of images.
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found

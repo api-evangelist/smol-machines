@@ -102,54 +102,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ExecRequest:
-      type: object
-      description: Request to execute a command in a sandbox.
-      required:
-      - command
-      properties:
-        command:
-          type: array
-          items:
-            type: string
-          description: Command and arguments.
-          example:
-          - echo
-          - hello
-        env:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnvVar'
-          description: Environment variables.
-        timeoutSecs:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: Timeout in seconds.
-          example: 30
-          minimum: 0
-        workdir:
-          type:
-          - string
-          - 'null'
-          description: Working directory.
-          example: /workspace
-    EnvVar:
-      type: object
-      description: Environment variable.
-      required:
-      - name
-      - value
-      properties:
-        name:
-          type: string
-          description: Variable name.
-          example: MY_VAR
-        value:
-          type: string
-          description: Variable value.
-          example: my_value
     RunRequest:
       type: object
       description: Request to run a command in an image.
@@ -187,21 +139,6 @@ components:
           - string
           - 'null'
           description: Working directory.
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
     ExecResponse:
       type: object
       description: Command execution result.
@@ -225,3 +162,66 @@ components:
           example: 'hello
 
             '
+    EnvVar:
+      type: object
+      description: Environment variable.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
+    ExecRequest:
+      type: object
+      description: Request to execute a command in a sandbox.
+      required:
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - echo
+          - hello
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout in seconds.
+          example: 30
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
+          example: /workspace
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found

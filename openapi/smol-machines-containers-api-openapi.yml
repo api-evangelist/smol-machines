@@ -251,64 +251,26 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ListContainersResponse:
+    StartResponse:
       type: object
-      description: List containers response.
+      description: Generic start response.
       required:
-      - containers
+      - started
       properties:
-        containers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerInfo'
-          description: List of containers.
-    EnvVar:
-      type: object
-      description: Environment variable.
-      required:
-      - name
-      - value
-      properties:
-        name:
+        started:
           type: string
-          description: Variable name.
-          example: MY_VAR
-        value:
-          type: string
-          description: Variable value.
-          example: my_value
-    ContainerInfo:
-      type: object
-      description: Container information.
-      required:
-      - id
-      - image
-      - state
-      - createdAt
-      - command
-      properties:
-        command:
-          type: array
-          items:
-            type: string
-          description: Command.
-        createdAt:
-          type: integer
-          format: int64
-          description: Creation timestamp.
-          minimum: 0
-        id:
-          type: string
-          description: Container ID.
+          description: Identifier of started resource.
           example: abc123
-        image:
+    StopResponse:
+      type: object
+      description: Generic stop response.
+      required:
+      - stopped
+      properties:
+        stopped:
           type: string
-          description: Image.
-          example: alpine:latest
-        state:
-          type: string
-          description: State (created, running, stopped).
-          example: running
+          description: Identifier of stopped resource.
+          example: abc123
     ContainerExecRequest:
       type: object
       description: Request to exec in a container.
@@ -340,35 +302,29 @@ components:
           - string
           - 'null'
           description: Working directory.
-    ContainerMountSpec:
+    StopContainerRequest:
       type: object
-      description: 'Container mount specification.
-
-
-        Note: The `source` field is the virtiofs tag, which corresponds to
-
-        host mounts configured on the sandbox. Tags are assigned in order:
-
-        `smolvm0`, `smolvm1`, etc. based on the sandbox''s mount configuration.
-
-        Use `GET /api/v1/sandboxes/:id` to see the tag-to-path mapping.'
-      required:
-      - source
-      - target
+      description: Request to stop a container.
       properties:
-        readonly:
-          type: boolean
-          description: Read-only mount.
-        source:
-          type: string
-          description: 'Virtiofs tag (e.g., "smolvm0", "smolvm1").
-
-            These correspond to sandbox mounts in order.'
-          example: smolvm0
-        target:
-          type: string
-          description: Target path in container.
-          example: /app
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout before force kill (seconds).
+          example: 10
+          minimum: 0
+    ListContainersResponse:
+      type: object
+      description: List containers response.
+      required:
+      - containers
+      properties:
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerInfo'
+          description: List of containers.
     ExecResponse:
       type: object
       description: Command execution result.
@@ -392,21 +348,6 @@ components:
           example: 'hello
 
             '
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
     CreateContainerRequest:
       type: object
       description: Request to create a container.
@@ -440,33 +381,6 @@ components:
           - string
           - 'null'
           description: Working directory.
-    DeleteContainerRequest:
-      type: object
-      description: Request to delete a container.
-      properties:
-        force:
-          type: boolean
-          description: Force delete even if running.
-    StartResponse:
-      type: object
-      description: Generic start response.
-      required:
-      - started
-      properties:
-        started:
-          type: string
-          description: Identifier of started resource.
-          example: abc123
-    StopResponse:
-      type: object
-      description: Generic stop response.
-      required:
-      - stopped
-      properties:
-        stopped:
-          type: string
-          description: Identifier of stopped resource.
-          example: abc123
     DeleteResponse:
       type: object
       description: Generic delete response.
@@ -477,15 +391,101 @@ components:
           type: string
           description: Name of deleted resource.
           example: my-sandbox
-    StopContainerRequest:
+    ContainerMountSpec:
       type: object
-      description: Request to stop a container.
+      description: 'Container mount specification.
+
+
+        Note: The `source` field is the virtiofs tag, which corresponds to
+
+        host mounts configured on the sandbox. Tags are assigned in order:
+
+        `smolvm0`, `smolvm1`, etc. based on the sandbox''s mount configuration.
+
+        Use `GET /api/v1/sandboxes/:id` to see the tag-to-path mapping.'
+      required:
+      - source
+      - target
       properties:
-        timeoutSecs:
-          type:
-          - integer
-          - 'null'
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: 'Virtiofs tag (e.g., "smolvm0", "smolvm1").
+
+            These correspond to sandbox mounts in order.'
+          example: smolvm0
+        target:
+          type: string
+          description: Target path in container.
+          example: /app
+    EnvVar:
+      type: object
+      description: Environment variable.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
+    DeleteContainerRequest:
+      type: object
+      description: Request to delete a container.
+      properties:
+        force:
+          type: boolean
+          description: Force delete even if running.
+    ContainerInfo:
+      type: object
+      description: Container information.
+      required:
+      - id
+      - image
+      - state
+      - createdAt
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command.
+        createdAt:
+          type: integer
           format: int64
-          description: Timeout before force kill (seconds).
-          example: 10
+          description: Creation timestamp.
           minimum: 0
+        id:
+          type: string
+          description: Container ID.
+          example: abc123
+        image:
+          type: string
+          description: Image.
+          example: alpine:latest
+        state:
+          type: string
+          description: State (created, running, stopped).
+          example: running
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found

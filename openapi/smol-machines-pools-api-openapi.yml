@@ -70,6 +70,138 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    MachineResources:
+      type: object
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          minimum: 0
+        diskGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          minimum: 0
+    PoolInfo:
+      type: object
+      required:
+      - id
+      - image
+      - targetSize
+      - idleCount
+      - busyCount
+      - status
+      properties:
+        busyCount:
+          type: integer
+          format: int32
+          minimum: 0
+        id:
+          type: string
+        idleCount:
+          type: integer
+          format: int32
+          minimum: 0
+        image:
+          type: string
+        status:
+          type: string
+        targetSize:
+          type: integer
+          format: int32
+          minimum: 0
+    MachineNetwork:
+      oneOf:
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - blocked
+      - type: object
+        required:
+        - mode
+        properties:
+          mode:
+            type: string
+            enum:
+            - open
+      - type: object
+        required:
+        - cidrs
+        - mode
+        properties:
+          cidrs:
+            type: array
+            items:
+              type: string
+          mode:
+            type: string
+            enum:
+            - allowCidrs
+    MachineSource:
+      oneOf:
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - image
+      - type: object
+        required:
+        - reference
+        - type
+        properties:
+          reference:
+            type: string
+          type:
+            type: string
+            enum:
+            - smolmachine
+    PoolConfig:
+      type: object
+      required:
+      - image
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          minimum: 0
+        image:
+          type: string
+        maxIdleSecs:
+          type: integer
+          format: int64
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          minimum: 0
+        network:
+          type: boolean
+        targetSize:
+          type: integer
+          format: int32
+          minimum: 0
+        tenantId:
+          type:
+          - string
+          - 'null'
+          description: 'Optional owning tenant. Admin-only: when set, the pool is private to that
+
+            tenant; when omitted, the pool is shared and any tenant may claim from it.'
     MachineInfo:
       type: object
       required:
@@ -129,135 +261,3 @@ components:
           type:
           - string
           - 'null'
-    PoolConfig:
-      type: object
-      required:
-      - image
-      properties:
-        cpus:
-          type: integer
-          format: int32
-          minimum: 0
-        image:
-          type: string
-        maxIdleSecs:
-          type: integer
-          format: int64
-          minimum: 0
-        memoryMb:
-          type: integer
-          format: int32
-          minimum: 0
-        network:
-          type: boolean
-        targetSize:
-          type: integer
-          format: int32
-          minimum: 0
-        tenantId:
-          type:
-          - string
-          - 'null'
-          description: 'Optional owning tenant. Admin-only: when set, the pool is private to that
-
-            tenant; when omitted, the pool is shared and any tenant may claim from it.'
-    MachineResources:
-      type: object
-      properties:
-        cpus:
-          type: integer
-          format: int32
-          minimum: 0
-        diskGb:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        memoryMb:
-          type: integer
-          format: int32
-          minimum: 0
-    MachineNetwork:
-      oneOf:
-      - type: object
-        required:
-        - mode
-        properties:
-          mode:
-            type: string
-            enum:
-            - blocked
-      - type: object
-        required:
-        - mode
-        properties:
-          mode:
-            type: string
-            enum:
-            - open
-      - type: object
-        required:
-        - cidrs
-        - mode
-        properties:
-          cidrs:
-            type: array
-            items:
-              type: string
-          mode:
-            type: string
-            enum:
-            - allowCidrs
-    PoolInfo:
-      type: object
-      required:
-      - id
-      - image
-      - targetSize
-      - idleCount
-      - busyCount
-      - status
-      properties:
-        busyCount:
-          type: integer
-          format: int32
-          minimum: 0
-        id:
-          type: string
-        idleCount:
-          type: integer
-          format: int32
-          minimum: 0
-        image:
-          type: string
-        status:
-          type: string
-        targetSize:
-          type: integer
-          format: int32
-          minimum: 0
-    MachineSource:
-      oneOf:
-      - type: object
-        required:
-        - reference
-        - type
-        properties:
-          reference:
-            type: string
-          type:
-            type: string
-            enum:
-            - image
-      - type: object
-        required:
-        - reference
-        - type
-        properties:
-          reference:
-            type: string
-          type:
-            type: string
-            enum:
-            - smolmachine

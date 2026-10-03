@@ -187,21 +187,6 @@ components:
           type:
           - string
           - 'null'
-    CreateTenantRequest:
-      type: object
-      required:
-      - name
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        planId:
-          type:
-          - string
-          - 'null'
     UpdateTenantRequest:
       type: object
       description: Partial update — only present fields change.
@@ -215,6 +200,21 @@ components:
           - string
           - 'null'
         status:
+          type:
+          - string
+          - 'null'
+    CreateTenantRequest:
+      type: object
+      required:
+      - name
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        planId:
           type:
           - string
           - 'null'

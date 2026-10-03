@@ -367,71 +367,39 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CommandSpec:
-      oneOf:
-      - type: array
-        items:
-          type: string
-      - type: string
-    MachineInfo:
+    CreateMachineSessionRequest:
       type: object
-      required:
-      - id
-      - source
-      - state
-      - resources
-      - network
-      - env
-      - ephemeral
-      - createdAt
-      - updatedAt
       properties:
-        autoStopSeconds:
+        cwd:
           type:
-          - integer
+          - string
           - 'null'
-          format: int64
-          minimum: 0
-        createdAt:
-          type: string
         env:
           type: object
           additionalProperties:
             type: string
           propertyNames:
             type: string
-        ephemeral:
-          type: boolean
+        id:
+          type:
+          - string
+          - 'null'
+    EventInfo:
+      type: object
+      required:
+      - id
+      - level
+      - message
+      - createdAt
+      properties:
+        createdAt:
+          type: string
         id:
           type: string
-        lastActivityAt:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        network:
-          $ref: '#/components/schemas/MachineNetwork'
-        resources:
-          $ref: '#/components/schemas/MachineResources'
-        source:
-          $ref: '#/components/schemas/MachineSource'
-        state:
+        level:
           type: string
-        ttlSeconds:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        updatedAt:
+        message:
           type: string
-        workdir:
-          type:
-          - string
-          - 'null'
     MachineExecResponse:
       type: object
       required:
@@ -458,37 +426,23 @@ components:
           type: string
         stdoutTruncated:
           type: boolean
-    MachineSessionInfo:
+    MachineResources:
       type: object
-      required:
-      - id
-      - machineId
-      - status
-      - env
-      - createdAt
       properties:
-        createdAt:
-          type: string
-        cwd:
+        cpus:
+          type: integer
+          format: int32
+          minimum: 0
+        diskGb:
           type:
-          - string
+          - integer
           - 'null'
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        id:
-          type: string
-        lastExecAt:
-          type:
-          - string
-          - 'null'
-        machineId:
-          type: string
-        status:
-          type: string
+          format: int64
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          minimum: 0
     MachineCommandRequest:
       type: object
       required:
@@ -518,48 +472,12 @@ components:
           - 'null'
           format: int64
           minimum: 0
-    EventInfo:
-      type: object
-      required:
-      - id
-      - level
-      - message
-      - createdAt
-      properties:
-        createdAt:
+    CommandSpec:
+      oneOf:
+      - type: array
+        items:
           type: string
-        id:
-          type: string
-        level:
-          type: string
-        message:
-          type: string
-    MachineCodeRequest:
-      type: object
-      required:
-      - language
-      - code
-      properties:
-        code:
-          type: string
-        cwd:
-          type:
-          - string
-          - 'null'
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        language:
-          type: string
-        timeoutSeconds:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
+      - type: string
     CreateMachineRequest:
       type: object
       required:
@@ -600,40 +518,6 @@ components:
           format: int64
           minimum: 0
         workdir:
-          type:
-          - string
-          - 'null'
-    MachineResources:
-      type: object
-      properties:
-        cpus:
-          type: integer
-          format: int32
-          minimum: 0
-        diskGb:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        memoryMb:
-          type: integer
-          format: int32
-          minimum: 0
-    CreateMachineSessionRequest:
-      type: object
-      properties:
-        cwd:
-          type:
-          - string
-          - 'null'
-        env:
-          type: object
-          additionalProperties:
-            type: string
-          propertyNames:
-            type: string
-        id:
           type:
           - string
           - 'null'
@@ -707,3 +591,119 @@ components:
             type: string
             enum:
             - smolmachine
+    MachineSessionInfo:
+      type: object
+      required:
+      - id
+      - machineId
+      - status
+      - env
+      - createdAt
+      properties:
+        createdAt:
+          type: string
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        id:
+          type: string
+        lastExecAt:
+          type:
+          - string
+          - 'null'
+        machineId:
+          type: string
+        status:
+          type: string
+    MachineCodeRequest:
+      type: object
+      required:
+      - language
+      - code
+      properties:
+        code:
+          type: string
+        cwd:
+          type:
+          - string
+          - 'null'
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        language:
+          type: string
+        timeoutSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+    MachineInfo:
+      type: object
+      required:
+      - id
+      - source
+      - state
+      - resources
+      - network
+      - env
+      - ephemeral
+      - createdAt
+      - updatedAt
+      properties:
+        autoStopSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        createdAt:
+          type: string
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          propertyNames:
+            type: string
+        ephemeral:
+          type: boolean
+        id:
+          type: string
+        lastActivityAt:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        network:
+          $ref: '#/components/schemas/MachineNetwork'
+        resources:
+          $ref: '#/components/schemas/MachineResources'
+        source:
+          $ref: '#/components/schemas/MachineSource'
+        state:
+          type: string
+        ttlSeconds:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        updatedAt:
+          type: string
+        workdir:
+          type:
+          - string
+          - 'null'
