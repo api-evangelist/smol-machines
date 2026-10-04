@@ -232,6 +232,199 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    CreateMicrovmRequest:
+      type: object
+      description: Request to create a new microvm.
+      required:
+      - name
+      properties:
+        cpus:
+          type: integer
+          format: int32
+          description: Number of vCPUs.
+          example: 2
+          minimum: 0
+        memoryMb:
+          type: integer
+          format: int32
+          description: Memory in MiB.
+          example: 1024
+          minimum: 0
+        mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MountSpec'
+          description: Host mounts to attach.
+        name:
+          type: string
+          description: Unique name for the microvm.
+          example: my-vm
+        network:
+          type: boolean
+          description: 'Enable outbound network access (TSI).
+
+            Note: Only TCP/UDP supported, not ICMP (ping).'
+        overlayGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Overlay disk size in GiB (default: 2).'
+          minimum: 0
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortSpec'
+          description: Port mappings (host:guest).
+        storageGb:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Storage disk size in GiB (default: 20).'
+          minimum: 0
+    DeleteResponse:
+      type: object
+      description: Generic delete response.
+      required:
+      - deleted
+      properties:
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
+    MountSpec:
+      type: object
+      description: Mount specification (for requests).
+      required:
+      - source
+      - target
+      properties:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: Host path to mount.
+          example: /Users/me/code
+        target:
+          type: string
+          description: Path inside the sandbox.
+          example: /workspace
+    ListMicrovmsResponse:
+      type: object
+      description: List microvms response.
+      required:
+      - microvms
+      properties:
+        microvms:
+          type: array
+          items:
+            $ref: '#/components/schemas/MicrovmInfo'
+          description: List of microvms.
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '
+    MicrovmExecRequest:
+      type: object
+      description: Request to execute a command in a microvm.
+      required:
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command and arguments.
+          example:
+          - echo
+          - hello
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvVar'
+          description: Environment variables.
+        timeoutSecs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Timeout in seconds.
+          minimum: 0
+        workdir:
+          type:
+          - string
+          - 'null'
+          description: Working directory.
+    PortSpec:
+      type: object
+      description: Port mapping specification.
+      required:
+      - host
+      - guest
+      properties:
+        guest:
+          type: integer
+          format: int32
+          description: Port inside the sandbox.
+          example: 80
+          minimum: 0
+        host:
+          type: integer
+          format: int32
+          description: Port on the host.
+          example: 8080
+          minimum: 0
+    EnvVar:
+      type: object
+      description: Environment variable.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Variable name.
+          example: MY_VAR
+        value:
+          type: string
+          description: Variable value.
+          example: my_value
     MicrovmInfo:
       type: object
       description: MicroVM status information.
@@ -286,196 +479,3 @@ components:
           type: string
           description: Current state ("created", "running", "stopped").
           example: running
-    PortSpec:
-      type: object
-      description: Port mapping specification.
-      required:
-      - host
-      - guest
-      properties:
-        guest:
-          type: integer
-          format: int32
-          description: Port inside the sandbox.
-          example: 80
-          minimum: 0
-        host:
-          type: integer
-          format: int32
-          description: Port on the host.
-          example: 8080
-          minimum: 0
-    MicrovmExecRequest:
-      type: object
-      description: Request to execute a command in a microvm.
-      required:
-      - command
-      properties:
-        command:
-          type: array
-          items:
-            type: string
-          description: Command and arguments.
-          example:
-          - echo
-          - hello
-        env:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnvVar'
-          description: Environment variables.
-        timeoutSecs:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: Timeout in seconds.
-          minimum: 0
-        workdir:
-          type:
-          - string
-          - 'null'
-          description: Working directory.
-    ExecResponse:
-      type: object
-      description: Command execution result.
-      required:
-      - exitCode
-      - stdout
-      - stderr
-      properties:
-        exitCode:
-          type: integer
-          format: int32
-          description: Exit code.
-          example: 0
-        stderr:
-          type: string
-          description: Standard error.
-          example: ''
-        stdout:
-          type: string
-          description: Standard output.
-          example: 'hello
-
-            '
-    ListMicrovmsResponse:
-      type: object
-      description: List microvms response.
-      required:
-      - microvms
-      properties:
-        microvms:
-          type: array
-          items:
-            $ref: '#/components/schemas/MicrovmInfo'
-          description: List of microvms.
-    DeleteResponse:
-      type: object
-      description: Generic delete response.
-      required:
-      - deleted
-      properties:
-        deleted:
-          type: string
-          description: Name of deleted resource.
-          example: my-sandbox
-    MountSpec:
-      type: object
-      description: Mount specification (for requests).
-      required:
-      - source
-      - target
-      properties:
-        readonly:
-          type: boolean
-          description: Read-only mount.
-        source:
-          type: string
-          description: Host path to mount.
-          example: /Users/me/code
-        target:
-          type: string
-          description: Path inside the sandbox.
-          example: /workspace
-    EnvVar:
-      type: object
-      description: Environment variable.
-      required:
-      - name
-      - value
-      properties:
-        name:
-          type: string
-          description: Variable name.
-          example: MY_VAR
-        value:
-          type: string
-          description: Variable value.
-          example: my_value
-    CreateMicrovmRequest:
-      type: object
-      description: Request to create a new microvm.
-      required:
-      - name
-      properties:
-        cpus:
-          type: integer
-          format: int32
-          description: Number of vCPUs.
-          example: 2
-          minimum: 0
-        memoryMb:
-          type: integer
-          format: int32
-          description: Memory in MiB.
-          example: 1024
-          minimum: 0
-        mounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/MountSpec'
-          description: Host mounts to attach.
-        name:
-          type: string
-          description: Unique name for the microvm.
-          example: my-vm
-        network:
-          type: boolean
-          description: 'Enable outbound network access (TSI).
-
-            Note: Only TCP/UDP supported, not ICMP (ping).'
-        overlayGb:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Overlay disk size in GiB (default: 2).'
-          minimum: 0
-        ports:
-          type: array
-          items:
-            $ref: '#/components/schemas/PortSpec'
-          description: Port mappings (host:guest).
-        storageGb:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Storage disk size in GiB (default: 20).'
-          minimum: 0
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found

@@ -174,74 +174,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    VolumeMount:
-      type: object
-      required:
-      - name
-      - mountPath
-      properties:
-        mountPath:
-          type: string
-        name:
-          type: string
-        sizeGb:
-          type: integer
-          format: int64
-          minimum: 0
-    DeployStrategy:
-      oneOf:
-      - type: object
-        description: 'Replace instances in batches. Each batch: start new → health check → destroy old.'
-        required:
-        - type
-        properties:
-          batchSize:
-            type: integer
-            format: int32
-            description: 'Instances to replace per batch (default: 1).'
-            minimum: 0
-          type:
-            type: string
-            enum:
-            - rolling
-          useHealthCheck:
-            type: boolean
-            description: Wait for health check to pass before destroying old instances.
-          waitSeconds:
-            type: integer
-            format: int64
-            description: 'Seconds to wait between batches if not using health checks (default: 5).'
-            minimum: 0
-      - type: object
-        description: 'Deploy N canary instances first. If healthy, replace the rest.
-
-          If canaries fail, roll back without touching existing instances.'
-        required:
-        - type
-        properties:
-          autoPromote:
-            type: boolean
-            description: Auto-promote after health check passes. If false, requires manual promotion.
-          canaryCount:
-            type: integer
-            format: int32
-            description: 'Number of canary instances to deploy (default: 1).'
-            minimum: 0
-          type:
-            type: string
-            enum:
-            - canary
-      - type: object
-        description: 'Deploy a complete new set alongside the old. Switch traffic atomically,
-
-          then destroy old instances.'
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - blueGreen
+    HealthCheckType:
+      type: string
+      enum:
+      - http
+      - tcp
+      - exec
     AppInfo:
       type: object
       required:
@@ -283,35 +221,6 @@ components:
           type: string
         updatedAt:
           type: string
-    HealthCheck:
-      type: object
-      required:
-      - type
-      properties:
-        intervalSecs:
-          type: integer
-          format: int64
-          minimum: 0
-        path:
-          type:
-          - string
-          - 'null'
-        port:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-        retries:
-          type: integer
-          format: int32
-          minimum: 0
-        timeoutSecs:
-          type: integer
-          format: int64
-          minimum: 0
-        type:
-          $ref: '#/components/schemas/HealthCheckType'
     DeployRequest:
       type: object
       required:
@@ -386,6 +295,60 @@ components:
           type: string
         status:
           type: string
+    DeployStrategy:
+      oneOf:
+      - type: object
+        description: 'Replace instances in batches. Each batch: start new → health check → destroy old.'
+        required:
+        - type
+        properties:
+          batchSize:
+            type: integer
+            format: int32
+            description: 'Instances to replace per batch (default: 1).'
+            minimum: 0
+          type:
+            type: string
+            enum:
+            - rolling
+          useHealthCheck:
+            type: boolean
+            description: Wait for health check to pass before destroying old instances.
+          waitSeconds:
+            type: integer
+            format: int64
+            description: 'Seconds to wait between batches if not using health checks (default: 5).'
+            minimum: 0
+      - type: object
+        description: 'Deploy N canary instances first. If healthy, replace the rest.
+
+          If canaries fail, roll back without touching existing instances.'
+        required:
+        - type
+        properties:
+          autoPromote:
+            type: boolean
+            description: Auto-promote after health check passes. If false, requires manual promotion.
+          canaryCount:
+            type: integer
+            format: int32
+            description: 'Number of canary instances to deploy (default: 1).'
+            minimum: 0
+          type:
+            type: string
+            enum:
+            - canary
+      - type: object
+        description: 'Deploy a complete new set alongside the old. Switch traffic atomically,
+
+          then destroy old instances.'
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - blueGreen
     ScaleRequest:
       type: object
       required:
@@ -395,6 +358,49 @@ components:
           type: integer
           format: int32
           minimum: 0
+    VolumeMount:
+      type: object
+      required:
+      - name
+      - mountPath
+      properties:
+        mountPath:
+          type: string
+        name:
+          type: string
+        sizeGb:
+          type: integer
+          format: int64
+          minimum: 0
+    HealthCheck:
+      type: object
+      required:
+      - type
+      properties:
+        intervalSecs:
+          type: integer
+          format: int64
+          minimum: 0
+        path:
+          type:
+          - string
+          - 'null'
+        port:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+        retries:
+          type: integer
+          format: int32
+          minimum: 0
+        timeoutSecs:
+          type: integer
+          format: int64
+          minimum: 0
+        type:
+          $ref: '#/components/schemas/HealthCheckType'
     EnvVar:
       type: object
       required:
@@ -405,9 +411,3 @@ components:
           type: string
         value:
           type: string
-    HealthCheckType:
-      type: string
-      enum:
-      - http
-      - tcp
-      - exec

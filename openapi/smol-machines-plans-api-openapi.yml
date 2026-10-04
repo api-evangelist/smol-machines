@@ -49,30 +49,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PlanInfo:
+    CreatePlanRequest:
       type: object
-      description: 'A reusable plan: quota + per-unit rates (money in integer micros) + budget.'
       required:
-      - id
       - name
-      - maxApps
-      - maxCpus
-      - maxMemoryMb
-      - maxMachines
-      - maxConcurrentMachines
-      - rateCpuHourMicros
-      - rateMemoryGbHourMicros
-      - rateExecMicros
-      - budgetPolicy
-      - isDefault
-      - createdAt
       properties:
         budgetPolicy:
           type: string
-        createdAt:
-          type: string
         id:
-          type: string
+          type:
+          - string
+          - 'null'
         isDefault:
           type: boolean
         maxApps:
@@ -121,17 +108,30 @@ components:
           type: integer
           format: int64
           minimum: 0
-    CreatePlanRequest:
+    PlanInfo:
       type: object
+      description: 'A reusable plan: quota + per-unit rates (money in integer micros) + budget.'
       required:
+      - id
       - name
+      - maxApps
+      - maxCpus
+      - maxMemoryMb
+      - maxMachines
+      - maxConcurrentMachines
+      - rateCpuHourMicros
+      - rateMemoryGbHourMicros
+      - rateExecMicros
+      - budgetPolicy
+      - isDefault
+      - createdAt
       properties:
         budgetPolicy:
           type: string
+        createdAt:
+          type: string
         id:
-          type:
-          - string
-          - 'null'
+          type: string
         isDefault:
           type: boolean
         maxApps:

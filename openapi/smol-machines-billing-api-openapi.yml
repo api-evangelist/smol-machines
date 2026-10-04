@@ -122,28 +122,44 @@ components:
           format: double
         tenantId:
           type: string
-    CostBreakdown:
+    UsageResponse:
       type: object
-      description: Cost breakdown for a usage period (all amounts in integer micros).
       required:
-      - cpuMicros
-      - memoryMicros
-      - execMicros
-      - totalMicros
+      - tenantId
+      - from
+      - to
+      - totalUptimeSeconds
+      - cpuHours
+      - memoryGbHours
+      - machineCount
+      - execCount
+      - execDurationMs
       properties:
-        cpuMicros:
+        cpuHours:
+          type: number
+          format: double
+        execCount:
+          type: integer
+          format: int32
+          minimum: 0
+        execDurationMs:
           type: integer
           format: int64
           minimum: 0
-        execMicros:
+        from:
+          type: string
+        machineCount:
           type: integer
-          format: int64
+          format: int32
           minimum: 0
-        memoryMicros:
-          type: integer
-          format: int64
-          minimum: 0
-        totalMicros:
+        memoryGbHours:
+          type: number
+          format: double
+        tenantId:
+          type: string
+        to:
+          type: string
+        totalUptimeSeconds:
           type: integer
           format: int64
           minimum: 0
@@ -219,44 +235,28 @@ components:
           type: integer
           format: int64
           minimum: 0
-    UsageResponse:
+    CostBreakdown:
       type: object
+      description: Cost breakdown for a usage period (all amounts in integer micros).
       required:
-      - tenantId
-      - from
-      - to
-      - totalUptimeSeconds
-      - cpuHours
-      - memoryGbHours
-      - machineCount
-      - execCount
-      - execDurationMs
+      - cpuMicros
+      - memoryMicros
+      - execMicros
+      - totalMicros
       properties:
-        cpuHours:
-          type: number
-          format: double
-        execCount:
-          type: integer
-          format: int32
-          minimum: 0
-        execDurationMs:
+        cpuMicros:
           type: integer
           format: int64
           minimum: 0
-        from:
-          type: string
-        machineCount:
+        execMicros:
           type: integer
-          format: int32
+          format: int64
           minimum: 0
-        memoryGbHours:
-          type: number
-          format: double
-        tenantId:
-          type: string
-        to:
-          type: string
-        totalUptimeSeconds:
+        memoryMicros:
+          type: integer
+          format: int64
+          minimum: 0
+        totalMicros:
           type: integer
           format: int64
           minimum: 0

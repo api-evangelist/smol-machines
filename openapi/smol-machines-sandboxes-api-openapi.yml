@@ -182,17 +182,21 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ListSandboxesResponse:
+    ApiErrorResponse:
       type: object
-      description: List sandboxes response.
+      description: API error response.
       required:
-      - sandboxes
+      - error
+      - code
       properties:
-        sandboxes:
-          type: array
-          items:
-            $ref: '#/components/schemas/SandboxInfo'
-          description: List of sandboxes.
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
     SandboxInfo:
       type: object
       description: Sandbox status information.
@@ -242,59 +246,6 @@ components:
           type: string
           description: Current state.
           example: running
-    PortSpec:
-      type: object
-      description: Port mapping specification.
-      required:
-      - host
-      - guest
-      properties:
-        guest:
-          type: integer
-          format: int32
-          description: Port inside the sandbox.
-          example: 80
-          minimum: 0
-        host:
-          type: integer
-          format: int32
-          description: Port on the host.
-          example: 8080
-          minimum: 0
-    MountInfo:
-      type: object
-      description: Mount information (for responses, includes virtiofs tag).
-      required:
-      - tag
-      - source
-      - target
-      - readonly
-      properties:
-        readonly:
-          type: boolean
-          description: Read-only mount.
-        source:
-          type: string
-          description: Host path.
-          example: /Users/me/code
-        tag:
-          type: string
-          description: Virtiofs tag (e.g., "smolvm0"). Use this in container mounts.
-          example: smolvm0
-        target:
-          type: string
-          description: Path inside the sandbox.
-          example: /workspace
-    DeleteResponse:
-      type: object
-      description: Generic delete response.
-      required:
-      - deleted
-      properties:
-        deleted:
-          type: string
-          description: Name of deleted resource.
-          example: my-sandbox
     MountSpec:
       type: object
       description: Mount specification (for requests).
@@ -313,6 +264,16 @@ components:
           type: string
           description: Path inside the sandbox.
           example: /workspace
+    DeleteResponse:
+      type: object
+      description: Generic delete response.
+      required:
+      - deleted
+      properties:
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
     RestartSpec:
       type: object
       description: Restart policy specification for sandbox creation.
@@ -329,21 +290,6 @@ components:
           - string
           - 'null'
           description: 'Restart policy: "never", "always", "on-failure", "unless-stopped".'
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
     ResourceSpec:
       type: object
       description: VM resource specification.
@@ -417,3 +363,57 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/RestartSpec'
             description: Restart policy configuration.
+    ListSandboxesResponse:
+      type: object
+      description: List sandboxes response.
+      required:
+      - sandboxes
+      properties:
+        sandboxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SandboxInfo'
+          description: List of sandboxes.
+    PortSpec:
+      type: object
+      description: Port mapping specification.
+      required:
+      - host
+      - guest
+      properties:
+        guest:
+          type: integer
+          format: int32
+          description: Port inside the sandbox.
+          example: 80
+          minimum: 0
+        host:
+          type: integer
+          format: int32
+          description: Port on the host.
+          example: 8080
+          minimum: 0
+    MountInfo:
+      type: object
+      description: Mount information (for responses, includes virtiofs tag).
+      required:
+      - tag
+      - source
+      - target
+      - readonly
+      properties:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: Host path.
+          example: /Users/me/code
+        tag:
+          type: string
+          description: Virtiofs tag (e.g., "smolvm0"). Use this in container mounts.
+          example: smolvm0
+        target:
+          type: string
+          description: Path inside the sandbox.
+          example: /workspace

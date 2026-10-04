@@ -132,6 +132,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    UpdateTenantRequest:
+      type: object
+      description: Partial update — only present fields change.
+      properties:
+        externalBillingId:
+          type:
+          - string
+          - 'null'
+        planId:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
     TenantInfo:
       type: object
       description: 'A tenant (customer account). Quota override fields are `None` when inherited
@@ -184,22 +200,6 @@ components:
         status:
           type: string
         updatedAt:
-          type:
-          - string
-          - 'null'
-    UpdateTenantRequest:
-      type: object
-      description: Partial update — only present fields change.
-      properties:
-        externalBillingId:
-          type:
-          - string
-          - 'null'
-        planId:
-          type:
-          - string
-          - 'null'
-        status:
           type:
           - string
           - 'null'

@@ -66,6 +66,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CreateApiKeyRequest:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        expiresInDays:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          minimum: 0
+        scopes:
+          type: array
+          items:
+            type: string
+        tenantId:
+          type:
+          - string
+          - 'null'
+          description: 'Tenant to scope this key to (admin only). Keys created with a tenant_id
+
+            can only access resources belonging to that tenant.'
     ApiKeyInfo:
       type: object
       required:
@@ -93,30 +117,6 @@ components:
           type: array
           items:
             type: string
-    CreateApiKeyRequest:
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        expiresInDays:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          minimum: 0
-        scopes:
-          type: array
-          items:
-            type: string
-        tenantId:
-          type:
-          - string
-          - 'null'
-          description: 'Tenant to scope this key to (admin only). Keys created with a tenant_id
-
-            can only access resources belonging to that tenant.'
     ApiKeyCreated:
       type: object
       required:

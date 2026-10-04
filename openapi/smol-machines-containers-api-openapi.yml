@@ -261,6 +261,39 @@ components:
           type: string
           description: Identifier of started resource.
           example: abc123
+    ListContainersResponse:
+      type: object
+      description: List containers response.
+      required:
+      - containers
+      properties:
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerInfo'
+          description: List of containers.
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    DeleteContainerRequest:
+      type: object
+      description: Request to delete a container.
+      properties:
+        force:
+          type: boolean
+          description: Force delete even if running.
     StopResponse:
       type: object
       description: Generic stop response.
@@ -271,6 +304,71 @@ components:
           type: string
           description: Identifier of stopped resource.
           example: abc123
+    DeleteResponse:
+      type: object
+      description: Generic delete response.
+      required:
+      - deleted
+      properties:
+        deleted:
+          type: string
+          description: Name of deleted resource.
+          example: my-sandbox
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '
+    ContainerInfo:
+      type: object
+      description: Container information.
+      required:
+      - id
+      - image
+      - state
+      - createdAt
+      - command
+      properties:
+        command:
+          type: array
+          items:
+            type: string
+          description: Command.
+        createdAt:
+          type: integer
+          format: int64
+          description: Creation timestamp.
+          minimum: 0
+        id:
+          type: string
+          description: Container ID.
+          example: abc123
+        image:
+          type: string
+          description: Image.
+          example: alpine:latest
+        state:
+          type: string
+          description: State (created, running, stopped).
+          example: running
     ContainerExecRequest:
       type: object
       description: Request to exec in a container.
@@ -302,6 +400,35 @@ components:
           - string
           - 'null'
           description: Working directory.
+    ContainerMountSpec:
+      type: object
+      description: 'Container mount specification.
+
+
+        Note: The `source` field is the virtiofs tag, which corresponds to
+
+        host mounts configured on the sandbox. Tags are assigned in order:
+
+        `smolvm0`, `smolvm1`, etc. based on the sandbox''s mount configuration.
+
+        Use `GET /api/v1/sandboxes/:id` to see the tag-to-path mapping.'
+      required:
+      - source
+      - target
+      properties:
+        readonly:
+          type: boolean
+          description: Read-only mount.
+        source:
+          type: string
+          description: 'Virtiofs tag (e.g., "smolvm0", "smolvm1").
+
+            These correspond to sandbox mounts in order.'
+          example: smolvm0
+        target:
+          type: string
+          description: Target path in container.
+          example: /app
     StopContainerRequest:
       type: object
       description: Request to stop a container.
@@ -314,40 +441,6 @@ components:
           description: Timeout before force kill (seconds).
           example: 10
           minimum: 0
-    ListContainersResponse:
-      type: object
-      description: List containers response.
-      required:
-      - containers
-      properties:
-        containers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerInfo'
-          description: List of containers.
-    ExecResponse:
-      type: object
-      description: Command execution result.
-      required:
-      - exitCode
-      - stdout
-      - stderr
-      properties:
-        exitCode:
-          type: integer
-          format: int32
-          description: Exit code.
-          example: 0
-        stderr:
-          type: string
-          description: Standard error.
-          example: ''
-        stdout:
-          type: string
-          description: Standard output.
-          example: 'hello
-
-            '
     CreateContainerRequest:
       type: object
       description: Request to create a container.
@@ -381,45 +474,6 @@ components:
           - string
           - 'null'
           description: Working directory.
-    DeleteResponse:
-      type: object
-      description: Generic delete response.
-      required:
-      - deleted
-      properties:
-        deleted:
-          type: string
-          description: Name of deleted resource.
-          example: my-sandbox
-    ContainerMountSpec:
-      type: object
-      description: 'Container mount specification.
-
-
-        Note: The `source` field is the virtiofs tag, which corresponds to
-
-        host mounts configured on the sandbox. Tags are assigned in order:
-
-        `smolvm0`, `smolvm1`, etc. based on the sandbox''s mount configuration.
-
-        Use `GET /api/v1/sandboxes/:id` to see the tag-to-path mapping.'
-      required:
-      - source
-      - target
-      properties:
-        readonly:
-          type: boolean
-          description: Read-only mount.
-        source:
-          type: string
-          description: 'Virtiofs tag (e.g., "smolvm0", "smolvm1").
-
-            These correspond to sandbox mounts in order.'
-          example: smolvm0
-        target:
-          type: string
-          description: Target path in container.
-          example: /app
     EnvVar:
       type: object
       description: Environment variable.
@@ -435,57 +489,3 @@ components:
           type: string
           description: Variable value.
           example: my_value
-    DeleteContainerRequest:
-      type: object
-      description: Request to delete a container.
-      properties:
-        force:
-          type: boolean
-          description: Force delete even if running.
-    ContainerInfo:
-      type: object
-      description: Container information.
-      required:
-      - id
-      - image
-      - state
-      - createdAt
-      - command
-      properties:
-        command:
-          type: array
-          items:
-            type: string
-          description: Command.
-        createdAt:
-          type: integer
-          format: int64
-          description: Creation timestamp.
-          minimum: 0
-        id:
-          type: string
-          description: Container ID.
-          example: abc123
-        image:
-          type: string
-          description: Image.
-          example: alpine:latest
-        state:
-          type: string
-          description: State (created, running, stopped).
-          example: running
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found

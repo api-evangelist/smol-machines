@@ -102,6 +102,44 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
+    ApiErrorResponse:
+      type: object
+      description: API error response.
+      required:
+      - error
+      - code
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        error:
+          type: string
+          description: Error message.
+          example: sandbox 'test' not found
+    ExecResponse:
+      type: object
+      description: Command execution result.
+      required:
+      - exitCode
+      - stdout
+      - stderr
+      properties:
+        exitCode:
+          type: integer
+          format: int32
+          description: Exit code.
+          example: 0
+        stderr:
+          type: string
+          description: Standard error.
+          example: ''
+        stdout:
+          type: string
+          description: Standard output.
+          example: 'hello
+
+            '
     RunRequest:
       type: object
       description: Request to run a command in an image.
@@ -139,29 +177,6 @@ components:
           - string
           - 'null'
           description: Working directory.
-    ExecResponse:
-      type: object
-      description: Command execution result.
-      required:
-      - exitCode
-      - stdout
-      - stderr
-      properties:
-        exitCode:
-          type: integer
-          format: int32
-          description: Exit code.
-          example: 0
-        stderr:
-          type: string
-          description: Standard error.
-          example: ''
-        stdout:
-          type: string
-          description: Standard output.
-          example: 'hello
-
-            '
     EnvVar:
       type: object
       description: Environment variable.
@@ -210,18 +225,3 @@ components:
           - 'null'
           description: Working directory.
           example: /workspace
-    ApiErrorResponse:
-      type: object
-      description: API error response.
-      required:
-      - error
-      - code
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        error:
-          type: string
-          description: Error message.
-          example: sandbox 'test' not found
