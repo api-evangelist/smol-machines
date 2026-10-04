@@ -306,6 +306,8 @@ apis:
   humanURL: https://smolmachines.com/docs/cloud-api
   baseURL: https://api.smolmachines.com
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -313,6 +315,9 @@ apis:
   - type: Documentation
     url: https://smolmachines.com/docs/cloud-api
 common:
+- type: CapabilityMap
+  url: capabilities/smol-machines-capability-edges.yml
+  name: Smol Machines Business Capability Map
 - type: Website
   url: https://www.smolmachines.com/
 - type: Overlay
