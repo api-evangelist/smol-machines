@@ -1,0 +1,12 @@
+{
+ "url": "https://smolmachines.com/openapi.json",
+ "requested_url": "https://smolmachines.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 77708,
+ "sha256": "853ec529472a2d2277e88e91a2d63e920f44b12dc4819df45f768c001231492d",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
