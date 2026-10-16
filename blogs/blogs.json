@@ -2,6 +2,13 @@
   "repo": "smol-machines",
   "feeds": [
     {
+      "source": "https://smolmachines.com/engineering",
+      "feed_url": "https://smolmachines.com/engineering",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://smolmachines.com/legal/privacy",
       "feed_url": "https://smolmachines.com/legal/privacy",
       "title": "",
@@ -10,5 +17,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z"
+  "fetched": "2026-10-10T13:15:00Z"
 }
